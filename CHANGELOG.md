@@ -6,6 +6,7 @@
 
 ## Bug Fixes
 
+* **appsync:** make contextual data accessible for async functions ([#5317](https://github.com/aws-powertools/powertools-lambda-python/issues/5317))
 * **ci:** Update output to something easily copy/pasteable ([#5435](https://github.com/aws-powertools/powertools-lambda-python/issues/5435))
 * **ci:** remove space ([#5433](https://github.com/aws-powertools/powertools-lambda-python/issues/5433))
 
@@ -15,6 +16,7 @@
 
 ## Maintenance
 
+* **ci:** bump minimum required pydantic version ([#5446](https://github.com/aws-powertools/powertools-lambda-python/issues/5446))
 * **ci:** new pre-release 3.2.1a1 ([#5443](https://github.com/aws-powertools/powertools-lambda-python/issues/5443))
 * **ci:** new pre-release 3.2.1a0 ([#5434](https://github.com/aws-powertools/powertools-lambda-python/issues/5434))
 * **deps:** bump actions/checkout from 4.2.1 to 4.2.2 ([#5438](https://github.com/aws-powertools/powertools-lambda-python/issues/5438))
