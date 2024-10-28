@@ -17,17 +17,24 @@
 ## Maintenance
 
 * **ci:** bump minimum required pydantic version ([#5446](https://github.com/aws-powertools/powertools-lambda-python/issues/5446))
-* **ci:** new pre-release 3.2.1a1 ([#5443](https://github.com/aws-powertools/powertools-lambda-python/issues/5443))
+* **ci:** new pre-release 3.2.1a2 ([#5456](https://github.com/aws-powertools/powertools-lambda-python/issues/5456))
 * **ci:** new pre-release 3.2.1a0 ([#5434](https://github.com/aws-powertools/powertools-lambda-python/issues/5434))
-* **deps:** bump actions/checkout from 4.2.1 to 4.2.2 ([#5438](https://github.com/aws-powertools/powertools-lambda-python/issues/5438))
+* **ci:** new pre-release 3.2.1a1 ([#5443](https://github.com/aws-powertools/powertools-lambda-python/issues/5443))
+* **deps:** bump actions/setup-node from 4.0.4 to 4.1.0 ([#5450](https://github.com/aws-powertools/powertools-lambda-python/issues/5450))
+* **deps:** bump actions/setup-python from 5.2.0 to 5.3.0 ([#5449](https://github.com/aws-powertools/powertools-lambda-python/issues/5449))
+* **deps:** bump redis from 5.1.1 to 5.2.0 ([#5454](https://github.com/aws-powertools/powertools-lambda-python/issues/5454))
 * **deps:** bump actions/dependency-review-action from 4.3.4 to 4.3.5 ([#5431](https://github.com/aws-powertools/powertools-lambda-python/issues/5431))
-* **deps-dev:** bump cdklabs-generative-ai-cdk-constructs from 0.1.277 to 0.1.278 ([#5439](https://github.com/aws-powertools/powertools-lambda-python/issues/5439))
+* **deps:** bump actions/checkout from 4.2.1 to 4.2.2 ([#5438](https://github.com/aws-powertools/powertools-lambda-python/issues/5438))
 * **deps-dev:** bump aws-cdk-aws-lambda-python-alpha from 2.162.1a0 to 2.163.1a0 ([#5441](https://github.com/aws-powertools/powertools-lambda-python/issues/5441))
-* **deps-dev:** bump boto3-stubs from 1.35.45 to 1.35.46 ([#5430](https://github.com/aws-powertools/powertools-lambda-python/issues/5430))
-* **deps-dev:** bump aws-cdk from 2.162.1 to 2.163.1 ([#5432](https://github.com/aws-powertools/powertools-lambda-python/issues/5432))
-* **deps-dev:** bump xenon from 0.9.1 to 0.9.3 ([#5428](https://github.com/aws-powertools/powertools-lambda-python/issues/5428))
+* **deps-dev:** bump cdklabs-generative-ai-cdk-constructs from 0.1.277 to 0.1.278 ([#5439](https://github.com/aws-powertools/powertools-lambda-python/issues/5439))
 * **deps-dev:** bump mypy from 1.11.2 to 1.13.0 ([#5440](https://github.com/aws-powertools/powertools-lambda-python/issues/5440))
 * **deps-dev:** bump aws-cdk-lib from 2.162.1 to 2.163.1 ([#5429](https://github.com/aws-powertools/powertools-lambda-python/issues/5429))
+* **deps-dev:** bump boto3-stubs from 1.35.45 to 1.35.46 ([#5430](https://github.com/aws-powertools/powertools-lambda-python/issues/5430))
+* **deps-dev:** bump aws-cdk from 2.162.1 to 2.163.1 ([#5432](https://github.com/aws-powertools/powertools-lambda-python/issues/5432))
+* **deps-dev:** bump aws-cdk from 2.163.1 to 2.164.0 ([#5452](https://github.com/aws-powertools/powertools-lambda-python/issues/5452))
+* **deps-dev:** bump xenon from 0.9.1 to 0.9.3 ([#5428](https://github.com/aws-powertools/powertools-lambda-python/issues/5428))
+* **deps-dev:** bump aws-cdk-lib from 2.163.1 to 2.164.0 ([#5453](https://github.com/aws-powertools/powertools-lambda-python/issues/5453))
+* **deps-dev:** bump ruff from 0.7.0 to 0.7.1 ([#5451](https://github.com/aws-powertools/powertools-lambda-python/issues/5451))
 
 
 <a name="v3.2.0"></a>
