@@ -89,6 +89,20 @@ The `@event_parser` decorator is ideal for:
 
 Parser provides built-in models for parsing events from AWS services. You don't need to worry about creating these models yourself - we've already done that for you, making it easier to process AWS events in your Lambda functions.
 
+=== "sqs_model_event.py" 
+
+    ```python hl_lines="2 7"
+    --8<-- "examples/parser/src/sqs_model_event.py"
+    ```
+
+=== "Sample event"
+
+    ```json
+    --8<-- "examples/parser/src/sqs_model_event.json"
+    ```
+
+The example above uses `SqsModel`. Other built-in envelopes can be found below.
+
 | Model name                                  | Description                                                                           |
 | ------------------------------------------- | ------------------------------------------------------------------------------------- |
 | **AlbModel**                                | Lambda Event Source payload for Amazon Application Load Balancer                      |
@@ -178,21 +192,6 @@ Using `@event_parser` decorator to automatically parse the EventBridge event and
 #### Built-in envelopes
 
 Parsers provides built-in envelopes to extract and parse specific parts of complex event structures. These envelopes simplify handling nested data in events from various AWS services, allowing you to focus on the relevant information for your Lambda function.
-
-
-=== "sqs_model_event.py" 
-
-    ```python hl_lines="2 7"
-    --8<-- "examples/parser/src/sqs_model_event.py"
-    ```
-
-=== "Sample event"
-
-    ```json
-    --8<-- "examples/parser/src/sqs_model_event.json"
-    ```
-
-The example above uses `SqsEnvelope` by importing `SqsModel`. Other built-in envelopes can be found below.
 
 | Envelope name                 | Behaviour                                                                                                                                                                                             | Return                             |
 | ----------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------- |
