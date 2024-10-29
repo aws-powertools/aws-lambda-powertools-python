@@ -19,22 +19,13 @@ The Parser utility simplifies data parsing and validation using [Pydantic](https
 
 ### Install
 
-Parser supports Pydantic v2. Each Pydantic version requires different dependencies before you can use Parser.
+Parser supports Pydantic v2. To use Parser, you'll need to install the necessary dependencies for Pydantic v2 beforehand.
 
 ```python
 pip install aws-lambda-powertools
 ```
 
 !!! info "This is not necessary if you're installing Powertools for AWS Lambda (Python) via [Lambda Layer/SAR](../index.md#lambda-layer){target="\_blank"}"
-
-???+ warning
-    This will increase the compressed package size by >10MB due to the Pydantic dependency.
-
-    To reduce the impact on the package size at the expense of 30%-50% of its performance[Pydantic can also be
-    installed without binary files](https://pydantic-docs.helpmanual.io/install/#performance-vs-package-size-trade-off){target="_blank" rel="nofollow"}:
-
-    Pip example:`SKIP_CYTHON=1 pip install --no-binary pydantic aws-lambda-powertools[parser]`
-
 
 You can also add as a dependency in your preferred tool: e.g., requirements.txt, pyproject.toml.
 
@@ -46,12 +37,20 @@ Define models by inheriting from `BaseModel` to parse incoming events. Pydantic 
 
 The `event_parser` decorator automatically parses and validates the event.
 
+=== "getting_started_with_parser.py" 
 
-```python title="getting_started_with_parser.py" hl_lines="2 8"
---8<-- "examples/parser/src/getting_started_with_parser.py"
-```
+    ```python hl_lines="2 8"
+    --8<-- "examples/parser/src/getting_started_with_parser.py"
+    ```
 
-The `@event_parser(model=MyEvent)` automatically parses the event into the specified Pydantic model MyEvent.
+=== "Sample event"
+
+    ```json
+    --8<-- "examples/parser/src/example_event_parser.json"
+    ```
+
+
+The `@event_parser(model=MyEvent)` automatically parses the event into the specified Pydantic model `MyEvent`.
 
 The function catches **ValidationError**, returning a 400 status code with an error message if the input doesn't match the `MyEvent` model. It provides robust error handling for invalid inputs.
 
@@ -59,9 +58,17 @@ The function catches **ValidationError**, returning a 400 status code with an er
 
 The `parse()` function allows you to manually control when and how an event is parsed into a Pydantic model. This can be useful in cases where you need flexibility, such as handling different event formats or adding custom logic before parsing.
 
-```python title="parser_function.py" hl_lines="2 12"
---8<-- "examples/parser/src/parser_function.py"
-```
+=== "parser_function.py" 
+
+    ```python hl_lines="2 12"
+    --8<-- "examples/parser/src/parser_function.py"
+    ```
+
+=== "Sample event"
+
+    ```json
+    --8<-- "examples/parser/src/example_event_parser.json"
+    ```
 
 
 **Should I use parse() or @event_parser? 🤔**
@@ -171,6 +178,21 @@ Using `@event_parser` decorator to automatically parse the EventBridge event and
 #### Built-in envelopes
 
 Parsers provides built-in envelopes to extract and parse specific parts of complex event structures. These envelopes simplify handling nested data in events from various AWS services, allowing you to focus on the relevant information for your Lambda function.
+
+
+=== "sqs_model_event.py" 
+
+    ```python hl_lines="2 7"
+    --8<-- "examples/parser/src/sqs_model_event.py"
+    ```
+
+=== "Sample event"
+
+    ```json
+    --8<-- "examples/parser/src/sqs_model_event.json"
+    ```
+
+The example above uses `SqsEnvelope` by importing `SqsModel`. Other built-in envelopes can be found below.
 
 | Envelope name                 | Behaviour                                                                                                                                                                                             | Return                             |
 | ----------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------- |

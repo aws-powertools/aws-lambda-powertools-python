@@ -7,7 +7,6 @@ class MyEvent(BaseModel):
 
 @event_parser(model=MyEvent)
 def lambda_handler(event: MyEvent, context):
-    try:
-        return {"statusCode": 200, "body": f"Hello {event.name}, your ID is {event.id}"}
-    except ValidationError as e:
-        return {"statusCode": 400, "body": f"Invalid input: {str(e)}"}
+    #if your model is valid, you can return
+    return {"statusCode": 200, "body": f"Hello {event.name}, your ID is {event.id}"}
+   

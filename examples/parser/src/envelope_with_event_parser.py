@@ -16,7 +16,6 @@ def lambda_handler(event: UserModel, context: LambdaContext):
         }
 
     # If parentids match, proceed with user registration
-    # Add your user registration logic here
 
     return {
         "statusCode": 200,
