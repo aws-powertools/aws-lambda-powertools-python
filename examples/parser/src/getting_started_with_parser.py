@@ -1,4 +1,4 @@
-from aws_lambda_powertools.utilities.parser import BaseModel, ValidationError
+from aws_lambda_powertools.utilities.parser import BaseModel
 from aws_lambda_powertools.utilities.parser import event_parser
 
 class MyEvent(BaseModel):

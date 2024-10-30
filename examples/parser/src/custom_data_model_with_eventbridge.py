@@ -1,4 +1,4 @@
-from aws_lambda_powertools.utilities.parser import BaseModel, parse, Field
+from aws_lambda_powertools.utilities.parser import BaseModel, parse, Field, ValidationError
 from aws_lambda_powertools.utilities.parser.models import EventBridgeModel
 
 # Define a custom EventBridge model by extending the built-in EventBridgeModel
