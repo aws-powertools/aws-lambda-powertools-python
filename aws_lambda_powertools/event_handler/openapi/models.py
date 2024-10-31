@@ -363,6 +363,7 @@ class SecuritySchemeType(Enum):
     http = "http"
     oauth2 = "oauth2"
     openIdConnect = "openIdConnect"
+    mutualTLS = 'mutualTLS'
 
 
 class SecurityBase(OpenAPIExtensions):
@@ -440,7 +441,11 @@ class OpenIdConnect(SecurityBase):
     openIdConnectUrl: str
 
 
-SecurityScheme = Union[APIKey, HTTPBase, OAuth2, OpenIdConnect, HTTPBearer]
+class MutualTLS(SecurityBase):
+    type_: SecuritySchemeType = Field(default=SecuritySchemeType.mutualTLS, alias="type")
+
+
+SecurityScheme = Union[APIKey, HTTPBase, OAuth2, OpenIdConnect, HTTPBearer, MutualTLS]
 
 
 # https://swagger.io/specification/#components-object
