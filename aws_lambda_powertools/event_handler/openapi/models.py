@@ -363,7 +363,7 @@ class SecuritySchemeType(Enum):
     http = "http"
     oauth2 = "oauth2"
     openIdConnect = "openIdConnect"
-    mutualTLS = 'mutualTLS'
+    mutualTLS = "mutualTLS"
 
 
 class SecurityBase(OpenAPIExtensions):
