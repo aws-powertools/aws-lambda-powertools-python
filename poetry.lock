@@ -238,24 +238,24 @@ typeguard = ">=2.13.3,<5.0.0"
 
 [[package]]
 name = "aws-cdk-lib"
-version = "2.164.1"
+version = "2.165.0"
 description = "Version 2 of the AWS Cloud Development Kit library"
 optional = false
 python-versions = "~=3.8"
 files = [
-    {file = "aws_cdk_lib-2.164.1-py3-none-any.whl", hash = "sha256:758a84f806496193684b9fdf995f69cd24ce93fab2eba03a1a4cdb85115d2669"},
-    {file = "aws_cdk_lib-2.164.1.tar.gz", hash = "sha256:a0191479e3bed1579eff4df856efd30f34aca033a3b3ac1553743ac55b0820a2"},
+    {file = "aws_cdk_lib-2.165.0-py3-none-any.whl", hash = "sha256:6fa2f2b76345bf04256b06e2cafa3bcbab9a54eeb1b7c42b74b8a18920e09e4b"},
+    {file = "aws_cdk_lib-2.165.0.tar.gz", hash = "sha256:1fff96622fbafe48603c0633c62e1afa9fa72ac50bc3607ef385e395dc94c5f4"},
 ]
 
 [package.dependencies]
-"aws-cdk.asset-awscli-v1" = ">=2.2.202,<3.0.0"
-"aws-cdk.asset-kubectl-v20" = ">=2.1.2,<3.0.0"
+"aws-cdk.asset-awscli-v1" = ">=2.2.208,<3.0.0"
+"aws-cdk.asset-kubectl-v20" = ">=2.1.3,<3.0.0"
 "aws-cdk.asset-node-proxy-agent-v6" = ">=2.1.0,<3.0.0"
-"aws-cdk.cloud-assembly-schema" = ">=38.0.0,<39.0.0"
+"aws-cdk.cloud-assembly-schema" = ">=38.0.1,<39.0.0"
 constructs = ">=10.0.0,<11.0.0"
-jsii = ">=1.103.1,<2.0.0"
+jsii = ">=1.104.0,<2.0.0"
 publication = ">=0.0.3"
-typeguard = ">=2.13.3,<5.0.0"
+typeguard = ">=2.13.3,<4.3.0"
 
 [[package]]
 name = "aws-encryption-sdk"
@@ -4346,4 +4346,4 @@ validation = ["fastjsonschema"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.8,<4.0.0"
-content-hash = "88ef392abe114520e5ffd232ef5f7381ee5e2cd9caa396c992c4c5a33a867f42"
+content-hash = "1e6224f9a107d6d66e9a0f3124b8ee7e0b834fbef440da667a3d639a91c852f7"
