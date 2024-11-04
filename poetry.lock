@@ -238,24 +238,24 @@ typeguard = ">=2.13.3,<5.0.0"
 
 [[package]]
 name = "aws-cdk-lib"
-version = "2.164.1"
+version = "2.165.0"
 description = "Version 2 of the AWS Cloud Development Kit library"
 optional = false
 python-versions = "~=3.8"
 files = [
-    {file = "aws_cdk_lib-2.164.1-py3-none-any.whl", hash = "sha256:758a84f806496193684b9fdf995f69cd24ce93fab2eba03a1a4cdb85115d2669"},
-    {file = "aws_cdk_lib-2.164.1.tar.gz", hash = "sha256:a0191479e3bed1579eff4df856efd30f34aca033a3b3ac1553743ac55b0820a2"},
+    {file = "aws_cdk_lib-2.165.0-py3-none-any.whl", hash = "sha256:6fa2f2b76345bf04256b06e2cafa3bcbab9a54eeb1b7c42b74b8a18920e09e4b"},
+    {file = "aws_cdk_lib-2.165.0.tar.gz", hash = "sha256:1fff96622fbafe48603c0633c62e1afa9fa72ac50bc3607ef385e395dc94c5f4"},
 ]
 
 [package.dependencies]
-"aws-cdk.asset-awscli-v1" = ">=2.2.202,<3.0.0"
-"aws-cdk.asset-kubectl-v20" = ">=2.1.2,<3.0.0"
+"aws-cdk.asset-awscli-v1" = ">=2.2.208,<3.0.0"
+"aws-cdk.asset-kubectl-v20" = ">=2.1.3,<3.0.0"
 "aws-cdk.asset-node-proxy-agent-v6" = ">=2.1.0,<3.0.0"
-"aws-cdk.cloud-assembly-schema" = ">=38.0.0,<39.0.0"
+"aws-cdk.cloud-assembly-schema" = ">=38.0.1,<39.0.0"
 constructs = ">=10.0.0,<11.0.0"
-jsii = ">=1.103.1,<2.0.0"
+jsii = ">=1.104.0,<2.0.0"
 publication = ">=0.0.3"
-typeguard = ">=2.13.3,<5.0.0"
+typeguard = ">=2.13.3,<4.3.0"
 
 [[package]]
 name = "aws-encryption-sdk"
@@ -431,13 +431,13 @@ crt = ["botocore[crt] (>=1.21.0,<2.0a0)"]
 
 [[package]]
 name = "boto3-stubs"
-version = "1.35.53"
-description = "Type annotations for boto3 1.35.53 generated with mypy-boto3-builder 8.1.4"
+version = "1.35.54"
+description = "Type annotations for boto3 1.35.54 generated with mypy-boto3-builder 8.1.4"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "boto3_stubs-1.35.53-py3-none-any.whl", hash = "sha256:43172fe0f6950c6a5310856cd21664f5d8bf2a561d2969bf5694ba851a5fc905"},
-    {file = "boto3_stubs-1.35.53.tar.gz", hash = "sha256:502b9c90b5a03e9fc7e12a6f1aeb8a4ce6caf169c32b23a902b3910ce4160a58"},
+    {file = "boto3_stubs-1.35.54-py3-none-any.whl", hash = "sha256:17519739590614d50a4bfb82d10e02a9bf324ab87e90d54ecddf68044ba219b7"},
+    {file = "boto3_stubs-1.35.54.tar.gz", hash = "sha256:ecf6cce737abc9bc212d48238021ff4aa3fb20ed887ecdee72a750bd329c902e"},
 ]
 
 [package.dependencies]
@@ -499,7 +499,7 @@ bedrock-agent = ["mypy-boto3-bedrock-agent (>=1.35.0,<1.36.0)"]
 bedrock-agent-runtime = ["mypy-boto3-bedrock-agent-runtime (>=1.35.0,<1.36.0)"]
 bedrock-runtime = ["mypy-boto3-bedrock-runtime (>=1.35.0,<1.36.0)"]
 billingconductor = ["mypy-boto3-billingconductor (>=1.35.0,<1.36.0)"]
-boto3 = ["boto3 (==1.35.53)", "botocore (==1.35.53)"]
+boto3 = ["boto3 (==1.35.54)", "botocore (==1.35.54)"]
 braket = ["mypy-boto3-braket (>=1.35.0,<1.36.0)"]
 budgets = ["mypy-boto3-budgets (>=1.35.0,<1.36.0)"]
 ce = ["mypy-boto3-ce (>=1.35.0,<1.36.0)"]
@@ -4346,4 +4346,4 @@ validation = ["fastjsonschema"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.8,<4.0.0"
-content-hash = "88ef392abe114520e5ffd232ef5f7381ee5e2cd9caa396c992c4c5a33a867f42"
+content-hash = "1e6224f9a107d6d66e9a0f3124b8ee7e0b834fbef440da667a3d639a91c852f7"
