@@ -122,7 +122,7 @@ def test_openapi_security_scheme_mtls():
 
     schema = app.get_openapi_schema(
         security_schemes={
-            "mutualTLS": MutualTLS(),
+            "mutualTLS": MutualTLS(description="mTLS Authentication"),
         },
     )
 
@@ -130,3 +130,5 @@ def test_openapi_security_scheme_mtls():
     assert security_schemes is not None
 
     assert "mutualTLS" in security_schemes
+    mtls_scheme = security_schemes["mutualTLS"]
+    assert mtls_scheme.description == "mTLS Authentication"
