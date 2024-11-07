@@ -1,9 +1,18 @@
-from typing import Any, Type
+from __future__ import annotations
+
+from typing import TYPE_CHECKING, Any
 
 from pydantic import BaseModel, Json
 
 from aws_lambda_powertools.utilities.parser import BaseEnvelope, event_parser
+from aws_lambda_powertools.utilities.parser.functions import (
+    _parse_and_validate_event,
+    _retrieve_or_set_model_from_cache,
+)
 from aws_lambda_powertools.utilities.typing import LambdaContext
+
+if TYPE_CHECKING:
+    from aws_lambda_powertools.utilities.parser.types import T
 
 
 class CancelOrder(BaseModel):
@@ -16,8 +25,9 @@ class CancelOrderModel(BaseModel):
 
 
 class CustomEnvelope(BaseEnvelope):
-    def parse(self, data: dict, model: Type[BaseModel]) -> Any:
-        return model.model_validate({"body": data.get("body", {})})
+    def parse(self, data: dict[str, Any] | Any | None, model: type[T]):
+        adapter = _retrieve_or_set_model_from_cache(model=model)
+        return _parse_and_validate_event(data=data, adapter=adapter)
 
 
 @event_parser(model=CancelOrderModel, envelope=CustomEnvelope)

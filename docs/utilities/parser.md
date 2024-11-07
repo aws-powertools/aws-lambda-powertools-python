@@ -42,7 +42,7 @@ The `@event_parser` decorator automatically parses the incoming event into the s
 
 === "getting_started_with_parser.py"
 
-    ```python hl_lines="3 10"
+    ```python hl_lines="3 11"
     --8<-- "examples/parser/src/getting_started_with_parser.py"
     ```
 
@@ -58,7 +58,7 @@ You can use the `parse()` function when you need to have flexibility with differ
 
 === "parser_function.py"
 
-    ```python hl_lines="3 14"
+    ```python hl_lines="3 15"
     --8<-- "examples/parser/src/parser_function.py"
     ```
 
@@ -144,7 +144,7 @@ Use the model to validate and extract relevant information from the incoming eve
 
 === "Custom data model"
 
-    ```python hl_lines="4 8 16"
+    ```python hl_lines="4 8 17"
     --8<-- "examples/parser/src/custom_data_model_with_eventbridge.py"
     ```
 
@@ -164,7 +164,7 @@ Envelopes can be used via `envelope` parameter available in both `parse` functio
 
 === "Envelopes using event parser decorator"
 
-    ```python hl_lines="3 6-10 12"
+    ```python hl_lines="3 7-10 13"
     --8<-- "examples/parser/src/envelope_with_event_parser.py"
     ```
 
@@ -203,7 +203,7 @@ Here's a snippet of how the EventBridge envelope we demonstrated previously is i
 
 === "Bring your own envelope with Event Bridge"
 
-    ```python hl_lines="6 12-18"
+    ```python hl_lines="6 13-19"
     --8<-- "examples/parser/src/bring_your_own_envelope.py"
     ```
 
@@ -269,7 +269,7 @@ Wrap these fields with [Pydantic&#39;s Json Type](https://pydantic-docs.helpmanu
 
 === "Validate string fields containing JSON data"
 
-    ```python hl_lines="3 14"
+    ```python hl_lines="5 24"
     --8<-- "examples/parser/src/string_fields_contain_json.py"
     ```
 
@@ -287,7 +287,7 @@ Pydantic's definition of _serialization_ is broader than usual. It includes conv
 
 Read more at [Serialization for Pydantic documentation](https://docs.pydantic.dev/latest/concepts/serialization/#model_copy){target="_blank" rel="nofollow"}.
 
-```python title="serialization_parser.py" hl_lines="39-40"
+```python title="serialization_parser.py" hl_lines="36-37"
 --8<-- "examples/parser/src/serialization_parser.py"
 ```
 

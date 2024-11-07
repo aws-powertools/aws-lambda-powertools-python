@@ -1,25 +1,38 @@
+from __future__ import annotations
+
 import json
-from typing import Any, Type
-from aws_lambda_powertools.utilities.parser import event_parser, BaseEnvelope, BaseModel
-from aws_lambda_powertools.utilities.validation import validator
+from typing import TYPE_CHECKING, Any
+
+from aws_lambda_powertools.utilities.parser import BaseEnvelope, BaseModel, event_parser
+from aws_lambda_powertools.utilities.parser.functions import (
+    _parse_and_validate_event,
+    _retrieve_or_set_model_from_cache,
+)
 from aws_lambda_powertools.utilities.typing import LambdaContext
+from aws_lambda_powertools.utilities.validation import validator
+
+if TYPE_CHECKING:
+    from aws_lambda_powertools.utilities.parser.types import T
+
 
 class CancelOrder(BaseModel):
     order_id: int
     reason: str
+
 
 class CancelOrderModel(BaseModel):
     body: CancelOrder
 
     @validator("body", pre=True)
     def transform_body_to_dict(cls, value):
-        if isinstance(value, str):
-            return json.loads(value)
-        return value
+        return json.loads(value) if isinstance(value, str) else value
+
 
 class CustomEnvelope(BaseEnvelope):
-    def parse(self, data: dict, model: Type[BaseModel]) -> Any:
-        return model.model_validate({"body": data.get("body", {})})
+    def parse(self, data: dict[str, Any] | Any | None, model: type[T]):
+        adapter = _retrieve_or_set_model_from_cache(model=model)
+        return _parse_and_validate_event(data=data, adapter=adapter)
+
 
 @event_parser(model=CancelOrderModel, envelope=CustomEnvelope)
 def lambda_handler(event: CancelOrderModel, context: LambdaContext):
@@ -32,5 +45,5 @@ def lambda_handler(event: CancelOrderModel, context: LambdaContext):
 
     return {
         "statusCode": 200,
-        "body": json.dumps({"message": f"Order {cancel_order.order_id} cancelled successfully"})
+        "body": json.dumps({"message": f"Order {cancel_order.order_id} cancelled successfully"}),
     }
