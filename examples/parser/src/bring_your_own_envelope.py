@@ -1,24 +1,29 @@
 import json
-from typing import Any, Dict, Optional, TypeVar, Union
-from aws_lambda_powertools.utilities.parser import BaseEnvelope, BaseModel
+from typing import Any, Dict, Optional, Type, TypeVar, Union
+
+from pydantic import BaseModel
+
+from aws_lambda_powertools.utilities.parser import BaseEnvelope, event_parser
 from aws_lambda_powertools.utilities.parser.models import EventBridgeModel
-from aws_lambda_powertools.utilities.parser import event_parser
 from aws_lambda_powertools.utilities.typing import LambdaContext
 
 Model = TypeVar("Model", bound=BaseModel)
 
+
 class EventBridgeEnvelope(BaseEnvelope):
-    def parse(self, data: Optional[Union[Dict[str, Any], Any]], model: type[Model]) -> Optional[Model]:
+    def parse(self, data: Optional[Union[Dict[str, Any], Any]], model: Type[Model]) -> Optional[Model]:
         if data is None:
             return None
 
-        parsed_envelope = EventBridgeModel.parse_obj(data)
+        parsed_envelope = EventBridgeModel.model_validate(data)
         return self._parse(data=parsed_envelope.detail, model=model)
+
 
 class OrderDetail(BaseModel):
     order_id: str
     amount: float
     customer_id: str
+
 
 @event_parser(model=OrderDetail, envelope=EventBridgeEnvelope)
 def lambda_handler(event: OrderDetail, context: LambdaContext):
@@ -32,16 +37,15 @@ def lambda_handler(event: OrderDetail, context: LambdaContext):
 
         return {
             "statusCode": 200,
-            "body": json.dumps({
-                "message": f"Order {event.order_id} processed successfully",
-                "order_id": event.order_id,
-                "amount": event.amount,
-                "customer_id": event.customer_id
-            })
+            "body": json.dumps(
+                {
+                    "message": f"Order {event.order_id} processed successfully",
+                    "order_id": event.order_id,
+                    "amount": event.amount,
+                    "customer_id": event.customer_id,
+                },
+            ),
         }
     except Exception as e:
         print(f"Error processing order: {str(e)}")
-        return {
-            "statusCode": 500,
-            "body": json.dumps({"error": "Internal server error"})
-        }
+        return {"statusCode": 500, "body": json.dumps({"error": "Internal server error"})}

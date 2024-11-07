@@ -5,7 +5,7 @@ description: Utility
 
 <!-- markdownlint-disable MD043 -->
 
-The Parser utility simplifies data parsing and validation using [Pydantic](https://pydantic-docs.helpmanual.io/){target="\_blank" rel="nofollow"}. It allows you to define data models in pure Python classes, parse and validate incoming events, and extract only the data you need.
+The Parser utility simplifies data parsing and validation using [Pydantic](https://pydantic-docs.helpmanual.io/){target="_blank" rel="nofollow"}. It allows you to define data models in pure Python classes, parse and validate incoming events, and extract only the data you need.
 
 ## Key features
 
@@ -19,27 +19,30 @@ The Parser utility simplifies data parsing and validation using [Pydantic](https
 
 ### Install
 
-Parser supports Pydantic v2. To use Parser, you'll need to install the necessary dependencies for Pydantic v2 beforehand.
+Powertools only supports Pydantic v2, so make sure to install the required dependencies for Pydantic v2 before using the Parser.
 
 ```python
-pip install aws-lambda-powertools
+pip install aws-lambda-powertools[tracer]
 ```
 
-!!! info "This is not necessary if you're installing Powertools for AWS Lambda (Python) via [Lambda Layer/SAR](../index.md#lambda-layer){target="\_blank"}"
+!!! info "This is not necessary if you're installing Powertools for AWS Lambda (Python) via [Lambda Layer/SAR](../index.md#lambda-layer){target="_blank"}"
 
-You can also add as a dependency in your preferred tool: e.g., requirements.txt, pyproject.toml.
+You can also add as a dependency in your preferred tool: `e.g., requirements.txt, pyproject.toml`.
 
 ### Data Model with Parse
 
-Define models by inheriting from `BaseModel` to parse incoming events. Pydantic then validates the data, ensuring all fields adhere to specified types and guaranteeing data integrity.
+You can define models by inheriting from `BaseModel` or any other supported type through `TypeAdapter` to parse incoming events. Pydantic then validates the data, ensuring that all fields conform to the specified types and maintaining data integrity.
+
+???+ info
+    The new TypeAdapter feature provide a flexible way to perform validation and serialization based on a Python type. Read more in the [Pydantic documentation](https://docs.pydantic.dev/latest/api/type_adapter/){target="_blank" rel="nofollow"}.
 
 #### Event parser
 
-The `event_parser` decorator automatically parses and validates the event.
+The `@event_parser` decorator automatically parses the incoming event into the specified Pydantic model `MyEvent`. If the input doesn't match the model's structure or type requirements, we raises a `ValidationError` directly from Pydantic.
 
-=== "getting_started_with_parser.py" 
+=== "getting_started_with_parser.py"
 
-    ```python hl_lines="2 8"
+    ```python hl_lines="3 10"
     --8<-- "examples/parser/src/getting_started_with_parser.py"
     ```
 
@@ -49,18 +52,13 @@ The `event_parser` decorator automatically parses and validates the event.
     --8<-- "examples/parser/src/example_event_parser.json"
     ```
 
-
-The `@event_parser(model=MyEvent)` automatically parses the event into the specified Pydantic model `MyEvent`.
-
-The function catches **ValidationError**, returning a 400 status code with an error message if the input doesn't match the `MyEvent` model. It provides robust error handling for invalid inputs.
-
 #### Parse function
 
-The `parse()` function allows you to manually control when and how an event is parsed into a Pydantic model. This can be useful in cases where you need flexibility, such as handling different event formats or adding custom logic before parsing.
+You can use the `parse()` function when you need to have flexibility with different event formats, custom pre-parsing logic, and better exception handling.
 
-=== "parser_function.py" 
+=== "parser_function.py"
 
-    ```python hl_lines="2 12"
+    ```python hl_lines="3 14"
     --8<-- "examples/parser/src/parser_function.py"
     ```
 
@@ -70,15 +68,14 @@ The `parse()` function allows you to manually control when and how an event is p
     --8<-- "examples/parser/src/example_event_parser.json"
     ```
 
-
-**Should I use parse() or @event_parser? 🤔**
+#### Keys difference between parse and event_parser
 
 The `parse()` function offers more flexibility and control:
 
 - It allows parsing different parts of an event using multiple models.
 - You can conditionally handle events before parsing them.
 - It's useful for integrating with complex workflows where a decorator might not be sufficient.
-- It provides more control over the validation process.
+- It provides more control over the validation process and handling exceptions.
 
 The `@event_parser` decorator is ideal for:
 
@@ -87,9 +84,9 @@ The `@event_parser` decorator is ideal for:
 
 ### Built-in models
 
-Parser provides built-in models for parsing events from AWS services. You don't need to worry about creating these models yourself - we've already done that for you, making it easier to process AWS events in your Lambda functions.
+You can use pre-built models provided by the Parser for parsing events from AWS services, so you don’t need to create these models yourself, we’ve already done that for you.
 
-=== "sqs_model_event.py" 
+=== "sqs_model_event.py"
 
     ```python hl_lines="2 7"
     --8<-- "examples/parser/src/sqs_model_event.py"
@@ -101,7 +98,7 @@ Parser provides built-in models for parsing events from AWS services. You don't 
     --8<-- "examples/parser/src/sqs_model_event.json"
     ```
 
-The example above uses `SqsModel`. Other built-in envelopes can be found below.
+The example above uses `SqsModel`. Other built-in models can be found below.
 
 | Model name                                  | Description                                                                           |
 | ------------------------------------------- | ------------------------------------------------------------------------------------- |
@@ -145,9 +142,9 @@ You can extend them to include your own models, and yet have all other known fie
 **Example: custom data model with Amazon EventBridge**
 Use the model to validate and extract relevant information from the incoming event. This can be useful when you need to handle events with a specific structure or when you want to ensure that the event data conforms to certain rules.
 
-=== "Custom data model" 
+=== "Custom data model"
 
-    ```python hl_lines="2 5 13"
+    ```python hl_lines="4 8 16"
     --8<-- "examples/parser/src/custom_data_model_with_eventbridge.py"
     ```
 
@@ -157,41 +154,29 @@ Use the model to validate and extract relevant information from the incoming eve
     --8<-- "examples/parser/src/data_model_eventbridge.json"
     ```
 
-
 ## Advanced
 
 ### Envelopes
 
-Envelopes use JMESPath expressions to extract specific portions of complex, nested JSON structures. This feature simplifies processing events from various AWS services by allowing you to focus on core data without unnecessary metadata or wrapper information.
-
-**Purpose of the Envelope**
-
-- Data Extraction: The envelope helps extract the specific data we need from a larger, more complex event structure.
-- Standardization: It allows us to handle different event sources in a consistent manner.
-- Simplification: By using an envelope, we can focus on parsing only the relevant part of the event, ignoring the surrounding metadata.
+You can use **Envelopes**, which are **JMESPath expressions**, to extract specific portions of complex, nested JSON structures. This is useful when your actual payload is wrapped around a known structure, for example Lambda Event Sources like **EventBridge**.
 
 Envelopes can be used via `envelope` parameter available in both `parse` function and `event_parser` decorator.
 
-All you want is what's inside the `detail` key, from the payload in the sample example.
-
-Using `@event_parser` decorator to automatically parse the EventBridge event and extract the UserModel data. The envelope, specifically `envelopes.EventBridgeEnvelope` in this case, is used to extract the relevant data from a complex event structure. It acts as a wrapper or container that holds additional metadata and the actual payload we're interested in.
-
 === "Envelopes using event parser decorator"
 
-    ```python hl_lines="2 10"
+    ```python hl_lines="3 6-10 12"
     --8<-- "examples/parser/src/envelope_with_event_parser.py"
     ```
 
 === "Sample event"
 
-    ```json
+    ```json hl_lines="12-16"
     --8<-- "examples/parser/src/envelope_payload.json"
     ```
 
-
 #### Built-in envelopes
 
-Parsers provides built-in envelopes to extract and parse specific parts of complex event structures. These envelopes simplify handling nested data in events from various AWS services, allowing you to focus on the relevant information for your Lambda function.
+You can use pre-built envelopes provided by the Parser to extract and parse specific parts of complex event structures.
 
 | Envelope name                 | Behaviour                                                                                                                                                                                             | Return                             |
 | ----------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------- |
@@ -212,13 +197,13 @@ Parsers provides built-in envelopes to extract and parse specific parts of compl
 
 #### Bringing your own envelope
 
-You can create your own Envelope model and logic by inheriting from `BaseEnvelope`, and implementing the `parse` method.
+You can create your own Envelope model and logic by inheriting from `BaseEnvelope`, and implementing the `parse` method or `@event_parser` decorator.
 
 Here's a snippet of how the EventBridge envelope we demonstrated previously is implemented.
 
 === "Bring your own envelope with Event Bridge"
 
-    ```python hl_lines="3 4 8-16"
+    ```python hl_lines="6 12-18"
     --8<-- "examples/parser/src/bring_your_own_envelope.py"
     ```
 
@@ -227,7 +212,6 @@ Here's a snippet of how the EventBridge envelope we demonstrated previously is i
     ```json
     --8<-- "examples/parser/src/bring_your_own_envelope.json"
     ```
-
 
 **What's going on here, you might ask**:
 
@@ -256,7 +240,7 @@ Keep the following in mind regardless of which decorator you end up using it:
 
 Quick validation using decorator `field_validator` to verify whether the field `message` has the value of `hello world`.
 
-```python title="field_validator.py" hl_lines="2 8"
+```python title="field_validator.py" hl_lines="1 10-14"
 --8<-- "examples/parser/src/field_validator.py"
 ```
 
@@ -266,42 +250,26 @@ If you run using a test event `{"message": "hello universe"}` you should expect 
   Message must be hello world! (type=value_error)
 ```
 
-Alternatively, you can pass `'*'` as an argument for the decorator so that you can validate every value available.
-
-```python title="field_validator_all_values.py" hl_lines="2 9"
---8<-- "examples/parser/src/field_validator_all_values.py"
-```
-
-Try with `event={"message": "hello universe", "sender": "universe"}` to get a validation error, as "sender" does not contain white spaces.
-
 #### Model validator
 
 `model_validator` can help when you have a complex validation mechanism. For example finding whether data has been omitted or comparing field values.
 
-**Key points about model_validator:**
-
-- It runs after all other validators have been called.
-- It receives all the values of the model as a dictionary.
-- It can modify or validate multiple fields at once.
-- It's useful for validations that depend on multiple fields.
-
-```python title="model_validator.py" hl_lines="3 10"
+```python title="model_validator.py" hl_lines="1 12-17"
 --8<-- "examples/parser/src/model_validator.py"
 ```
 
-- The keyword argument `mode='after'` will cause the validator to be called after all field-level validation and parsing has been completed.
+1. The keyword argument `mode='after'` will cause the validator to be called after all field-level validation and parsing has been completed.
 
 ???+ info
-    You can read more about validating list items, reusing validators, validating raw inputs, and a lot more in [Pydantic&#39;s documentation](`https://pydantic-docs.helpmanual.io/usage/validators/`).
+    You can read more about validating list items, reusing validators, validating raw inputs, and a lot more in [Pydantic&#39;s documentation](`https://pydantic-docs.helpmanual.io/usage/validators/`){target="_blank" rel="nofollow"}.
 
-**String fields that contain JSON data**
+#### String fields that contain JSON data
 
-Wrap these fields with [Pydantic&#39;s Json Type](https://pydantic-docs.helpmanual.io/usage/types/#json-type){target="\_blank" rel="nofollow"}. This approach allows Pydantic to properly parse and validate the JSON content, ensuring type safety and data integrity.
-
+Wrap these fields with [Pydantic&#39;s Json Type](https://pydantic-docs.helpmanual.io/usage/types/#json-type){target="_blank" rel="nofollow"}. This approach allows Pydantic to properly parse and validate the JSON content, ensuring type safety and data integrity.
 
 === "Validate string fields containing JSON data"
 
-    ```python hl_lines="4 6-11"
+    ```python hl_lines="3 14"
     --8<-- "examples/parser/src/string_fields_contain_json.py"
     ```
 
@@ -311,35 +279,20 @@ Wrap these fields with [Pydantic&#39;s Json Type](https://pydantic-docs.helpmanu
     --8<-- "examples/parser/src/json_data_string.json"
     ```
 
-Alternatively, you could use a [Pydantic validator](https://pydantic-docs.helpmanual.io/usage/validators/){target="\_blank" rel="nofollow"} to transform the JSON string into a dict before the mapping.
-
-=== "Validate string fields containing JSON data using Pydantic validator"
-
-    ```python hl_lines="4 14"
-    --8<-- "examples/parser/src/string_fields_contain_json_pydantic_validator.py"
-    ```
-
-=== "Sample event"
-
-    ```json
-    --8<-- "examples/parser/src/json_data_string.json"
-    ```
-
-
 ### Serialization
 
 Models in Pydantic offer more than direct attribute access. They can be transformed, serialized, and exported in various formats.
 
 Pydantic's definition of _serialization_ is broader than usual. It includes converting structured objects to simpler Python types, not just data to strings or bytes. This reflects the close relationship between these processes in Pydantic.
 
-Read more at [Serialization for Pydantic documentation](https://docs.pydantic.dev/latest/concepts/serialization/#model_copy){target="\_blank" rel="nofollow"}.
+Read more at [Serialization for Pydantic documentation](https://docs.pydantic.dev/latest/concepts/serialization/#model_copy){target="_blank" rel="nofollow"}.
 
-```python title="serialization_parser.py" hl_lines="37-38"
+```python title="serialization_parser.py" hl_lines="39-40"
 --8<-- "examples/parser/src/serialization_parser.py"
 ```
 
 ???+ info
-    There are number of advanced use cases well documented in Pydantic's doc such as creating [immutable models](https://pydantic-docs.helpmanual.io/usage/models/#faux-immutability){target="\_blank" rel="nofollow"}, [declaring fields with dynamic values](https://pydantic-docs.helpmanual.io/usage/models/#field-with-dynamic-default-value){target="\_blank" rel="nofollow"}.
+    There are number of advanced use cases well documented in Pydantic's doc such as creating [immutable models](https://pydantic-docs.helpmanual.io/usage/models/#faux-immutability){target="_blank" rel="nofollow"}, [declaring fields with dynamic values](https://pydantic-docs.helpmanual.io/usage/models/#field-with-dynamic-default-value){target="_blank" rel="nofollow"}.
 
 ## FAQ
 
@@ -351,10 +304,10 @@ Parser is best suited for those looking for a trade-off between defining their m
 
 **How do I import X from Pydantic?**
 
-We export most common classes, exceptions, and utilities from Pydantic as part of parser e.g. `from aws_lambda_powertools.utilities.parser import BaseModel`.
-
-If what you're trying to use isn't available as part of the high level import system, use the following escape _most_ hatch mechanism:
+We recommend importing directly from Pydantic to access all features and stay up-to-date with the latest Pydantic updates. For example:
 
 ```python
-from aws_lambda_powertools.utilities.parser.pydantic import <"what you'd like to import">
+from pydantic import BaseModel, Field, ValidationError
 ```
+
+While we export some common Pydantic classes and utilities through the parser for convenience (e.g., `from aws_lambda_powertools.utilities.parser import BaseModel`), importing directly from Pydantic ensures you have access to all features and the most recent updates.
