@@ -13,7 +13,7 @@ The Parser utility simplifies data parsing and validation using [Pydantic](https
 - Parse and validate Lambda event payloads
 - Built-in support for common AWS event sources
 - Runtime type checking with user-friendly error messages
-- Compatible with Pydantic v2
+- Compatible with Pydantic v2.x
 
 ## Getting started
 
@@ -22,14 +22,14 @@ The Parser utility simplifies data parsing and validation using [Pydantic](https
 Powertools only supports Pydantic v2, so make sure to install the required dependencies for Pydantic v2 before using the Parser.
 
 ```python
-pip install aws-lambda-powertools[tracer]
+pip install aws-lambda-powertools[parser]
 ```
 
 !!! info "This is not necessary if you're installing Powertools for AWS Lambda (Python) via [Lambda Layer/SAR](../index.md#lambda-layer){target="_blank"}"
 
-You can also add as a dependency in your preferred tool: `e.g., requirements.txt, pyproject.toml`.
+You can also add as a dependency in your preferred tool: `e.g., requirements.txt, pyproject.toml`, etc.
 
-### Data Model with Parse
+### Data Model with Parser
 
 You can define models by inheriting from `BaseModel` or any other supported type through `TypeAdapter` to parse incoming events. Pydantic then validates the data, ensuring that all fields conform to the specified types and maintaining data integrity.
 
@@ -38,7 +38,7 @@ You can define models by inheriting from `BaseModel` or any other supported type
 
 #### Event parser
 
-The `@event_parser` decorator automatically parses the incoming event into the specified Pydantic model `MyEvent`. If the input doesn't match the model's structure or type requirements, we raises a `ValidationError` directly from Pydantic.
+The `@event_parser` decorator automatically parses the incoming event into the specified Pydantic model `MyEvent`. If the input doesn't match the model's structure or type requirements, it raises a `ValidationError` directly from Pydantic.
 
 === "getting_started_with_parser.py"
 
@@ -68,7 +68,7 @@ You can use the `parse()` function when you need to have flexibility with differ
     --8<-- "examples/parser/src/example_event_parser.json"
     ```
 
-#### Keys difference between parse and event_parser
+#### Keys differences between parse and event_parser
 
 The `parse()` function offers more flexibility and control:
 
@@ -84,7 +84,7 @@ The `@event_parser` decorator is ideal for:
 
 ### Built-in models
 
-You can use pre-built models provided by the Parser for parsing events from AWS services, so you don’t need to create these models yourself, we’ve already done that for you.
+You can use pre-built models to work events from AWS services, so you don’t need to create them yourself. We’ve already done that for you!
 
 === "sqs_model_event.py"
 
@@ -158,7 +158,7 @@ Use the model to validate and extract relevant information from the incoming eve
 
 ### Envelopes
 
-You can use **Envelopes**, which are **JMESPath expressions**, to extract specific portions of complex, nested JSON structures. This is useful when your actual payload is wrapped around a known structure, for example Lambda Event Sources like **EventBridge**.
+You can use **Envelopes** to extract specific portions of complex, nested JSON structures. This is useful when your actual payload is wrapped around a known structure, for example Lambda Event Sources like **EventBridge**.
 
 Envelopes can be used via `envelope` parameter available in both `parse` function and `event_parser` decorator.
 
@@ -181,23 +181,23 @@ You can use pre-built envelopes provided by the Parser to extract and parse spec
 | Envelope name                 | Behaviour                                                                                                                                                                                             | Return                             |
 | ----------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------- |
 | **DynamoDBStreamEnvelope**    | 1. Parses data using `DynamoDBStreamModel`. `` 2. Parses records in `NewImage` and `OldImage` keys using your model. `` 3. Returns a list with a dictionary containing `NewImage` and `OldImage` keys | `List[Dict[str, Optional[Model]]]` |
-| **EventBridgeEnvelope**       | 1. Parses data using `EventBridgeModel`. ``2. Parses`detail` key using your model and returns it.                                                                                                     | `Model`                            |
-| **SqsEnvelope**               | 1. Parses data using `SqsModel`. ``2. Parses records in`body` key using your model and return them in a list.                                                                                         | `List[Model]`                      |
-| **CloudWatchLogsEnvelope**    | 1. Parses data using `CloudwatchLogsModel` which will base64 decode and decompress it. ``2. Parses records in`message` key using your model and return them in a list.                                | `List[Model]`                      |
-| **KinesisDataStreamEnvelope** | 1. Parses data using `KinesisDataStreamModel` which will base64 decode it. ``2. Parses records in in`Records` key using your model and returns them in a list.                                        | `List[Model]`                      |
-| **KinesisFirehoseEnvelope**   | 1. Parses data using `KinesisFirehoseModel` which will base64 decode it. ``2. Parses records in in`Records` key using your model and returns them in a list.                                          | `List[Model]`                      |
-| **SnsEnvelope**               | 1. Parses data using `SnsModel`. ``2. Parses records in`body` key using your model and return them in a list.                                                                                         | `List[Model]`                      |
+| **EventBridgeEnvelope**       | 1. Parses data using `EventBridgeModel`. ``2. Parses `detail` key using your model`` and returns it.                                                                                                     | `Model`                            |
+| **SqsEnvelope**               | 1. Parses data using `SqsModel`. ``2. Parses records in `body` key using your model`` and return them in a list.                                                                                         | `List[Model]`                      |
+| **CloudWatchLogsEnvelope**    | 1. Parses data using `CloudwatchLogsModel` which will base64 decode and decompress it. ``2. Parses records in `message` key using your model`` and return them in a list.                                | `List[Model]`                      |
+| **KinesisDataStreamEnvelope** | 1. Parses data using `KinesisDataStreamModel` which will base64 decode it. ``2. Parses records in in `Records` key using your model`` and returns them in a list.                                        | `List[Model]`                      |
+| **KinesisFirehoseEnvelope**   | 1. Parses data using `KinesisFirehoseModel` which will base64 decode it. ``2. Parses records in in` Records` key using your model`` and returns them in a list.                                          | `List[Model]`                      |
+| **SnsEnvelope**               | 1. Parses data using `SnsModel`. ``2. Parses records in `body` key using your model`` and return them in a list.                                                                                         | `List[Model]`                      |
 | **SnsSqsEnvelope**            | 1. Parses data using `SqsModel`. `` 2. Parses SNS records in `body` key using `SnsNotificationModel`. `` 3. Parses data in `Message` key using your model and return them in a list.                  | `List[Model]`                      |
-| **ApiGatewayEnvelope**        | 1. Parses data using `APIGatewayProxyEventModel`. ``2. Parses`body` key using your model and returns it.                                                                                              | `Model`                            |
-| **ApiGatewayV2Envelope**      | 1. Parses data using `APIGatewayProxyEventV2Model`. ``2. Parses`body` key using your model and returns it.                                                                                            | `Model`                            |
-| **LambdaFunctionUrlEnvelope** | 1. Parses data using `LambdaFunctionUrlModel`. ``2. Parses`body` key using your model and returns it.                                                                                                 | `Model`                            |
-| **KafkaEnvelope**             | 1. Parses data using `KafkaRecordModel`. ``2. Parses`value` key using your model and returns it.                                                                                                      | `Model`                            |
-| **VpcLatticeEnvelope**        | 1. Parses data using `VpcLatticeModel`. ``2. Parses`value` key using your model and returns it.                                                                                                       | `Model`                            |
-| **BedrockAgentEnvelope**      | 1. Parses data using `BedrockAgentEventModel`. ``2. Parses`inputText` key using your model and returns it.                                                                                            | `Model`                            |
+| **ApiGatewayEnvelope**        | 1. Parses data using `APIGatewayProxyEventModel`. ``2. Parses `body` key using your model`` and returns it.                                                                                              | `Model`                            |
+| **ApiGatewayV2Envelope**      | 1. Parses data using `APIGatewayProxyEventV2Model`. ``2. Parses `body` key using your model`` and returns it.                                                                                            | `Model`                            |
+| **LambdaFunctionUrlEnvelope** | 1. Parses data using `LambdaFunctionUrlModel`. ``2. Parses `body` key using your model`` and returns it.                                                                                                 | `Model`                            |
+| **KafkaEnvelope**             | 1. Parses data using `KafkaRecordModel`. ``2. Parses `value` key using your model`` and returns it.                                                                                                      | `Model`                            |
+| **VpcLatticeEnvelope**        | 1. Parses data using `VpcLatticeModel`. ``2. Parses `value` key using your model`` and returns it.                                                                                                       | `Model`                            |
+| **BedrockAgentEnvelope**      | 1. Parses data using `BedrockAgentEventModel`. ``2. Parses `inputText` key using your model`` and returns it.                                                                                            | `Model`                            |
 
 #### Bringing your own envelope
 
-You can create your own Envelope model and logic by inheriting from `BaseEnvelope`, and implementing the `parse` method or `@event_parser` decorator.
+You can create your own Envelope model and logic by inheriting from `BaseEnvelope`, and implementing the `parse` method.
 
 Here's a snippet of how the EventBridge envelope we demonstrated previously is implemented.
 
