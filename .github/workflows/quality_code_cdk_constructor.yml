@@ -5,10 +5,7 @@ name: Code quality - CDK constructor
 # 1. Install all dependencies and spin off containers for all supported Python versions
 # 2. Run code formatters and linters (various checks) for code standard
 # 3. Run static typing checker for potential bugs
-# 4. Run entire test suite for regressions except end-to-end (unit, functional, performance)
-# 5. Run static analysis (in addition to CodeQL) for common insecure code practices
-# 6. Run complexity baseline to avoid error-prone bugs and keep maintenance lower
-# 7. Collect and report on test coverage
+# 4. Run tests
 
 # USAGE
 #
@@ -21,13 +18,11 @@ on:
       - "layer/layer_constructors/**"
     branches:
       - develop
-      - v3
   push:
     paths:
         - "layer/layer_constructors/**"
     branches:
       - develop
-      - v3
 
 permissions:
   contents: read
