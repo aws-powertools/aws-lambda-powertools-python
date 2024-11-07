@@ -20,6 +20,7 @@ on:
     paths:
       - "aws_lambda_powertools/**"
       - "tests/**"
+      - "examples/**"
       - "pyproject.toml"
       - "poetry.lock"
       - "mypy.ini"
@@ -30,6 +31,7 @@ on:
     paths:
       - "aws_lambda_powertools/**"
       - "tests/**"
+      - "examples/**"
       - "pyproject.toml"
       - "poetry.lock"
       - "mypy.ini"
