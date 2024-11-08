@@ -57,7 +57,7 @@ jobs:
         # NOTE: we need QEMU to build Layer against a different architecture (e.g., ARM)
       - name: Set up Docker Buildx
         id: builder
-        uses: docker/setup-buildx-action@f03ac48505955848960e80bbb68046aa35c7b9e7 # v2.4.1
+        uses: docker/setup-buildx-action@c47758b77c9736f4b2ef4073d4d51994fabfe349 # v3.7.1
         with:
           install: true
           driver: docker
