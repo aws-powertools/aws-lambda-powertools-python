@@ -15,12 +15,12 @@ name: Code quality - CDK constructor
 on:
   pull_request:
     paths:
-      - "layer/layer_constructors/**"
+      - "layer_v3/layer_constructors/**"
     branches:
       - develop
   push:
     paths:
-        - "layer/layer_constructors/**"
+        - "layer_v3/layer_constructors/**"
     branches:
       - develop
 
