@@ -31,7 +31,7 @@ class LambdaPowertoolsLayerPythonV3(lambda_.LayerVersion):
     Example:
         >>> app = cdk.App()
         >>> LambdaPowertoolsLayerPythonV3(app, "PowertoolsLayer",
-        ...     python_version=lambda_.Runtime.PYTHON_3_11,
+        ...     python_version=lambda_.Runtime.PYTHON_3_13,
         ...     include_extras=False,
         ...     architecture=lambda_.Architecture.ARM_64,
         ...     powertools_version="2.10.0",
