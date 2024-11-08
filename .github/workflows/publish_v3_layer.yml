@@ -232,29 +232,28 @@ jobs:
   # where a new release creates a new doc (2.16.0) while layers are still pointing to 2.15
   # because the PR has to be merged while release process is running
 
-  # UNCOMMENT LEO
-  # update_v3_layer_arn_docs:
-  #  needs: prod
-  #   outputs:
-  #    temp_branch: ${{ steps.create-pr.outputs.temp_branch }}
-  #  runs-on: ubuntu-latest
-  #  permissions:
-  #    # lower privilege propagated from parent workflow (release.yml)
-  #    contents: write
-  #    pull-requests: write
-  #    id-token: none
-  #    pages: none
-  #  steps:
-  #    - name: Checkout repository # reusable workflows start clean, so we need to checkout again
-  #      uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683  # v4.2.2
-  #      with:
-  #        ref: ${{ env.RELEASE_COMMIT }}
+  update_v3_layer_arn_docs:
+    needs: prod
+    outputs:
+      temp_branch: ${{ steps.create-pr.outputs.temp_branch }}
+    runs-on: ubuntu-latest
+    permissions:
+      # lower privilege propagated from parent workflow (release.yml)
+      contents: write
+      pull-requests: write
+      id-token: none
+      pages: none
+    steps:
+      - name: Checkout repository # reusable workflows start clean, so we need to checkout again
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683  # v4.2.2
+        with:
+          ref: ${{ env.RELEASE_COMMIT }}
 
-  #    - name: Restore sealed source code
-  #      uses: ./.github/actions/seal-restore
-  #      with:
-  #        integrity_hash: ${{ inputs.source_code_integrity_hash }}
-  #        artifact_name: ${{ inputs.source_code_artifact_name }}
+      - name: Restore sealed source code
+        uses: ./.github/actions/seal-restore
+        with:
+          integrity_hash: ${{ inputs.source_code_integrity_hash }}
+          artifact_name: ${{ inputs.source_code_artifact_name }}
 
   # UNCOMMENT THIS
   #    - name: Download CDK layer artifacts

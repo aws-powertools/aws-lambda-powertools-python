@@ -17,11 +17,11 @@ class Order(BaseModel):
     item: dict
 
 
-class OrderKinesisPayloadRecord(KinesisDataStreamRecordPayload): # type: ignore[override]
+class OrderKinesisPayloadRecord(KinesisDataStreamRecordPayload):  # type: ignore[override]
     data: Json[Order]
 
 
-class OrderKinesisRecord(KinesisDataStreamRecord): # type: ignore[override]
+class OrderKinesisRecord(KinesisDataStreamRecord):  # type: ignore[override]
     kinesis: OrderKinesisPayloadRecord
 
 
