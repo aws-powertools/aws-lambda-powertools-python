@@ -113,12 +113,12 @@ class BaseInfrastructure(InfrastructureProvider):
             "aws-lambda-powertools-e2e-test",
             layer_version_name="aws-lambda-powertools-e2e-test",
             compatible_runtimes=[
-                Runtime.PYTHON_3_7,
                 Runtime.PYTHON_3_8,
                 Runtime.PYTHON_3_9,
                 Runtime.PYTHON_3_10,
                 Runtime.PYTHON_3_11,
                 Runtime.PYTHON_3_12,
+                Runtime.PYTHON_3_13,
             ],
             compatible_architectures=[architecture],
             code=Code.from_asset(path=layer_build),
@@ -260,8 +260,10 @@ class BaseInfrastructure(InfrastructureProvider):
             return Runtime.PYTHON_3_11
         elif version.major == 3 and version.minor == 12:
             return Runtime.PYTHON_3_12
+        elif version.major == 3 and version.minor == 13:
+            return Runtime.PYTHON_3_13
         else:
-            raise Exception(f"Unsupported Python version: {version}")
+            raise ValueError(f"Unsupported Python version: {version}")
 
     def create_resources(self) -> None:
         """Create any necessary CDK resources. It'll be called before deploy

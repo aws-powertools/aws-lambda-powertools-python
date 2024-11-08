@@ -94,7 +94,7 @@ This is a snapshot of our automated checks at a glance.
 To build and deploy the Lambda Layers, we run a pipeline with the following steps:
 
 * We fetch the latest PyPi release and use it as the source for our layer.
-* We build Python versions ranging from **3.8 to 3.12** for x86_64 and arm64 architectures. This is necessary because we use pre-compiled libraries like **Pydantic** and **Cryptography**, which require specific Python versions for each layer.
+* We build Python versions ranging from **3.8 to 3.13** for x86_64 and arm64 architectures. This is necessary because we use pre-compiled libraries like **Pydantic** and **Cryptography**, which require specific Python versions for each layer.
 * We provide layer distributions for both the **x86_64** and **arm64** architectures.
 * For each Python version, we create a single CDK package containing both x86_64 and arm64 assets to optimize deployment performance.
 
@@ -111,6 +111,7 @@ graph LR
     Fetch --> P310[<strong>Python 3.10</strong>]
     Fetch --> P311[<strong>Python 3.11</strong>]
     Fetch --> P312[<strong>Python 3.12</strong>]
+    Fetch --> P313[<strong>Python 3.13</strong>]
 
     subgraph build ["LAYER BUILD"]
       P38 --> P38x86[build x86_64]
@@ -124,6 +125,8 @@ graph LR
       P311 --> P311arm64[build arm64]
       P312 --> P312x86[build x86_64]
       P312 --> P312arm64[build arm64]
+      P313 --> P313x86[build x86_64]
+      P313 --> P313arm64[build arm64]
       P38x86 --> CDKP1[CDK Package]
       P38arm64 --> CDKP1[CDK Package]
       P39x86 --> CDKP2[CDK Package]
@@ -134,6 +137,8 @@ graph LR
       P311arm64 --> CDKP4[CDK Package]
       P312x86 --> CDKP5[CDK Package]
       P312arm64 --> CDKP5[CDK Package]
+      P313x86 --> CDKP6[CDK Package]
+      P313arm64 --> CDKP6[CDK Package]
     end
 
     subgraph beta ["BETA (all regions)"]
@@ -142,6 +147,7 @@ graph LR
       CDKP3 --> DeployBeta
       CDKP4 --> DeployBeta
       CDKP5 --> DeployBeta
+      CDKP6 --> DeployBeta
       DeployBeta --> RunBetaCanary["Beta canary tests<br> <i>(all packages)</i>"]
     end
     subgraph prod ["PROD (all regions)"]
