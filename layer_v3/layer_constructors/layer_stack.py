@@ -32,9 +32,9 @@ class LambdaPowertoolsLayerPythonV3(lambda_.LayerVersion):
         >>> app = cdk.App()
         >>> LambdaPowertoolsLayerPythonV3(app, "PowertoolsLayer",
         ...     python_version=lambda_.Runtime.PYTHON_3_13,
-        ...     include_extras=False,
+        ...     include_extras=True,
         ...     architecture=lambda_.Architecture.ARM_64,
-        ...     powertools_version="2.10.0",
+        ...     powertools_version="3.0.0",
         ...     layer_name="MyCustomPowertoolsLayer")
 
     """
