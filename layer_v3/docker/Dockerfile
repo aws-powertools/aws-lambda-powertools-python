@@ -12,11 +12,11 @@ ARG PACKAGE_SUFFIX=""
 USER root
 WORKDIR /tmp
 
-# PACKAGE_SUFFIX = '[all]==2.0.0'
-# PACKAGE_SUFFIX = '[all] @ git+https://github.com/awslabs/aws-lambda-powertools-python@v2'
+# PACKAGE_SUFFIX = '[all]==3.0.0'
+# PACKAGE_SUFFIX = '[all] @ git+https://github.com/awslabs/aws-lambda-powertools-python@develop'
 # PACKAGE_SUFFIX = '[all]'
-# PACKAGE_SUFFIX = '=='2.0.0'
-# PACKAGE_SUFFIX = ' @ git+https://github.com/awslabs/aws-lambda-powertools-python@v2'
+# PACKAGE_SUFFIX = '=='3.0.0'
+# PACKAGE_SUFFIX = ' @ git+https://github.com/awslabs/aws-lambda-powertools-python@develop'
 # PACKAGE_SUFFIX = ''
 
 # PYTHON_VERSION = 3.8, 3.9, 3.10, 3.11, 3.12, and 3.13

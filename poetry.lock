@@ -290,13 +290,13 @@ requests = ">=0.14.0"
 
 [[package]]
 name = "aws-sam-translator"
-version = "1.91.0"
+version = "1.92.0"
 description = "AWS SAM Translator is a library that transform SAM templates into AWS CloudFormation templates"
 optional = false
 python-versions = "!=4.0,<=4.0,>=3.8"
 files = [
-    {file = "aws_sam_translator-1.91.0-py3-none-any.whl", hash = "sha256:9ebf4b53c226338e6b89d14d8583bc4559b87f0be52ed8d577c5a1dc2db14962"},
-    {file = "aws_sam_translator-1.91.0.tar.gz", hash = "sha256:0cdfbc598f384c430c3ec064f6008d80c5a0d58f1dc45ca4e331ae5c43cb4697"},
+    {file = "aws_sam_translator-1.92.0-py3-none-any.whl", hash = "sha256:10e77ab628cead3d0e8ee0211eb84c04010c051b9a48ce6b15171c39bdbe917d"},
+    {file = "aws_sam_translator-1.92.0.tar.gz", hash = "sha256:49014e783180ca1fcdd70790645a850d20f4285c19ae694d37fefc52a60d7c64"},
 ]
 
 [package.dependencies]
@@ -412,17 +412,17 @@ uvloop = ["uvloop (>=0.15.2)"]
 
 [[package]]
 name = "boto3"
-version = "1.35.56"
+version = "1.35.57"
 description = "The AWS SDK for Python"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "boto3-1.35.56-py3-none-any.whl", hash = "sha256:d04608cf40f429025eb66b52b835bdc333436022918788853ed0bbbba6dd2f09"},
-    {file = "boto3-1.35.56.tar.gz", hash = "sha256:6fcc510a4e747e85f84046b0ba0e5b178e89ba0f8ac9e2b6ebb4cc925c68c23b"},
+    {file = "boto3-1.35.57-py3-none-any.whl", hash = "sha256:9edf49640c79a05b0a72f4c2d1e24dfc164344b680535a645f455ac624dc3680"},
+    {file = "boto3-1.35.57.tar.gz", hash = "sha256:db58348849a5af061f0f5ec9c3b699da5221ca83354059fdccb798e3ddb6b62a"},
 ]
 
 [package.dependencies]
-botocore = ">=1.35.56,<1.36.0"
+botocore = ">=1.35.57,<1.36.0"
 jmespath = ">=0.7.1,<2.0.0"
 s3transfer = ">=0.10.0,<0.11.0"
 
@@ -431,13 +431,13 @@ crt = ["botocore[crt] (>=1.21.0,<2.0a0)"]
 
 [[package]]
 name = "boto3-stubs"
-version = "1.35.56"
-description = "Type annotations for boto3 1.35.56 generated with mypy-boto3-builder 8.2.0"
+version = "1.35.57"
+description = "Type annotations for boto3 1.35.57 generated with mypy-boto3-builder 8.2.1"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "boto3_stubs-1.35.56-py3-none-any.whl", hash = "sha256:122bc60c4545748ee8e29e85bf3b917ffcef7e0ca56838734b1fa7391f77dda2"},
-    {file = "boto3_stubs-1.35.56.tar.gz", hash = "sha256:de2a028c94b7a8f5164161bf9ff2495673aa104376ce5582d21f44bf697da581"},
+    {file = "boto3_stubs-1.35.57-py3-none-any.whl", hash = "sha256:380e742ebd956694b3c7e49e2ff8b748ffcef8c4b09d05b2f9c71cf103a425c7"},
+    {file = "boto3_stubs-1.35.57.tar.gz", hash = "sha256:014b7493fd2dcf7d2e5d685c7186a6e2fb4020713a299dfdf0dd15a3990d2c1b"},
 ]
 
 [package.dependencies]
@@ -499,7 +499,7 @@ bedrock-agent = ["mypy-boto3-bedrock-agent (>=1.35.0,<1.36.0)"]
 bedrock-agent-runtime = ["mypy-boto3-bedrock-agent-runtime (>=1.35.0,<1.36.0)"]
 bedrock-runtime = ["mypy-boto3-bedrock-runtime (>=1.35.0,<1.36.0)"]
 billingconductor = ["mypy-boto3-billingconductor (>=1.35.0,<1.36.0)"]
-boto3 = ["boto3 (==1.35.56)", "botocore (==1.35.56)"]
+boto3 = ["boto3 (==1.35.57)", "botocore (==1.35.57)"]
 braket = ["mypy-boto3-braket (>=1.35.0,<1.36.0)"]
 budgets = ["mypy-boto3-budgets (>=1.35.0,<1.36.0)"]
 ce = ["mypy-boto3-ce (>=1.35.0,<1.36.0)"]
@@ -854,13 +854,13 @@ xray = ["mypy-boto3-xray (>=1.35.0,<1.36.0)"]
 
 [[package]]
 name = "botocore"
-version = "1.35.56"
+version = "1.35.57"
 description = "Low-level, data-driven core of boto 3."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "botocore-1.35.56-py3-none-any.whl", hash = "sha256:4be97f7bc1fbf33ad71ee1b678cea0ecf9638e61d5f566a46f261cde969dd690"},
-    {file = "botocore-1.35.56.tar.gz", hash = "sha256:8a9e752c8e87a423575ac528340a35d4318b8576ae4c6e0acfe5a3867f6bbccf"},
+    {file = "botocore-1.35.57-py3-none-any.whl", hash = "sha256:92ddd02469213766872cb2399269dd20948f90348b42bf08379881d5e946cc34"},
+    {file = "botocore-1.35.57.tar.gz", hash = "sha256:d96306558085baf0bcb3b022d7a8c39c93494f031edb376694d2b2dcd0e81327"},
 ]
 
 [package.dependencies]
@@ -876,13 +876,13 @@ crt = ["awscrt (==0.22.0)"]
 
 [[package]]
 name = "botocore-stubs"
-version = "1.35.54"
+version = "1.35.57"
 description = "Type annotations and code completion for botocore"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "botocore_stubs-1.35.54-py3-none-any.whl", hash = "sha256:26ba65907eed959dddc644ab1cd72e3a2cc9761dad79e0b45ff3b8676c47e5ec"},
-    {file = "botocore_stubs-1.35.54.tar.gz", hash = "sha256:49e28813324308bfc5a92bde118df5c9c41a01237eef1e1628891770f3f68a94"},
+    {file = "botocore_stubs-1.35.57-py3-none-any.whl", hash = "sha256:e0a82d848620d21e3709be1e6c806d8565cf9cc94d0f71f0843f9b9c7c00eba5"},
+    {file = "botocore_stubs-1.35.57.tar.gz", hash = "sha256:842aa42a6eb3278bd83ff0050f5cdf2d6290552f8ef6d859b6c398b37bef4dfe"},
 ]
 
 [package.dependencies]
@@ -934,13 +934,13 @@ ujson = ["ujson (>=5.7.0)"]
 
 [[package]]
 name = "cdk-nag"
-version = "2.32.0"
+version = "2.32.1"
 description = "Check CDK v2 applications for best practices using a combination on available rule packs."
 optional = false
 python-versions = "~=3.8"
 files = [
-    {file = "cdk_nag-2.32.0-py3-none-any.whl", hash = "sha256:63732496ff9d543257f5ffa0db39fe157ed903b90cf93eb7ae5cd0797115e5bf"},
-    {file = "cdk_nag-2.32.0.tar.gz", hash = "sha256:5aeb48deeafbcc1d3dbd5a311cf21fe73bdb4641827ee2138c7f4346bb6196fb"},
+    {file = "cdk_nag-2.32.1-py3-none-any.whl", hash = "sha256:8b19647c865fb2b8078832f6174c83a48426388b48efbdd49889042a4f403d46"},
+    {file = "cdk_nag-2.32.1.tar.gz", hash = "sha256:8d37457d1015cbca18373355be7dc3b727caee68cf4f38dbe603abacd4cb03f7"},
 ]
 
 [package.dependencies]
@@ -2590,13 +2590,13 @@ typing-extensions = {version = ">=4.1.0", markers = "python_version < \"3.12\""}
 
 [[package]]
 name = "mypy-boto3-lambda"
-version = "1.35.49"
-description = "Type annotations for boto3.Lambda 1.35.49 service generated with mypy-boto3-builder 8.1.4"
+version = "1.35.57"
+description = "Type annotations for boto3.Lambda 1.35.57 service generated with mypy-boto3-builder 8.2.1"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "mypy_boto3_lambda-1.35.49-py3-none-any.whl", hash = "sha256:10d36265102c6bdff56c1195ee1ead8fac9e6a79c59d121864fb06cc0a3d2e8c"},
-    {file = "mypy_boto3_lambda-1.35.49.tar.gz", hash = "sha256:ed33d8077e3c95231703166e0d1dae8460b2500eb3a8588a0ef050ba1dcce6e1"},
+    {file = "mypy_boto3_lambda-1.35.57-py3-none-any.whl", hash = "sha256:2d6384ee60d26f9cc75bc1f770979b725d401b17bf5468ba07c22a788843f565"},
+    {file = "mypy_boto3_lambda-1.35.57.tar.gz", hash = "sha256:9bacdd4b241b453882ba8587ec65fb0909d97b403648c3dbf20825833ce57587"},
 ]
 
 [package.dependencies]
@@ -2725,13 +2725,13 @@ uv = ["uv (>=0.1.6)"]
 
 [[package]]
 name = "opentelemetry-api"
-version = "1.28.0"
+version = "1.28.1"
 description = "OpenTelemetry Python API"
 optional = true
 python-versions = ">=3.8"
 files = [
-    {file = "opentelemetry_api-1.28.0-py3-none-any.whl", hash = "sha256:8457cd2c59ea1bd0988560f021656cecd254ad7ef6be4ba09dbefeca2409ce52"},
-    {file = "opentelemetry_api-1.28.0.tar.gz", hash = "sha256:578610bcb8aa5cdcb11169d136cc752958548fb6ccffb0969c1036b0ee9e5353"},
+    {file = "opentelemetry_api-1.28.1-py3-none-any.whl", hash = "sha256:bfe86c95576cf19a914497f439fd79c9553a38de0adbdc26f7cfc46b0c00b16c"},
+    {file = "opentelemetry_api-1.28.1.tar.gz", hash = "sha256:6fa7295a12c707f5aebef82da3d9ec5afe6992f3e42bfe7bec0339a44b3518e7"},
 ]
 
 [package.dependencies]
@@ -2740,13 +2740,13 @@ importlib-metadata = ">=6.0,<=8.5.0"
 
 [[package]]
 name = "packaging"
-version = "24.1"
+version = "24.2"
 description = "Core utilities for Python packages"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "packaging-24.1-py3-none-any.whl", hash = "sha256:5b8f2217dbdbd2f7f384c41c628544e6d52f2d0f53c6d0c3ea61aa5d1d7ff124"},
-    {file = "packaging-24.1.tar.gz", hash = "sha256:026ed72c8ed3fcce5bf8950572258698927fd1dbda10a5e981cdf0ac37f4f002"},
+    {file = "packaging-24.2-py3-none-any.whl", hash = "sha256:09abb1bccd265c01f4a3aa3f7a7db064b36514d2cba19a2f694fe6150451a759"},
+    {file = "packaging-24.2.tar.gz", hash = "sha256:c228a6dc5e932d346bc5739379109d49e8853dd8223571c7c5b55260edc0b97f"},
 ]
 
 [[package]]
@@ -4400,4 +4400,4 @@ validation = ["fastjsonschema"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.8,<4.0.0"
-content-hash = "3f6803b47c2fa2e72f06074c2705e5898b2c3a01951f83f7ca71271c82b20512"
+content-hash = "c5b8864fb2e1fad4217e2e54ce42a0f302515d4f920d21eba3083a4775393860"
