@@ -23,7 +23,6 @@ WORKDIR /tmp
 
 # Installing libs based on base image; We must use dnf for AL2023 (Python 3.12+)
 COPY install_libraries.sh .
-RUN ls -la
 RUN chmod a+x /tmp/install_libraries.sh
 RUN /bin/sh /tmp/install_libraries.sh
 
