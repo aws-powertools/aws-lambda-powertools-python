@@ -96,12 +96,12 @@ class BaseInfrastructure(InfrastructureProvider):
         self.create_lambda_functions()
         ```
 
-        Creating Lambda functions and override runtime to Python 3.12
+        Creating Lambda functions and override runtime to Python 3.13
 
         ```python
         from aws_cdk.aws_lambda import Runtime
 
-        self.create_lambda_functions(function_props={"runtime": Runtime.PYTHON_3_12)
+        self.create_lambda_functions(function_props={"runtime": Runtime.PYTHON_3_13)
         ```
         """
         if not self._handlers_dir.exists():

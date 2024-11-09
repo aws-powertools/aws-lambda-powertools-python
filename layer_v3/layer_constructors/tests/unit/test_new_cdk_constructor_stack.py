@@ -17,7 +17,7 @@ def test_with_no_configuration_constructor():
 
     template.has_resource_properties("AWS::Lambda::LayerVersion", {"LicenseInfo": "MIT-0"})
 
-    template.has_resource_properties("AWS::Lambda::LayerVersion", {"CompatibleRuntimes": ["python3.12"]})
+    template.has_resource_properties("AWS::Lambda::LayerVersion", {"CompatibleRuntimes": ["python3.13"]})
 
 
 @pytest.mark.parametrize(
@@ -28,6 +28,7 @@ def test_with_no_configuration_constructor():
         lambda_.Runtime.PYTHON_3_10,
         lambda_.Runtime.PYTHON_3_11,
         lambda_.Runtime.PYTHON_3_12,
+        lambda_.Runtime.PYTHON_3_13,
     ],
 )
 def test_with_different_python_version_x86_64(python_version):
@@ -64,6 +65,7 @@ def test_with_different_python_version_x86_64(python_version):
         lambda_.Runtime.PYTHON_3_10,
         lambda_.Runtime.PYTHON_3_11,
         lambda_.Runtime.PYTHON_3_12,
+        lambda_.Runtime.PYTHON_3_13,
     ],
 )
 def test_with_different_python_version_arm64(python_version):
@@ -104,7 +106,7 @@ def test_with_custom_name():
     template.has_resource_properties(
         "AWS::Lambda::LayerVersion",
         {
-            "Description": "Powertools for AWS Lambda (Python) V3 [x86_64 - Python 3.12] with extra dependencies latest version",  # noqa E501
+            "Description": "Powertools for AWS Lambda (Python) V3 [x86_64 - Python 3.13] with extra dependencies latest version",  # noqa E501
         },
     )
 
@@ -127,7 +129,7 @@ def test_with_extras():
     template.has_resource_properties(
         "AWS::Lambda::LayerVersion",
         {
-            "Description": "Powertools for AWS Lambda (Python) V3 [x86_64 - Python 3.12] with extra dependencies version 3.0.0",  # noqa E501
+            "Description": "Powertools for AWS Lambda (Python) V3 [x86_64 - Python 3.13] with extra dependencies version 3.0.0",  # noqa E501
         },
     )
 
@@ -151,7 +153,7 @@ def test_with_extras_arm64():
     template.has_resource_properties(
         "AWS::Lambda::LayerVersion",
         {
-            "Description": "Powertools for AWS Lambda (Python) V3 [arm64 - Python 3.12] with extra dependencies version 3.0.0",  # noqa E501
+            "Description": "Powertools for AWS Lambda (Python) V3 [arm64 - Python 3.13] with extra dependencies version 3.0.0",  # noqa E501
         },
     )
 

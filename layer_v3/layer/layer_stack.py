@@ -94,6 +94,8 @@ class LayerStack(Stack):
             python_version = Runtime.PYTHON_3_11
         if python_version == "python3.12":
             python_version = Runtime.PYTHON_3_12
+        if python_version == "python3.13":
+            python_version = Runtime.PYTHON_3_13
 
         has_arm64_support = CfnParameter(
             self,
