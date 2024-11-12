@@ -272,10 +272,18 @@ class AmazonCloudWatchEMFProvider(BaseProvider):
             raise SchemaValidationError(
                 f"Maximum number of dimensions exceeded ({MAX_DIMENSIONS}): Unable to add dimension {name}.",
             )
-        # Cast value to str according to EMF spec
-        # Majority of values are expected to be string already, so
-        # checking before casting improves performance in most cases
-        self.dimension_set[name] = value if isinstance(value, str) else str(value)
+
+        if not name or not value:
+            warnings.warn(
+                f"The dimension {name} doesn't meet the requirements and won't be added. "
+                "Ensure the dimension name and value are non empty strings",
+                stacklevel=2,
+            )
+        else:
+            # Cast value to str according to EMF spec
+            # Majority of values are expected to be string already, so
+            # checking before casting improves performance in most cases
+            self.dimension_set[name] = value if isinstance(value, str) else str(value)
 
     def add_metadata(self, key: str, value: Any) -> None:
         """Adds high cardinal metadata for metrics object
