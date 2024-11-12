@@ -1802,7 +1802,7 @@ On March 25st, 2025 v2 of Powertools for AWS Lambda (Python) <a
 <li><strong>Resolution</strong>. It's a value representing the storage resolution for the corresponding metric. Metrics can be either Standard or High resolution. Read more <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html#high-resolution-metrics" target="_blank">here</a>.</li>
 </ul>
 <figure>
-  <img src="../../media/metrics_terminology.png" />
+  <img src="../../media/metrics_terminology.png" alt="Terminology" />
   <figcaption>Metric terminology, visually explained</figcaption>
 </figure>
 
@@ -2174,6 +2174,7 @@ On March 25st, 2025 v2 of Powertools for AWS Lambda (Python) <a
 </div>
 </div>
 </div>
+<p><strong>Note:</strong> Dimensions with empty values will not be included.</p>
 <h3 id="changing-default-timestamp">Changing default timestamp<a class="headerlink" href="#changing-default-timestamp" title="Permanent link">&para;</a></h3>
 <p>When creating metrics, we use the current timestamp. If you want to change the timestamp of all the metrics you create, utilize the <code>set_timestamp</code> function. You can specify a datetime object or an integer representing an epoch timestamp in milliseconds.</p>
 <p>Note that when specifying the timestamp using an integer, it must adhere to the epoch timezone format in milliseconds.</p>
