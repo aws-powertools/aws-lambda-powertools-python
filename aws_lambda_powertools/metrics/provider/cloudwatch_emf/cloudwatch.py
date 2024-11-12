@@ -273,7 +273,7 @@ class AmazonCloudWatchEMFProvider(BaseProvider):
                 f"Maximum number of dimensions exceeded ({MAX_DIMENSIONS}): Unable to add dimension {name}.",
             )
 
-        if not name or not value:
+        if not name.strip() or not value.strip():
             warnings.warn(
                 f"The dimension {name} doesn't meet the requirements and won't be added. "
                 "Ensure the dimension name and value are non empty strings",

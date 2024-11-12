@@ -1053,7 +1053,7 @@ def test_add_dimensions_with_empty_value(namespace, capsys, metric):
 
     # WHEN we try to add a dimension with empty value
     with pytest.warns(UserWarning, match=f"The dimension {my_dimension} doesn't meet the requirements *"):
-        my_metrics.add_dimension(name="my_empty_dimension", value="")
+        my_metrics.add_dimension(name="my_empty_dimension", value=" ")
 
     my_metrics.add_metric(**metric)
     my_metrics.flush_metrics()
