@@ -154,7 +154,41 @@ def test_parser_unions(test_input, expected):
     DogCallback = Annotated[Union[SuccessfulCallback, FailedCallback], pydantic.Field(discriminator="status")]
 
     @event_parser(model=DogCallback)
-    def handler(event: test_input, _: Any) -> str:
+    def handler(event, _: Any) -> str:
+        if isinstance(event, FailedCallback):
+            return f"Uh oh. Had a problem: {event.error}"
+
+        return f"Successfully retrieved {event.breed} named {event.name}"
+
+    ret = handler(test_input, None)
+    assert ret == expected
+
+
+@pytest.mark.parametrize(
+    "test_input,expected",
+    [
+        (
+            {"status": "succeeded", "name": "Clifford", "breed": "Labrador"},
+            "Successfully retrieved Labrador named Clifford",
+        ),
+        ({"status": "failed", "error": "oh some error"}, "Uh oh. Had a problem: oh some error"),
+    ],
+)
+def test_parser_unions_with_type_adapter_instance(test_input, expected):
+    class SuccessfulCallback(pydantic.BaseModel):
+        status: Literal["succeeded"]
+        name: str
+        breed: Literal["Newfoundland", "Labrador"]
+
+    class FailedCallback(pydantic.BaseModel):
+        status: Literal["failed"]
+        error: str
+
+    DogCallback = Annotated[Union[SuccessfulCallback, FailedCallback], pydantic.Field(discriminator="status")]
+    DogCallbackTypeAdapter = pydantic.TypeAdapter(DogCallback)
+
+    @event_parser(model=DogCallbackTypeAdapter)
+    def handler(event, _: Any) -> str:
         if isinstance(event, FailedCallback):
             return f"Uh oh. Had a problem: {event.error}"
 
