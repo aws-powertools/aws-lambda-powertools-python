@@ -5,7 +5,7 @@ from aws_lambda_powertools.utilities.parser.models import EventBridgeModel
 
 
 # Define a custom EventBridge model by extending the built-in EventBridgeModel
-class MyCustomEventBridgeModel(EventBridgeModel):
+class MyCustomEventBridgeModel(EventBridgeModel):  # type: ignore[override]
     detail_type: str = Field(alias="detail-type")
     source: str
     detail: dict

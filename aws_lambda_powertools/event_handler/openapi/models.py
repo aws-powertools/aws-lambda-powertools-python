@@ -390,7 +390,7 @@ class HTTPBase(SecurityBase):
     scheme: str
 
 
-class HTTPBearer(HTTPBase):
+class HTTPBearer(HTTPBase):  # type: ignore[override]
     scheme: Literal["bearer"] = "bearer"
     bearerFormat: Optional[str] = None
 

@@ -83,7 +83,7 @@ class S3EventNotificationEventBridgeDetailModel(BaseModel):
     destination_access_tier: Optional[str] = Field(None, alias="destination-access-tier")
 
 
-class S3EventNotificationEventBridgeModel(EventBridgeModel):
+class S3EventNotificationEventBridgeModel(EventBridgeModel):  # type: ignore[override]
     detail: S3EventNotificationEventBridgeDetailModel
 
 
