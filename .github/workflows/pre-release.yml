@@ -232,7 +232,7 @@ jobs:
 
       - name: Upload to PyPi prod
         if: ${{ !inputs.skip_pypi }}
-        uses: pypa/gh-action-pypi-publish@fb13cb306901256ace3dab689990e13a5550ffaa # v1.11.0
+        uses: pypa/gh-action-pypi-publish@15c56dba361d8335944d31a2ecd17d700fc7bcbc # v1.12.2
 
   # Creates a PR with the latest version we've just released
   # since our trunk is protected against any direct pushes from automation

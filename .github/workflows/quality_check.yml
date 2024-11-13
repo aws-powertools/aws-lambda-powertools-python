@@ -20,22 +20,22 @@ on:
     paths:
       - "aws_lambda_powertools/**"
       - "tests/**"
+      - "examples/**"
       - "pyproject.toml"
       - "poetry.lock"
       - "mypy.ini"
     branches:
       - develop
-      - v3
   push:
     paths:
       - "aws_lambda_powertools/**"
       - "tests/**"
+      - "examples/**"
       - "pyproject.toml"
       - "poetry.lock"
       - "mypy.ini"
     branches:
       - develop
-      - v3
 
 permissions:
   contents: read
