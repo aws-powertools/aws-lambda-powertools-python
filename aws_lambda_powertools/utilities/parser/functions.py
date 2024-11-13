@@ -35,12 +35,17 @@ def _retrieve_or_set_model_from_cache(model: type[T]) -> TypeAdapter:
         The TypeAdapter instance for the given model,
         either retrieved from the cache or newly created and stored in the cache.
     """
+
     id_model = id(model)
 
     if id_model in CACHE_TYPE_ADAPTER:
         return CACHE_TYPE_ADAPTER[id_model]
 
-    CACHE_TYPE_ADAPTER[id_model] = TypeAdapter(model)
+    if isinstance(model, TypeAdapter):
+        CACHE_TYPE_ADAPTER[id_model] = model
+    else:
+        CACHE_TYPE_ADAPTER[id_model] = TypeAdapter(model)
+
     return CACHE_TYPE_ADAPTER[id_model]
 
 
