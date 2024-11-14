@@ -15,8 +15,7 @@ from aws_cdk import (
 from aws_cdk.aws_lambda import Architecture, CfnLayerVersionPermission, Runtime
 from aws_cdk.aws_ssm import StringParameter
 from constructs import Construct
-
-from ..layer_constructors.layer_stack import LambdaPowertoolsLayerPythonV3
+from layer_constructors.layer_stack import LambdaPowertoolsLayerPythonV3
 
 
 @jsii.implements(IAspect)
