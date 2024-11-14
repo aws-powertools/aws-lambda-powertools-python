@@ -108,7 +108,7 @@ We have stopped exporting Pydantic objects directly from `aws_lambda_powertools.
 
 !!! note "No code changes required"
 
-To give you better a better experience, we're now building Powertools for AWS Lambda (Python)'s Lambda layers for specific Python versions (`3.8-3.12`) and architectures (`x86_64` & `arm64`).
+To give you better a better experience, we're now building Powertools for AWS Lambda (Python)'s Lambda layers for specific Python versions (`3.8-3.13`) and architectures (`x86_64` & `arm64`).
 
 This also allows us to include architecture-specific versions of both Pydantic v2 and AWS Encryption SDK and give you a more streamlined setup.
 
@@ -121,11 +121,13 @@ To take advantage of the new layers, you need to update your functions or deploy
 | x86_64       | 3.10           | arn:aws:lambda:{region}:017000801446:layer:AWSLambdaPowertoolsPythonV3-python310-x86_64:{version}   |
 | x86_64       | 3.11           | arn:aws:lambda:{region}:017000801446:layer:AWSLambdaPowertoolsPythonV3-python311-x86_64:{version}   |
 | x86_64       | 3.12           | arn:aws:lambda:{region}:017000801446:layer:AWSLambdaPowertoolsPythonV3-python312-x86_64:{version}   |
+| x86_64       | 3.13           | arn:aws:lambda:{region}:017000801446:layer:AWSLambdaPowertoolsPythonV3-python312-x86_64:{version}   |
 | arm64        | 3.8            | arn:aws:lambda:{region}:017000801446:layer:AWSLambdaPowertoolsPythonV3-python38-arm64:{version}     |
 | arm64        | 3.9            | arn:aws:lambda:{region}:017000801446:layer:AWSLambdaPowertoolsPythonV3-python39-arm64:{version}     |
 | arm64        | 3.10           | arn:aws:lambda:{region}:017000801446:layer:AWSLambdaPowertoolsPythonV3-python310-arm64:{version}    |
 | arm64        | 3.11           | arn:aws:lambda:{region}:017000801446:layer:AWSLambdaPowertoolsPythonV3-python311-arm64:{version}    |
 | arm64        | 3.12           | arn:aws:lambda:{region}:017000801446:layer:AWSLambdaPowertoolsPythonV3-python312-arm64:{version}    |
+| arm64        | 3.13           | arn:aws:lambda:{region}:017000801446:layer:AWSLambdaPowertoolsPythonV3-python312-arm64:{version}    |
 
 ## Event Handler: headers are case-insensitive
 

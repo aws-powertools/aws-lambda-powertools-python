@@ -8,7 +8,7 @@ from aws_cdk import aws_lambda as lambda_
 if TYPE_CHECKING:
     from constructs import Construct
 
-from layer_v3.layer_constructors.helpers import construct_build_args
+from .helpers import construct_build_args
 
 
 class LambdaPowertoolsLayerPythonV3(lambda_.LayerVersion):
@@ -22,19 +22,20 @@ class LambdaPowertoolsLayerPythonV3(lambda_.LayerVersion):
     Attributes:
         scope (Construct): The scope in which to define this construct.
         construct_id (str): The scoped construct ID. Must be unique amongst siblings in the same scope.
-        python_version (lambda_.Runtime): The Python runtime version for the layer. Defaults to Python 3.12.
+        python_version (lambda_.Runtime): The Python runtime version for the layer. Defaults to Python 3.13.
         include_extras (bool): Whether to include extra dependencies. Defaults to True.
         architecture (lambda_.Architecture): The compatible Lambda architecture. Defaults to x86_64.
         powertools_version (str): The version of Powertools to use. If empty, uses the latest version.
-        layer_name (str): Custom name for the Lambda Layer. If empty, a default name will be used.
+        layer_name (str): Custom name for the Lambda Layer. If empty, a default name will be used in the layer.
+
 
     Example:
         >>> app = cdk.App()
         >>> LambdaPowertoolsLayerPythonV3(app, "PowertoolsLayer",
-        ...     python_version=lambda_.Runtime.PYTHON_3_11,
-        ...     include_extras=False,
+        ...     python_version=lambda_.Runtime.PYTHON_3_13,
+        ...     include_extras=True,
         ...     architecture=lambda_.Architecture.ARM_64,
-        ...     powertools_version="2.10.0",
+        ...     powertools_version="3.0.0",
         ...     layer_name="MyCustomPowertoolsLayer")
 
     """
@@ -43,7 +44,7 @@ class LambdaPowertoolsLayerPythonV3(lambda_.LayerVersion):
         self,
         scope: Construct,
         construct_id: str,
-        python_version: lambda_.Runtime = lambda_.Runtime.PYTHON_3_12,
+        python_version: lambda_.Runtime = lambda_.Runtime.PYTHON_3_13,
         include_extras: bool = True,
         architecture: lambda_.Architecture = lambda_.Architecture.X86_64,
         powertools_version: str = "",

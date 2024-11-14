@@ -15,12 +15,12 @@ name: Code quality - CDK constructor
 on:
   pull_request:
     paths:
-      - "layer/layer_constructors/**"
+      - "layer_v3/layer_constructors/**"
     branches:
       - develop
   push:
     paths:
-        - "layer/layer_constructors/**"
+        - "layer_v3/layer_constructors/**"
     branches:
       - develop
 
@@ -28,12 +28,12 @@ permissions:
   contents: read
 
 jobs:
-  quality_check:
+  quality_check_cdk:
     runs-on: ubuntu-latest
     strategy:
       max-parallel: 4
       matrix:
-        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
+        python-version: ["3.12"]
     env:
       PYTHON: "${{ matrix.python-version }}"
     permissions:

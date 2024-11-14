@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "aws_lambda_powertools"
-version = "3.2.1a14"
+version = "3.3.0"
 description = "Powertools for AWS Lambda (Python) is a developer toolkit to implement Serverless best practices and increase developer velocity."
 authors = ["Amazon Web Services"]
 include = ["aws_lambda_powertools/py.typed", "THIRD-PARTY-LICENSES"]
@@ -14,6 +14,7 @@ classifiers = [
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
 ]
 repository = "https://github.com/aws-powertools/powertools-lambda-python"
 documentation = "https://docs.powertools.aws.dev/lambda/python/"
@@ -71,12 +72,12 @@ xenon = "^0.9.3"
 mkdocs-git-revision-date-plugin = "^0.3.2"
 mike = "^2.1.2"
 pytest-xdist = "^3.6.1"
-aws-cdk-lib = "^2.166.0"
+aws-cdk-lib = "^2.167.0"
 "aws-cdk.aws-apigatewayv2-alpha" = "^2.38.1-alpha.0"
 "aws-cdk.aws-apigatewayv2-integrations-alpha" = "^2.38.1-alpha.0"
 "aws-cdk.aws-apigatewayv2-authorizers-alpha" = "^2.38.1-alpha.0"
-"aws-cdk.aws-lambda-python-alpha" = "^2.166.0a0"
-"cdklabs.generative-ai-cdk-constructs" = "^0.1.279"
+"aws-cdk.aws-lambda-python-alpha" = "^2.167.0a0"
+"cdklabs.generative-ai-cdk-constructs" = "^0.1.281"
 pytest-benchmark = "^4.0.0"
 types-requests = "^2.31.0"
 typing-extensions = "^4.12.2"
@@ -88,7 +89,6 @@ ijson = "^3.3.0"
 typed-ast = { version = "^1.5.5", python = "< 3.8" }
 hvac = "^2.3.0"
 aws-requests-auth = "^0.4.3"
-datadog-lambda = "^6.101.0"
 
 [tool.poetry.extras]
 parser = ["pydantic"]

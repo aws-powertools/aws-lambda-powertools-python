@@ -65,7 +65,7 @@ You can install Powertools for AWS Lambda (Python) using your favorite dependenc
 
     [Lambda Layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html){target="_blank"} is a .zip file archive that can contain additional code, pre-packaged dependencies, data,  or configuration files. We compile and optimize [all dependencies](#install), and remove duplicate dependencies [already available in the Lambda runtime](https://github.com/aws-powertools/powertools-lambda-layer-cdk/blob/d24716744f7d1f37617b4998c992c4c067e19e64/layer/Python/Dockerfile#L36){target="_blank"} to achieve the most optimal size.
 
-    For the latter, make sure to replace `{region}` with your AWS region, e.g., `eu-west-1`, and the `{python_version}` without the period (.), e.g., `python312` for `Python 3.12`.
+    For the latter, make sure to replace `{region}` with your AWS region, e.g., `eu-west-1`, and the `{python_version}` without the period (.), e.g., `python313` for `Python 3.13`.
 
     | Architecture | Layer ARN                                                                                                 |
     | ------------ | --------------------------------------------------------------------------------------------------------- |
@@ -76,7 +76,7 @@ You can install Powertools for AWS Lambda (Python) using your favorite dependenc
 
     [Lambda Layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html){target="_blank"} is a .zip file archive that can contain additional code, pre-packaged dependencies, data,  or configuration files. We compile and optimize [all dependencies](#install), and remove duplicate dependencies [already available in the Lambda runtime](https://github.com/aws-powertools/powertools-lambda-layer-cdk/blob/d24716744f7d1f37617b4998c992c4c067e19e64/layer/Python/Dockerfile#L36){target="_blank"} to achieve the most optimal size.
 
-    For the latter, make sure to replace `{python_version}` without the period (.), e.g., `python312` for `Python 3.12`.
+    For the latter, make sure to replace `{python_version}` without the period (.), e.g., `python313` for `Python 3.13`.
 
     **AWS GovCloud (us-gov-east-1)**
 
@@ -267,7 +267,7 @@ In this context, `[aws-sdk]` is an alias to the `boto3` package. Due to dependen
 
 ### Lambda Layer
 
-[Lambda Layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html){target="_blank"} is a .zip file archive that can contain additional code, pre-packaged dependencies, data,  or configuration files. We compile and optimize [all dependencies](#install) for Python versions from **3.8 to 3.12**, as well as for both **arm64 and x86_64** architectures, to ensure compatibility. We also remove duplicate dependencies [already available in the Lambda runtime](https://github.com/aws-powertools/powertools-lambda-layer-cdk/blob/d24716744f7d1f37617b4998c992c4c067e19e64/layer/Python/Dockerfile#L36){target="_blank"} to achieve the most optimal size.
+[Lambda Layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html){target="_blank"} is a .zip file archive that can contain additional code, pre-packaged dependencies, data,  or configuration files. We compile and optimize [all dependencies](#install) for Python versions from **3.8 to 3.13**, as well as for both **arm64 and x86_64** architectures, to ensure compatibility. We also remove duplicate dependencies [already available in the Lambda runtime](https://github.com/aws-powertools/powertools-lambda-layer-cdk/blob/d24716744f7d1f37617b4998c992c4c067e19e64/layer/Python/Dockerfile#L36){target="_blank"} to achieve the most optimal size.
 
 === "x86_64"
     --8<-- "docs/includes/_layer_homepage_x86.md"
