@@ -26,7 +26,8 @@ class LambdaPowertoolsLayerPythonV3(lambda_.LayerVersion):
         include_extras (bool): Whether to include extra dependencies. Defaults to True.
         architecture (lambda_.Architecture): The compatible Lambda architecture. Defaults to x86_64.
         powertools_version (str): The version of Powertools to use. If empty, uses the latest version.
-        layer_name (str): Custom name for the Lambda Layer. If empty, a default name will be used.
+        layer_name (str): Custom name for the Lambda Layer. If empty, a default name will be used in the layer.
+
 
     Example:
         >>> app = cdk.App()
