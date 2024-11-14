@@ -2011,7 +2011,7 @@ def lambda_handler(event: DynamoDBStreamModel, context: LambdaContext):
 <div class="admonition note">
 <p class="admonition-title">No code changes required</p>
 </div>
-<p>To give you better a better experience, we're now building Powertools for AWS Lambda (Python)'s Lambda layers for specific Python versions (<code>3.8-3.12</code>) and architectures (<code>x86_64</code> &amp; <code>arm64</code>).</p>
+<p>To give you better a better experience, we're now building Powertools for AWS Lambda (Python)'s Lambda layers for specific Python versions (<code>3.8-3.13</code>) and architectures (<code>x86_64</code> &amp; <code>arm64</code>).</p>
 <p>This also allows us to include architecture-specific versions of both Pydantic v2 and AWS Encryption SDK and give you a more streamlined setup.</p>
 <p>To take advantage of the new layers, you need to update your functions or deployment setup to include one of the new Lambda layer ARN from the table below:</p>
 <table>
@@ -2049,6 +2049,11 @@ def lambda_handler(event: DynamoDBStreamModel, context: LambdaContext):
 <td>arn:aws:lambda:{region}:017000801446:layer:AWSLambdaPowertoolsPythonV3-python312-x86_64:{version}</td>
 </tr>
 <tr>
+<td>x86_64</td>
+<td>3.13</td>
+<td>arn:aws:lambda:{region}:017000801446:layer:AWSLambdaPowertoolsPythonV3-python312-x86_64:{version}</td>
+</tr>
+<tr>
 <td>arm64</td>
 <td>3.8</td>
 <td>arn:aws:lambda:{region}:017000801446:layer:AWSLambdaPowertoolsPythonV3-python38-arm64:{version}</td>
@@ -2071,6 +2076,11 @@ def lambda_handler(event: DynamoDBStreamModel, context: LambdaContext):
 <tr>
 <td>arm64</td>
 <td>3.12</td>
+<td>arn:aws:lambda:{region}:017000801446:layer:AWSLambdaPowertoolsPythonV3-python312-arm64:{version}</td>
+</tr>
+<tr>
+<td>arm64</td>
+<td>3.13</td>
 <td>arn:aws:lambda:{region}:017000801446:layer:AWSLambdaPowertoolsPythonV3-python312-arm64:{version}</td>
 </tr>
 </tbody>
@@ -2347,7 +2357,7 @@ def handler(event: dict, context: LambdaContext) -&gt; dict:
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    2024-10-08
+    2024-11-14
   </span>
 
     

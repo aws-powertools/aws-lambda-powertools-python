@@ -2387,7 +2387,7 @@ Use the model to validate and extract relevant information from the incoming eve
 </span>
 
 <span class="c1"># Define a custom EventBridge model by extending the built-in EventBridgeModel</span>
-<span class="hll"><span class="k">class</span> <span class="nc">MyCustomEventBridgeModel</span><span class="p">(</span><span class="n">EventBridgeModel</span><span class="p">):</span>
+<span class="hll"><span class="k">class</span> <span class="nc">MyCustomEventBridgeModel</span><span class="p">(</span><span class="n">EventBridgeModel</span><span class="p">):</span>  <span class="c1"># type: ignore[override]</span>
 </span>    <span class="n">detail_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">alias</span><span class="o">=</span><span class="s2">&quot;detail-type&quot;</span><span class="p">)</span>
     <span class="n">source</span><span class="p">:</span> <span class="nb">str</span>
     <span class="n">detail</span><span class="p">:</span> <span class="nb">dict</span>

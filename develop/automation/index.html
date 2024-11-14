@@ -1788,7 +1788,7 @@ On March 25st, 2025 v2 of Powertools for AWS Lambda (Python) <a
 <p>To build and deploy the Lambda Layers, we run a pipeline with the following steps:</p>
 <ul>
 <li>We fetch the latest PyPi release and use it as the source for our layer.</li>
-<li>We build Python versions ranging from <strong>3.8 to 3.12</strong> for x86_64 and arm64 architectures. This is necessary because we use pre-compiled libraries like <strong>Pydantic</strong> and <strong>Cryptography</strong>, which require specific Python versions for each layer.</li>
+<li>We build Python versions ranging from <strong>3.8 to 3.13</strong> for x86_64 and arm64 architectures. This is necessary because we use pre-compiled libraries like <strong>Pydantic</strong> and <strong>Cryptography</strong>, which require specific Python versions for each layer.</li>
 <li>We provide layer distributions for both the <strong>x86_64</strong> and <strong>arm64</strong> architectures.</li>
 <li>For each Python version, we create a single CDK package containing both x86_64 and arm64 assets to optimize deployment performance.</li>
 </ul>
@@ -1804,6 +1804,7 @@ On March 25st, 2025 v2 of Powertools for AWS Lambda (Python) <a
     Fetch --&gt; P310[&lt;strong&gt;Python 3.10&lt;/strong&gt;]
     Fetch --&gt; P311[&lt;strong&gt;Python 3.11&lt;/strong&gt;]
     Fetch --&gt; P312[&lt;strong&gt;Python 3.12&lt;/strong&gt;]
+    Fetch --&gt; P313[&lt;strong&gt;Python 3.13&lt;/strong&gt;]
 
     subgraph build ["LAYER BUILD"]
       P38 --&gt; P38x86[build x86_64]
@@ -1817,6 +1818,8 @@ On March 25st, 2025 v2 of Powertools for AWS Lambda (Python) <a
       P311 --&gt; P311arm64[build arm64]
       P312 --&gt; P312x86[build x86_64]
       P312 --&gt; P312arm64[build arm64]
+      P313 --&gt; P313x86[build x86_64]
+      P313 --&gt; P313arm64[build arm64]
       P38x86 --&gt; CDKP1[CDK Package]
       P38arm64 --&gt; CDKP1[CDK Package]
       P39x86 --&gt; CDKP2[CDK Package]
@@ -1827,6 +1830,8 @@ On March 25st, 2025 v2 of Powertools for AWS Lambda (Python) <a
       P311arm64 --&gt; CDKP4[CDK Package]
       P312x86 --&gt; CDKP5[CDK Package]
       P312arm64 --&gt; CDKP5[CDK Package]
+      P313x86 --&gt; CDKP6[CDK Package]
+      P313arm64 --&gt; CDKP6[CDK Package]
     end
 
     subgraph beta ["BETA (all regions)"]
@@ -1835,6 +1840,7 @@ On March 25st, 2025 v2 of Powertools for AWS Lambda (Python) <a
       CDKP3 --&gt; DeployBeta
       CDKP4 --&gt; DeployBeta
       CDKP5 --&gt; DeployBeta
+      CDKP6 --&gt; DeployBeta
       DeployBeta --&gt; RunBetaCanary["Beta canary tests&lt;br&gt; &lt;i&gt;(all packages)&lt;/i&gt;"]
     end
     subgraph prod ["PROD (all regions)"]
@@ -1861,7 +1867,7 @@ On March 25st, 2025 v2 of Powertools for AWS Lambda (Python) <a
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    2024-07-30
+    2024-11-14
   </span>
 
     

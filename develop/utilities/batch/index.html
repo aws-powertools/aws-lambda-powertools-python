@@ -3770,7 +3770,7 @@ On March 25st, 2025 v2 of Powertools for AWS Lambda (Python) <a
     <span class="n">item</span><span class="p">:</span> <span class="nb">dict</span>
 
 
-<span class="hll"><span class="k">class</span> <span class="nc">OrderSqsRecord</span><span class="p">(</span><span class="n">SqsRecordModel</span><span class="p">):</span>
+<span class="hll"><span class="k">class</span> <span class="nc">OrderSqsRecord</span><span class="p">(</span><span class="n">SqsRecordModel</span><span class="p">):</span>  <span class="c1"># type: ignore[override]</span>
 </span>    <span class="n">body</span><span class="p">:</span> <span class="n">Json</span><span class="p">[</span><span class="n">Order</span><span class="p">]</span>  <span class="c1"># deserialize order data from JSON string</span>
 
 
@@ -3926,11 +3926,11 @@ On March 25st, 2025 v2 of Powertools for AWS Lambda (Python) <a
     <span class="n">item</span><span class="p">:</span> <span class="nb">dict</span>
 
 
-<span class="hll"><span class="k">class</span> <span class="nc">OrderKinesisPayloadRecord</span><span class="p">(</span><span class="n">KinesisDataStreamRecordPayload</span><span class="p">):</span>
+<span class="hll"><span class="k">class</span> <span class="nc">OrderKinesisPayloadRecord</span><span class="p">(</span><span class="n">KinesisDataStreamRecordPayload</span><span class="p">):</span>  <span class="c1"># type: ignore[override]</span>
 </span>    <span class="n">data</span><span class="p">:</span> <span class="n">Json</span><span class="p">[</span><span class="n">Order</span><span class="p">]</span>
 
 
-<span class="k">class</span> <span class="nc">OrderKinesisRecord</span><span class="p">(</span><span class="n">KinesisDataStreamRecord</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">OrderKinesisRecord</span><span class="p">(</span><span class="n">KinesisDataStreamRecord</span><span class="p">):</span>  <span class="c1"># type: ignore[override]</span>
     <span class="n">kinesis</span><span class="p">:</span> <span class="n">OrderKinesisPayloadRecord</span>
 
 
@@ -4116,12 +4116,12 @@ On March 25st, 2025 v2 of Powertools for AWS Lambda (Python) <a
         <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">value</span><span class="p">[</span><span class="s2">&quot;S&quot;</span><span class="p">])</span>
 
 
-<span class="hll"><span class="k">class</span> <span class="nc">OrderDynamoDBChangeRecord</span><span class="p">(</span><span class="n">DynamoDBStreamChangedRecordModel</span><span class="p">):</span>
+<span class="hll"><span class="k">class</span> <span class="nc">OrderDynamoDBChangeRecord</span><span class="p">(</span><span class="n">DynamoDBStreamChangedRecordModel</span><span class="p">):</span>  <span class="c1"># type: ignore[override]</span>
 </span>    <span class="n">NewImage</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">OrderDynamoDB</span><span class="p">]</span>
     <span class="n">OldImage</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">OrderDynamoDB</span><span class="p">]</span>
 
 
-<span class="hll"><span class="k">class</span> <span class="nc">OrderDynamoDBRecord</span><span class="p">(</span><span class="n">DynamoDBStreamRecordModel</span><span class="p">):</span>
+<span class="hll"><span class="k">class</span> <span class="nc">OrderDynamoDBRecord</span><span class="p">(</span><span class="n">DynamoDBStreamRecordModel</span><span class="p">):</span>  <span class="c1"># type: ignore[override]</span>
 </span>    <span class="n">dynamodb</span><span class="p">:</span> <span class="n">OrderDynamoDBChangeRecord</span>
 
 
