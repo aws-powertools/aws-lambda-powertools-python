@@ -309,18 +309,29 @@ class CodePipelineJobEvent(DictWrapper):
         s3 = self.setup_s3_client()
         bucket = artifact.location.s3_location.bucket_name
         key = artifact.location.s3_location.key
-        encryption_key_id = self.data.encryption_key.get_id
-        encryption_key_type = self.data.encryption_key.get_type
 
-        if encryption_key_type == "KMS":
-            encryption_key_type = "aws:kms"
+        if self.data.encryption_key:
 
-        s3.put_object(
-            Bucket=bucket,
-            Key=key,
-            ContentType=content_type,
-            Body=body,
-            ServerSideEncryption=encryption_key_type,
-            SSEKMSKeyId=encryption_key_id,
-            BucketKeyEnabled=True,
-        )
+            encryption_key_id = self.data.encryption_key.get_id
+            encryption_key_type = self.data.encryption_key.get_type
+            if encryption_key_type == "KMS":
+                encryption_key_type = "aws:kms"
+
+            s3.put_object(
+                Bucket=bucket,
+                Key=key,
+                ContentType=content_type,
+                Body=body,
+                ServerSideEncryption=encryption_key_type,
+                SSEKMSKeyId=encryption_key_id,
+                BucketKeyEnabled=True,
+            )
+
+        else:
+            s3.put_object(
+                Bucket=bucket,
+                Key=key,
+                ContentType=content_type,
+                Body=body,
+                BucketKeyEnabled=True,
+            )
