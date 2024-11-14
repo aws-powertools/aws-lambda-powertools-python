@@ -8,7 +8,7 @@ from aws_cdk import aws_lambda as lambda_
 if TYPE_CHECKING:
     from constructs import Construct
 
-from layer_v3.layer_constructors.helpers import construct_build_args
+from .helpers import construct_build_args
 
 
 class LambdaPowertoolsLayerPythonV3(lambda_.LayerVersion):
