@@ -680,10 +680,11 @@ Data classes and utility functions to help create continuous delivery pipelines 
                 template = event.get_artifact(artifact_name, template_file)
                 # Kick off a stack update or create
                 result = start_update_or_create(job_id, stack, template)
+                artifact: io.BytesIO = zip_data(result)
                 event.put_artifact(
-                    artifact_name="json-artifact",
-                    body=json.dumps(result),
-                    content_type="application/json"
+                    artifact_name=event.data.output_artifacts[0].name,
+                    body=artifact,
+                    content_type="application/zip"
                 )
         except Exception as e:
             # If any other exceptions which we didn't expect are raised
