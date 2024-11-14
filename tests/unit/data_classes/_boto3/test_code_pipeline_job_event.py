@@ -262,6 +262,51 @@ def test_code_pipeline_put_artifact(mocker: MockerFixture):
     )
 
 
+def test_code_pipeline_put_unencrypted_artifact(mocker: MockerFixture):
+
+    raw_content = json.dumps({"steve": "french"})
+    artifact_content_type = "application/json"
+    event_without_artifact_encryption = load_event("codePipelineEventData.json")
+    event_without_artifact_encryption["CodePipeline.job"]["data"]["encryptionKey"] = None
+    event = CodePipelineJobEvent(event_without_artifact_encryption)
+    assert event.data.encryption_key is None
+    artifact_name = event.data.output_artifacts[0].name
+
+    class MockClient:
+        @staticmethod
+        def put_object(
+            Bucket: str,
+            Key: str,
+            ContentType: str,
+            Body: str,
+            BucketKeyEnabled: bool,
+        ):
+            output_artifact = event.find_output_artifact(artifact_name)
+            assert Bucket == output_artifact.location.s3_location.bucket_name
+            assert Key == output_artifact.location.s3_location.key
+            assert ContentType == artifact_content_type
+            assert Body == raw_content
+            assert BucketKeyEnabled is True
+
+    s3 = mocker.patch("boto3.client")
+    s3.return_value = MockClient()
+
+    event.put_artifact(
+        artifact_name=artifact_name,
+        body=raw_content,
+        content_type=artifact_content_type,
+    )
+
+    s3.assert_called_once_with(
+        "s3",
+        **{
+            "aws_access_key_id": event.data.artifact_credentials.access_key_id,
+            "aws_secret_access_key": event.data.artifact_credentials.secret_access_key,
+            "aws_session_token": event.data.artifact_credentials.session_token,
+        },
+    )
+
+
 def test_code_pipeline_put_output_artifact_not_found():
     raw_event = load_event("codePipelineEventData.json")
     parsed_event = CodePipelineJobEvent(raw_event)
