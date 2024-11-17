@@ -10,6 +10,7 @@
 
 ## Maintenance
 
+* **ci:** new pre-release 3.3.1a0 ([#5565](https://github.com/aws-powertools/powertools-lambda-python/issues/5565))
 
 
 <a name="v3.3.0"></a>
