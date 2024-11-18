@@ -1,4 +1,5 @@
 import json
+from datetime import datetime
 from typing import Any, Dict, Literal, Union
 
 import pydantic
@@ -6,10 +7,10 @@ import pytest
 from pydantic import ValidationError
 from typing_extensions import Annotated
 
-from aws_lambda_powertools.utilities.parser import (
-    event_parser,
-    exceptions,
-)
+from aws_lambda_powertools.utilities.parser import event_parser, exceptions, parse
+from aws_lambda_powertools.utilities.parser.envelopes.sqs import SqsEnvelope
+from aws_lambda_powertools.utilities.parser.models import SqsModel
+from aws_lambda_powertools.utilities.parser.models.event_bridge import EventBridgeModel
 from aws_lambda_powertools.utilities.typing import LambdaContext
 
 
@@ -153,7 +154,7 @@ def test_parser_unions(test_input, expected):
     DogCallback = Annotated[Union[SuccessfulCallback, FailedCallback], pydantic.Field(discriminator="status")]
 
     @event_parser(model=DogCallback)
-    def handler(event: test_input, _: Any) -> str:
+    def handler(event, _: Any) -> str:
         if isinstance(event, FailedCallback):
             return f"Uh oh. Had a problem: {event.error}"
 
@@ -161,3 +162,76 @@ def test_parser_unions(test_input, expected):
 
     ret = handler(test_input, None)
     assert ret == expected
+
+
+@pytest.mark.parametrize(
+    "test_input,expected",
+    [
+        (
+            {"status": "succeeded", "name": "Clifford", "breed": "Labrador"},
+            "Successfully retrieved Labrador named Clifford",
+        ),
+        ({"status": "failed", "error": "oh some error"}, "Uh oh. Had a problem: oh some error"),
+    ],
+)
+def test_parser_unions_with_type_adapter_instance(test_input, expected):
+    class SuccessfulCallback(pydantic.BaseModel):
+        status: Literal["succeeded"]
+        name: str
+        breed: Literal["Newfoundland", "Labrador"]
+
+    class FailedCallback(pydantic.BaseModel):
+        status: Literal["failed"]
+        error: str
+
+    DogCallback = Annotated[Union[SuccessfulCallback, FailedCallback], pydantic.Field(discriminator="status")]
+    DogCallbackTypeAdapter = pydantic.TypeAdapter(DogCallback)
+
+    @event_parser(model=DogCallbackTypeAdapter)
+    def handler(event, _: Any) -> str:
+        if isinstance(event, FailedCallback):
+            return f"Uh oh. Had a problem: {event.error}"
+
+        return f"Successfully retrieved {event.breed} named {event.name}"
+
+    ret = handler(test_input, None)
+    assert ret == expected
+
+
+def test_parser_with_model_type_model_and_envelope():
+    event = {
+        "Records": [
+            {
+                "messageId": "19dd0b57-b21e-4ac1-bd88-01bbb068cb78",
+                "receiptHandle": "MessageReceiptHandle",
+                "body": EventBridgeModel(
+                    version="version",
+                    id="id",
+                    source="source",
+                    account="account",
+                    time=datetime.now(),
+                    region="region",
+                    resources=[],
+                    detail={"key": "value"},
+                ).model_dump_json(),
+                "attributes": {
+                    "ApproximateReceiveCount": "1",
+                    "SentTimestamp": "1523232000000",
+                    "SenderId": "123456789012",
+                    "ApproximateFirstReceiveTimestamp": "1523232000001",
+                },
+                "messageAttributes": {},
+                "md5OfBody": "{{{md5_of_body}}}",
+                "eventSource": "aws:sqs",
+                "eventSourceARN": "arn:aws:sqs:us-east-1:123456789012:MyQueue",
+                "awsRegion": "us-east-1",
+            },
+        ],
+    }
+
+    def handler(event: SqsModel, _: LambdaContext):
+        parsed_event: EventBridgeModel = parse(event, model=EventBridgeModel, envelope=SqsEnvelope)
+        print(parsed_event)
+        assert parsed_event[0].version == "version"
+
+    handler(event, LambdaContext())
