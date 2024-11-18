@@ -259,13 +259,13 @@ typeguard = ">=2.13.3,<4.3.0"
 
 [[package]]
 name = "aws-encryption-sdk"
-version = "3.3.0"
+version = "4.0.0"
 description = "AWS Encryption SDK implementation for Python"
 optional = true
 python-versions = "*"
 files = [
-    {file = "aws-encryption-sdk-3.3.0.tar.gz", hash = "sha256:eb2adba14f481cd83d7169ab8e642994896d39a4a64e1796904a6b49256613b0"},
-    {file = "aws_encryption_sdk-3.3.0-py2.py3-none-any.whl", hash = "sha256:c2a967ebe70820f64dea1eb7000f60fe54f56b23276a592e1b77ec475e823304"},
+    {file = "aws-encryption-sdk-4.0.0.tar.gz", hash = "sha256:57df8b5c1b9f18db4373c6e8e65563791063a71be93d0849950ed365272db354"},
+    {file = "aws_encryption_sdk-4.0.0-py2.py3-none-any.whl", hash = "sha256:a94483785dff2cd166ccb8f3a15cdfe5cba7a3717f6604543c816a3a32f7c412"},
 ]
 
 [package.dependencies]
@@ -273,6 +273,9 @@ attrs = ">=17.4.0"
 boto3 = ">=1.10.0"
 cryptography = ">=3.4.6"
 wrapt = ">=1.10.11"
+
+[package.extras]
+mpl = ["aws-cryptographic-material-providers (==1.7.4)"]
 
 [[package]]
 name = "aws-requests-auth"
@@ -4389,4 +4392,4 @@ validation = ["fastjsonschema"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.8,<4.0.0"
-content-hash = "cab3c189049792ca907880e1a594d83cdfb00b7d96c2718a32fd01e261175c5a"
+content-hash = "b02dbfb1ee51262eaf42cdc83486f7a76a986eb4d32eb8379bf620acdbff5ca9"
