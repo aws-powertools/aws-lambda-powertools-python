@@ -121,13 +121,13 @@ To take advantage of the new layers, you need to update your functions or deploy
 | x86_64       | 3.10           | arn:aws:lambda:{region}:017000801446:layer:AWSLambdaPowertoolsPythonV3-python310-x86_64:{version}   |
 | x86_64       | 3.11           | arn:aws:lambda:{region}:017000801446:layer:AWSLambdaPowertoolsPythonV3-python311-x86_64:{version}   |
 | x86_64       | 3.12           | arn:aws:lambda:{region}:017000801446:layer:AWSLambdaPowertoolsPythonV3-python312-x86_64:{version}   |
-| x86_64       | 3.13           | arn:aws:lambda:{region}:017000801446:layer:AWSLambdaPowertoolsPythonV3-python312-x86_64:{version}   |
+| x86_64       | 3.13           | arn:aws:lambda:{region}:017000801446:layer:AWSLambdaPowertoolsPythonV3-python313-x86_64:{version}   |
 | arm64        | 3.8            | arn:aws:lambda:{region}:017000801446:layer:AWSLambdaPowertoolsPythonV3-python38-arm64:{version}     |
 | arm64        | 3.9            | arn:aws:lambda:{region}:017000801446:layer:AWSLambdaPowertoolsPythonV3-python39-arm64:{version}     |
 | arm64        | 3.10           | arn:aws:lambda:{region}:017000801446:layer:AWSLambdaPowertoolsPythonV3-python310-arm64:{version}    |
 | arm64        | 3.11           | arn:aws:lambda:{region}:017000801446:layer:AWSLambdaPowertoolsPythonV3-python311-arm64:{version}    |
 | arm64        | 3.12           | arn:aws:lambda:{region}:017000801446:layer:AWSLambdaPowertoolsPythonV3-python312-arm64:{version}    |
-| arm64        | 3.13           | arn:aws:lambda:{region}:017000801446:layer:AWSLambdaPowertoolsPythonV3-python312-arm64:{version}    |
+| arm64        | 3.13           | arn:aws:lambda:{region}:017000801446:layer:AWSLambdaPowertoolsPythonV3-python313-arm64:{version}    |
 
 ## Event Handler: headers are case-insensitive
 
