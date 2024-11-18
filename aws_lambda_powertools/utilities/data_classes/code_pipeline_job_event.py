@@ -310,7 +310,7 @@ class CodePipelineJobEvent(DictWrapper):
         bucket = artifact.location.s3_location.bucket_name
         key = artifact.location.s3_location.key
 
-        # boto3 doesn't treat None as equivalent to omitting the parameter when using ServerSideEncryption and SSEKMSKeyId
+        # boto3 doesn't support None to omit the parameter when using ServerSideEncryption and SSEKMSKeyId
         # So we are using if/else instead. 
 
         if self.data.encryption_key:
