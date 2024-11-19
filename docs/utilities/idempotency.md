@@ -212,7 +212,10 @@ By default, `idempotent_function` serializes, stores, and returns your annotated
 
 The output serializer supports any JSON serializable data, **Python Dataclasses** and **Pydantic Models**.
 
-!!! info "When using the `output_serializer` parameter, the data will continue to be stored in your persistent storage as a JSON string."
+!!! info
+    When using the `output_serializer` parameter, the data will continue to be stored in your persistent storage as a JSON string.
+
+    Function returns must be annotated with a single type, optionally wrapped in `Optional` or `Union` with `None`.
 
 === "Pydantic"
 
