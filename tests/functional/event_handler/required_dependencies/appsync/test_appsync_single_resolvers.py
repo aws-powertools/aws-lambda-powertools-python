@@ -329,3 +329,25 @@ def test_route_context_is_manually_cleared_after_resolve_async():
     # THEN
     assert asyncio.run(result) == "value"
     assert app.context == {}
+
+
+def test_exception_handler_with_single_resolver():
+    # GIVEN a AppSyncResolver instance
+    mock_event = load_event("appSyncDirectResolver.json")
+
+    app = AppSyncResolver()
+
+    # WHEN we configure exception handler for ValueError
+    @app.exception_handler(ValueError)
+    def handle_value_error(ex: ValueError):
+        return {"message": "error"}
+
+    @app.resolver(field_name="createSomething")
+    def create_something(id: str):  # noqa AA03 VNE003
+        raise ValueError("Error")
+
+    # Call the implicit handler
+    result = app(mock_event, {})
+
+    # THEN the return must be the Exception Handler error message
+    assert result["message"] == "error"

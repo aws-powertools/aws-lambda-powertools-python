@@ -981,3 +981,125 @@ def test_context_is_accessible_in_async_batch_resolver():
     # THEN the resolver must be able to return a field in the batch_current_event
     assert app.context == {}
     assert ret[0] == "powertools"
+
+
+def test_exception_handler_with_batch_resolver_and_raise_exception():
+
+    # GIVEN a AppSyncResolver instance
+    app = AppSyncResolver()
+
+    event = [
+        {
+            "typeName": "Query",
+            "info": {
+                "fieldName": "listLocations",
+                "parentTypeName": "Post",
+            },
+            "fieldName": "listLocations",
+            "arguments": {},
+            "source": {
+                "id": "1",
+            },
+        },
+        {
+            "typeName": "Query",
+            "info": {
+                "fieldName": "listLocations",
+                "parentTypeName": "Post",
+            },
+            "fieldName": "listLocations",
+            "arguments": {},
+            "source": {
+                "id": "2",
+            },
+        },
+        {
+            "typeName": "Query",
+            "info": {
+                "fieldName": "listLocations",
+                "parentTypeName": "Post",
+            },
+            "fieldName": "listLocations",
+            "arguments": {},
+            "source": {
+                "id": [3, 4],
+            },
+        },
+    ]
+
+    # WHEN we configure exception handler for ValueError
+    @app.exception_handler(ValueError)
+    def handle_value_error(ex: ValueError):
+        return {"message": "error"}
+
+    # WHEN the sync batch resolver for the 'listLocations' field is defined with raise_on_error=True
+    @app.batch_resolver(field_name="listLocations", raise_on_error=True, aggregate=False)
+    def create_something(event: AppSyncResolverEvent) -> Optional[list]:  # noqa AA03 VNE003
+        raise ValueError
+
+    # Call the implicit handler
+    result = app(event, {})
+
+    # THEN the return must be the Exception Handler error message
+    assert result["message"] == "error"
+
+
+def test_exception_handler_with_batch_resolver_and_no_raise_exception():
+
+    # GIVEN a AppSyncResolver instance
+    app = AppSyncResolver()
+
+    event = [
+        {
+            "typeName": "Query",
+            "info": {
+                "fieldName": "listLocations",
+                "parentTypeName": "Post",
+            },
+            "fieldName": "listLocations",
+            "arguments": {},
+            "source": {
+                "id": "1",
+            },
+        },
+        {
+            "typeName": "Query",
+            "info": {
+                "fieldName": "listLocations",
+                "parentTypeName": "Post",
+            },
+            "fieldName": "listLocations",
+            "arguments": {},
+            "source": {
+                "id": "2",
+            },
+        },
+        {
+            "typeName": "Query",
+            "info": {
+                "fieldName": "listLocations",
+                "parentTypeName": "Post",
+            },
+            "fieldName": "listLocations",
+            "arguments": {},
+            "source": {
+                "id": [3, 4],
+            },
+        },
+    ]
+
+    # WHEN we configure exception handler for ValueError
+    @app.exception_handler(ValueError)
+    def handle_value_error(ex: ValueError):
+        return {"message": "error"}
+
+    # WHEN the sync batch resolver for the 'listLocations' field is defined with raise_on_error=False
+    @app.batch_resolver(field_name="listLocations", raise_on_error=False, aggregate=False)
+    def create_something(event: AppSyncResolverEvent) -> Optional[list]:  # noqa AA03 VNE003
+        raise ValueError
+
+    # Call the implicit handler
+    result = app(event, {})
+
+    # THEN the return must not trigger the Exception Handler, but instead return from the resolver
+    assert result == [None, None, None]
