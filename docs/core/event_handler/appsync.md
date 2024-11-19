@@ -288,6 +288,19 @@ You can use `append_context` when you want to share data between your App and Ro
     --8<-- "examples/event_handler_graphql/src/split_operation_append_context_module.py"
 	```
 
+### Exception handling
+
+You can use **`exception_handler`** decorator with any Python exception. This allows you to handle a common exception outside your resolver, for example validation errors.
+
+The `exception_handler` function also supports passing a list of exception types you wish to handle with one handler.
+
+```python hl_lines="5-7 11" title="Exception handling"
+--8<-- "examples/event_handler_graphql/src/exception_handling_graphql.py"
+```
+
+???+ warning
+    This is not supported when using async single resolvers.
+
 ### Batch processing
 
 ```mermaid
