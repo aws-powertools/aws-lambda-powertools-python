@@ -311,7 +311,7 @@ class CodePipelineJobEvent(DictWrapper):
         key = artifact.location.s3_location.key
 
         # boto3 doesn't support None to omit the parameter when using ServerSideEncryption and SSEKMSKeyId
-        # So we are using if/else instead. 
+        # So we are using if/else instead.
 
         if self.data.encryption_key:
 
