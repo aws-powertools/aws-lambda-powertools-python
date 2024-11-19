@@ -8,9 +8,22 @@
 
 * **layer:** update layer version number - v3.3.0 ([#5562](https://github.com/aws-powertools/powertools-lambda-python/issues/5562))
 
+## Features
+
+* **event_source:** Extend CodePipeline Artifact Capabilities ([#5448](https://github.com/aws-powertools/powertools-lambda-python/issues/5448))
+
 ## Maintenance
 
 * **ci:** new pre-release 3.3.1a0 ([#5565](https://github.com/aws-powertools/powertools-lambda-python/issues/5565))
+* **ci:** new pre-release 3.3.1a1 ([#5577](https://github.com/aws-powertools/powertools-lambda-python/issues/5577))
+* **deps:** bump aws-encryption-sdk from 3.3.0 to 4.0.0 ([#5564](https://github.com/aws-powertools/powertools-lambda-python/issues/5564))
+* **deps:** bump datadog-lambda from 6.101.0 to 6.102.0 ([#5570](https://github.com/aws-powertools/powertools-lambda-python/issues/5570))
+* **deps:** bump codecov/codecov-action from 4.6.0 to 5.0.2 ([#5567](https://github.com/aws-powertools/powertools-lambda-python/issues/5567))
+* **deps-dev:** bump ruff from 0.7.3 to 0.7.4 ([#5569](https://github.com/aws-powertools/powertools-lambda-python/issues/5569))
+* **deps-dev:** bump aws-cdk-lib from 2.167.0 to 2.167.1 ([#5568](https://github.com/aws-powertools/powertools-lambda-python/issues/5568))
+* **deps-dev:** bump aws-cdk from 2.167.0 to 2.167.1 ([#5572](https://github.com/aws-powertools/powertools-lambda-python/issues/5572))
+* **deps-dev:** bump boto3-stubs from 1.35.60 to 1.35.63 ([#5581](https://github.com/aws-powertools/powertools-lambda-python/issues/5581))
+* **layers:** balance Python 3.13 layers in GovCloud partition ([#5579](https://github.com/aws-powertools/powertools-lambda-python/issues/5579))
 
 
 <a name="v3.3.0"></a>
