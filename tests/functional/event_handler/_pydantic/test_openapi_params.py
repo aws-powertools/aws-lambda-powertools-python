@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from datetime import datetime
 from typing import List
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from typing_extensions import Annotated
 
 from aws_lambda_powertools.event_handler.api_gateway import APIGatewayRestResolver, Response, Router
@@ -130,8 +130,9 @@ def test_openapi_with_custom_params():
     assert parameter.schema_.exclusiveMinimum == 0
     assert parameter.schema_.exclusiveMaximum == 100
     assert len(parameter.schema_.examples) == 1
-    assert parameter.schema_.examples[0].summary == "Example 1"
-    assert parameter.schema_.examples[0].value == 10
+    example = Example(**parameter.schema_.examples[0])
+    assert example.summary == "Example 1"
+    assert example.value == 10
 
 
 def test_openapi_with_scalar_returns():
@@ -495,3 +496,38 @@ def test_openapi_with_example_as_list():
     assert parameter.schema_.exclusiveMaximum == 100
     assert len(parameter.schema_.examples) == 1
     assert parameter.schema_.examples[0] == "Example 1"
+
+
+def test_openapi_with_examples_of_base_model_field():
+    app = APIGatewayRestResolver()
+
+    class Todo(BaseModel):
+        id: int = Field(examples=[1])
+        title: str = Field(examples=["Example 1"])
+        priority: float = Field(examples=[0.5])
+        completed: bool = Field(examples=[True])
+
+    @app.get("/")
+    def handler() -> Todo:
+        return Todo(id=0, title="", priority=0.0, completed=False)
+
+    schema = app.get_openapi_schema()
+    assert "Todo" in schema.components.schemas
+    todo_schema = schema.components.schemas["Todo"]
+    assert isinstance(todo_schema, Schema)
+
+    assert "id" in todo_schema.properties
+    id_property = todo_schema.properties["id"]
+    assert id_property.examples == [1]
+
+    assert "title" in todo_schema.properties
+    title_property = todo_schema.properties["title"]
+    assert title_property.examples == ["Example 1"]
+
+    assert "priority" in todo_schema.properties
+    priority_property = todo_schema.properties["priority"]
+    assert priority_property.examples == [0.5]
+
+    assert "completed" in todo_schema.properties
+    completed_property = todo_schema.properties["completed"]
+    assert completed_property.examples == [True]
