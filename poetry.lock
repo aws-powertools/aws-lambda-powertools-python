@@ -940,38 +940,38 @@ ujson = ["ujson (>=5.7.0)"]
 
 [[package]]
 name = "cdk-nag"
-version = "2.33.1"
+version = "2.34.2"
 description = "Check CDK v2 applications for best practices using a combination on available rule packs."
 optional = false
 python-versions = "~=3.8"
 files = [
-    {file = "cdk_nag-2.33.1-py3-none-any.whl", hash = "sha256:656fbdf15e570911832bbfe9c0ca8e008d4e10becff3d7fa0c989c52117be475"},
-    {file = "cdk_nag-2.33.1.tar.gz", hash = "sha256:334d78cb133ab05d686f59f1e91f8ea291b41d27969f08cad42b858d725f6c24"},
+    {file = "cdk_nag-2.34.2-py3-none-any.whl", hash = "sha256:e9f3961b8632516991b0e675bb8abdebd4b2e56cc1a60619eddbbbb8b73c9c34"},
+    {file = "cdk_nag-2.34.2.tar.gz", hash = "sha256:df8f3a232212b3c85bcad91573f9938c2797adbdbf41d5bf71d1a360ce4d7de5"},
 ]
 
 [package.dependencies]
 aws-cdk-lib = ">=2.156.0,<3.0.0"
 constructs = ">=10.0.5,<11.0.0"
-jsii = ">=1.104.0,<2.0.0"
+jsii = ">=1.105.0,<2.0.0"
 publication = ">=0.0.3"
 typeguard = ">=2.13.3,<4.3.0"
 
 [[package]]
 name = "cdklabs-generative-ai-cdk-constructs"
-version = "0.1.281"
+version = "0.1.282"
 description = "AWS Generative AI CDK Constructs is a library for well-architected generative AI patterns."
 optional = false
 python-versions = "~=3.8"
 files = [
-    {file = "cdklabs.generative_ai_cdk_constructs-0.1.281-py3-none-any.whl", hash = "sha256:845b953fa1ba581389442c291fee9652b45b3b647f04ffcb1112d116df0df472"},
-    {file = "cdklabs_generative_ai_cdk_constructs-0.1.281.tar.gz", hash = "sha256:d46e3388d42e3691f46db6ef32e4ca83718ada2a090fd897294dc844ff0fef11"},
+    {file = "cdklabs.generative_ai_cdk_constructs-0.1.282-py3-none-any.whl", hash = "sha256:1bb8acda14bc0402a60aa76b7431c7482a3304c5cb59994ea6dc53012b0ac4ed"},
+    {file = "cdklabs_generative_ai_cdk_constructs-0.1.282.tar.gz", hash = "sha256:1d119acb4f225d9e758f69d015b0ef0f9e2741ae6e9e12b628de0a63fa69ade2"},
 ]
 
 [package.dependencies]
 aws-cdk-lib = ">=2.162.1,<3.0.0"
-cdk-nag = ">=2.32.2,<3.0.0"
+cdk-nag = ">=2.34.2,<3.0.0"
 constructs = ">=10.3.0,<11.0.0"
-jsii = ">=1.104.0,<2.0.0"
+jsii = ">=1.105.0,<2.0.0"
 publication = ">=0.0.3"
 typeguard = ">=2.13.3,<4.3.0"
 
@@ -1067,17 +1067,17 @@ pycparser = "*"
 
 [[package]]
 name = "cfn-lint"
-version = "1.19.0"
+version = "1.20.0"
 description = "Checks CloudFormation templates for practices and behaviour that could potentially be improved"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "cfn_lint-1.19.0-py3-none-any.whl", hash = "sha256:9c43a6b866915df6d2ac5584000ef05e53c67624809808c2cebd3dc6154b7c14"},
-    {file = "cfn_lint-1.19.0.tar.gz", hash = "sha256:63835e083f7831e54c512bce4808754df221b5895aed9a114c71879d1cc4ebff"},
+    {file = "cfn_lint-1.20.0-py3-none-any.whl", hash = "sha256:b75bf2fbb1d8f6155fd6c919fcde432c44793778c888b293bb0966c5358f4949"},
+    {file = "cfn_lint-1.20.0.tar.gz", hash = "sha256:1b5d1f493e9e821d6ecf51c0492d9bb3ec0c407cb47beb7070024637c3ec057a"},
 ]
 
 [package.dependencies]
-aws-sam-translator = ">=1.91.0"
+aws-sam-translator = ">=1.92.0"
 jsonpatch = "*"
 networkx = ">=2.4,<4"
 pyyaml = ">5.4"
@@ -2035,13 +2035,13 @@ files = [
 
 [[package]]
 name = "jsii"
-version = "1.104.0"
+version = "1.105.0"
 description = "Python client for jsii runtime"
 optional = false
 python-versions = "~=3.8"
 files = [
-    {file = "jsii-1.104.0-py3-none-any.whl", hash = "sha256:c1da4d21be208db7dd341bc8fd9c4cdbaa5ff1a3cec7ce4f5f4e3ce89bc949cc"},
-    {file = "jsii-1.104.0.tar.gz", hash = "sha256:1e9b3e49797450258d473c16052258f2291bde4dd410d30c21e325c000c10a0c"},
+    {file = "jsii-1.105.0-py3-none-any.whl", hash = "sha256:8888088479b449db6d8e3a7df25434ec4580bf4fc13f4f952e9db5f2a3fc0c0f"},
+    {file = "jsii-1.105.0.tar.gz", hash = "sha256:435682d509e628e6f8a765b017102e6fcd553f4d0f6b3417b3f7eb295c2e0d1f"},
 ]
 
 [package.dependencies]
@@ -2050,7 +2050,7 @@ cattrs = ">=1.8,<24.2"
 importlib-resources = ">=5.2.0"
 publication = ">=0.0.3"
 python-dateutil = "*"
-typeguard = ">=2.13.3,<4.3.0"
+typeguard = ">=2.13.3,<4.5.0"
 typing-extensions = ">=3.8,<5.0"
 
 [[package]]
@@ -4392,4 +4392,4 @@ validation = ["fastjsonschema"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.8,<4.0.0"
-content-hash = "7368625bbc463e3d63424d9947f83c3e6ecd149aa7bb0af5b775efb219832453"
+content-hash = "42da2baafd07648eb65de70c6ce4357d67a9074db8407592ade501938fea07ef"
