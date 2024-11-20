@@ -4,25 +4,40 @@
 <a name="unreleased"></a>
 # Unreleased
 
+## Bug Fixes
+
+* **openapi:** Allow values of any type in the examples of the Schema Object. ([#5575](https://github.com/aws-powertools/powertools-lambda-python/issues/5575))
+* **parser:** remove 'aws:' prefix from SelfManagedKafka model ([#5584](https://github.com/aws-powertools/powertools-lambda-python/issues/5584))
+
 ## Documentation
 
 * **layer:** update layer version number - v3.3.0 ([#5562](https://github.com/aws-powertools/powertools-lambda-python/issues/5562))
 
 ## Features
 
+* **event_handler:** add exception handling mechanism for AppSyncResolver ([#5588](https://github.com/aws-powertools/powertools-lambda-python/issues/5588))
 * **event_source:** Extend CodePipeline Artifact Capabilities ([#5448](https://github.com/aws-powertools/powertools-lambda-python/issues/5448))
 
 ## Maintenance
 
 * **ci:** new pre-release 3.3.1a0 ([#5565](https://github.com/aws-powertools/powertools-lambda-python/issues/5565))
+* **ci:** new pre-release 3.3.1a2 ([#5585](https://github.com/aws-powertools/powertools-lambda-python/issues/5585))
 * **ci:** new pre-release 3.3.1a1 ([#5577](https://github.com/aws-powertools/powertools-lambda-python/issues/5577))
-* **deps:** bump aws-encryption-sdk from 3.3.0 to 4.0.0 ([#5564](https://github.com/aws-powertools/powertools-lambda-python/issues/5564))
-* **deps:** bump datadog-lambda from 6.101.0 to 6.102.0 ([#5570](https://github.com/aws-powertools/powertools-lambda-python/issues/5570))
+* **ci:** new pre-release 3.3.1a3 ([#5598](https://github.com/aws-powertools/powertools-lambda-python/issues/5598))
 * **deps:** bump codecov/codecov-action from 4.6.0 to 5.0.2 ([#5567](https://github.com/aws-powertools/powertools-lambda-python/issues/5567))
+* **deps:** bump codecov/codecov-action from 5.0.2 to 5.0.3 ([#5592](https://github.com/aws-powertools/powertools-lambda-python/issues/5592))
+* **deps:** bump datadog-lambda from 6.101.0 to 6.102.0 ([#5570](https://github.com/aws-powertools/powertools-lambda-python/issues/5570))
+* **deps:** bump aws-encryption-sdk from 3.3.0 to 4.0.0 ([#5564](https://github.com/aws-powertools/powertools-lambda-python/issues/5564))
+* **deps-dev:** bump aws-cdk-aws-lambda-python-alpha from 2.167.0a0 to 2.167.1a0 ([#5583](https://github.com/aws-powertools/powertools-lambda-python/issues/5583))
+* **deps-dev:** bump boto3-stubs from 1.35.60 to 1.35.63 ([#5581](https://github.com/aws-powertools/powertools-lambda-python/issues/5581))
+* **deps-dev:** bump boto3-stubs from 1.35.63 to 1.35.64 ([#5582](https://github.com/aws-powertools/powertools-lambda-python/issues/5582))
+* **deps-dev:** bump aws-cdk from 2.167.0 to 2.167.1 ([#5572](https://github.com/aws-powertools/powertools-lambda-python/issues/5572))
+* **deps-dev:** bump aws-cdk-lib from 2.167.1 to 2.167.2 ([#5596](https://github.com/aws-powertools/powertools-lambda-python/issues/5596))
 * **deps-dev:** bump ruff from 0.7.3 to 0.7.4 ([#5569](https://github.com/aws-powertools/powertools-lambda-python/issues/5569))
 * **deps-dev:** bump aws-cdk-lib from 2.167.0 to 2.167.1 ([#5568](https://github.com/aws-powertools/powertools-lambda-python/issues/5568))
-* **deps-dev:** bump aws-cdk from 2.167.0 to 2.167.1 ([#5572](https://github.com/aws-powertools/powertools-lambda-python/issues/5572))
-* **deps-dev:** bump boto3-stubs from 1.35.60 to 1.35.63 ([#5581](https://github.com/aws-powertools/powertools-lambda-python/issues/5581))
+* **deps-dev:** bump aws-cdk from 2.167.1 to 2.167.2 ([#5593](https://github.com/aws-powertools/powertools-lambda-python/issues/5593))
+* **deps-dev:** bump cfn-lint from 1.19.0 to 1.20.0 ([#5595](https://github.com/aws-powertools/powertools-lambda-python/issues/5595))
+* **deps-dev:** bump cdklabs-generative-ai-cdk-constructs from 0.1.281 to 0.1.282 ([#5594](https://github.com/aws-powertools/powertools-lambda-python/issues/5594))
 * **layers:** balance Python 3.13 layers in GovCloud partition ([#5579](https://github.com/aws-powertools/powertools-lambda-python/issues/5579))
 
 
