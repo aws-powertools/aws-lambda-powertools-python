@@ -7,6 +7,16 @@ from .apigw import (
     APIGatewayEventRequestContext,
     APIGatewayProxyEventModel,
 )
+from .apigw_websocket_api import (
+    APIGatewayWebSocketApiConnectEventModel,
+    APIGatewayWebSocketApiConnectEventRequestContext,
+    APIGatewayWebSocketApiDisconnectEventModel,
+    APIGatewayWebSocketApiDisconnectEventRequestContext,
+    APIGatewayWebSocketApiEventIdentity,
+    APIGatewayWebSocketApiEventRequestContextBase,
+    APIGatewayWebSocketApiMessageEventModel,
+    APIGatewayWebSocketApiMessageEventRequestContext,
+)
 from .apigwv2 import (
     ApiGatewayAuthorizerRequestV2,
     APIGatewayProxyEventV2Model,
@@ -105,6 +115,14 @@ from .vpc_latticev2 import VpcLatticeV2Model
 __all__ = [
     "APIGatewayProxyEventV2Model",
     "ApiGatewayAuthorizerRequestV2",
+    "APIGatewayWebSocketApiEventIdentity",
+    "APIGatewayWebSocketApiMessageEventModel",
+    "APIGatewayWebSocketApiMessageEventRequestContext",
+    "APIGatewayWebSocketApiConnectEventModel",
+    "APIGatewayWebSocketApiConnectEventRequestContext",
+    "APIGatewayWebSocketApiDisconnectEventRequestContext",
+    "APIGatewayWebSocketApiDisconnectEventModel",
+    "APIGatewayWebSocketApiEventRequestContextBase",
     "RequestContextV2",
     "RequestContextV2Http",
     "RequestContextV2Authorizer",
