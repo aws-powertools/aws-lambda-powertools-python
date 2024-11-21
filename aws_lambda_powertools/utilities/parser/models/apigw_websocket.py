@@ -5,37 +5,37 @@ from pydantic import BaseModel
 from pydantic.networks import IPvAnyNetwork
 
 
-class APIGatewayWebSocketApiEventIdentity(BaseModel):
+class APIGatewayWebSocketEventIdentity(BaseModel):
     sourceIp: IPvAnyNetwork
 
 
-class APIGatewayWebSocketApiEventRequestContextBase(BaseModel):
+class APIGatewayWebSocketEventRequestContextBase(BaseModel):
     extendedRequestId: str
     requestTime: str
     stage: str
     connectedAt: datetime
     requestTimeEpoch: datetime
-    identity: APIGatewayWebSocketApiEventIdentity
+    identity: APIGatewayWebSocketEventIdentity
     requestId: str
     domainName: str
     connectionId: str
     apiId: str
 
 
-class APIGatewayWebSocketApiMessageEventRequestContext(APIGatewayWebSocketApiEventRequestContextBase):
+class APIGatewayWebSocketMessageEventRequestContext(APIGatewayWebSocketEventRequestContextBase):
     routeKey: str
     messageId: str
     eventType: Literal["MESSAGE"]
     messageDirection: Literal["IN", "OUT"]
 
 
-class APIGatewayWebSocketApiConnectEventRequestContext(APIGatewayWebSocketApiEventRequestContextBase):
+class APIGatewayWebSocketConnectEventRequestContext(APIGatewayWebSocketEventRequestContextBase):
     routeKey: Literal["$connect"]
     eventType: Literal["CONNECT"]
     messageDirection: Literal["IN"]
 
 
-class APIGatewayWebSocketApiDisconnectEventRequestContext(APIGatewayWebSocketApiEventRequestContextBase):
+class APIGatewayWebSocketDisconnectEventRequestContext(APIGatewayWebSocketEventRequestContextBase):
     routeKey: Literal["$disconnect"]
     disconnectStatusCode: int
     eventType: Literal["DISCONNECT"]
@@ -43,21 +43,21 @@ class APIGatewayWebSocketApiDisconnectEventRequestContext(APIGatewayWebSocketApi
     disconnectReason: str
 
 
-class APIGatewayWebSocketApiConnectEventModel(BaseModel):
+class APIGatewayWebSocketConnectEventModel(BaseModel):
     headers: Dict[str, str]
     multiValueHeaders: Dict[str, List[str]]
-    requestContext: APIGatewayWebSocketApiConnectEventRequestContext
+    requestContext: APIGatewayWebSocketConnectEventRequestContext
     isBase64Encoded: bool
 
 
-class APIGatewayWebSocketApiDisconnectEventModel(BaseModel):
+class APIGatewayWebSocketDisconnectEventModel(BaseModel):
     headers: Dict[str, str]
     multiValueHeaders: Dict[str, List[str]]
-    requestContext: APIGatewayWebSocketApiDisconnectEventRequestContext
+    requestContext: APIGatewayWebSocketDisconnectEventRequestContext
     isBase64Encoded: bool
 
 
-class APIGatewayWebSocketApiMessageEventModel(BaseModel):
-    requestContext: APIGatewayWebSocketApiMessageEventRequestContext
+class APIGatewayWebSocketMessageEventModel(BaseModel):
+    requestContext: APIGatewayWebSocketMessageEventRequestContext
     isBase64Encoded: bool
     body: Optional[Union[str, Type[BaseModel]]] = None

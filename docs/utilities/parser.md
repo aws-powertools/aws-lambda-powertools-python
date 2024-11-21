@@ -108,9 +108,9 @@ The example above uses `SqsModel`. Other built-in models can be found below.
 | **ApiGatewayAuthorizerRequest**             | Lambda Event Source payload for Amazon API Gateway Lambda Authorizer with Request     |
 | **APIGatewayProxyEventV2Model**             | Lambda Event Source payload for Amazon API Gateway v2 payload                         |
 | **ApiGatewayAuthorizerRequestV2**           | Lambda Event Source payload for Amazon API Gateway v2 Lambda Authorizer               |
-| **APIGatewayWebSocketApiMessageEventModel** | Lambda Event Source payload for Amazon API Gateway WebSocket API message body         |
-| **APIGatewayWebSocketApiConnectEventModel** | Lambda Event Source payload for Amazon API Gateway WebSocket API $connect message     |
-| **APIGatewayWebSocketApiDisconnectEventModel** | Lambda Event Source payload for Amazon API Gateway WebSocket API $disconnect message  |
+| **APIGatewayWebSocketMessageEventModel** | Lambda Event Source payload for Amazon API Gateway WebSocket API message body         |
+| **APIGatewayWebSocketConnectEventModel** | Lambda Event Source payload for Amazon API Gateway WebSocket API $connect message     |
+| **APIGatewayWebSocketDisconnectEventModel** | Lambda Event Source payload for Amazon API Gateway WebSocket API $disconnect message  |
 | **BedrockAgentEventModel**                  | Lambda Event Source payload for Bedrock Agents                                        |
 | **CloudFormationCustomResourceCreateModel** | Lambda Event Source payload for AWS CloudFormation `CREATE` operation                 |
 | **CloudFormationCustomResourceUpdateModel** | Lambda Event Source payload for AWS CloudFormation `UPDATE` operation                 |
@@ -193,7 +193,7 @@ You can use pre-built envelopes provided by the Parser to extract and parse spec
 | **SnsSqsEnvelope**            | 1. Parses data using `SqsModel`. `` 2. Parses SNS records in `body` key using `SnsNotificationModel`. `` 3. Parses data in `Message` key using your model and return them in a list.                  | `List[Model]`                      |
 | **ApiGatewayV2Envelope**      | 1. Parses data using `APIGatewayWebSocketApiMessageEventModel`. ``2. Parses `body` key using your model`` and returns it.                                                                                            | `Model`                            |
 | **ApiGatewayEnvelope**        | 1. Parses data using `APIGatewayProxyEventModel`. ``2. Parses `body` key using your model`` and returns it.                                                                                              | `Model`                            |
-| **ApiGatewayV2Envelope**      | 1. Parses data using `APIGatewayProxyEventV2Model`. ``2. Parses `body` key using your model`` and returns it.                                                                                            | `Model`                            |
+| **ApiGatewayWebSocketEnvelope**      | 1. Parses data using `APIGatewayWebSocketMessageEventModel`. ``2. Parses `body` key using your model`` and returns it.                                                                                            | `Model`                            |
 | **LambdaFunctionUrlEnvelope** | 1. Parses data using `LambdaFunctionUrlModel`. ``2. Parses `body` key using your model`` and returns it.                                                                                                 | `Model`                            |
 | **KafkaEnvelope**             | 1. Parses data using `KafkaRecordModel`. ``2. Parses `value` key using your model`` and returns it.                                                                                                      | `Model`                            |
 | **VpcLatticeEnvelope**        | 1. Parses data using `VpcLatticeModel`. ``2. Parses `value` key using your model`` and returns it.                                                                                                       | `Model`                            |

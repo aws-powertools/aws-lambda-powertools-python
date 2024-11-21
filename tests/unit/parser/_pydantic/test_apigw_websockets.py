@@ -1,8 +1,8 @@
 from aws_lambda_powertools.utilities.parser import envelopes, parse
 from aws_lambda_powertools.utilities.parser.models import (
-    APIGatewayWebSocketApiConnectEventModel,
-    APIGatewayWebSocketApiDisconnectEventModel,
-    APIGatewayWebSocketApiMessageEventModel,
+    APIGatewayWebSocketConnectEventModel,
+    APIGatewayWebSocketDisconnectEventModel,
+    APIGatewayWebSocketMessageEventModel,
 )
 from tests.functional.utils import load_event
 from tests.unit.parser._pydantic.schemas import MyApiGatewayWebSocketBusiness
@@ -14,7 +14,7 @@ def test_apigw_websocket_api_message_event_with_envelope():
     parsed_event: MyApiGatewayWebSocketBusiness = parse(
         event=raw_event,
         model=MyApiGatewayWebSocketBusiness,
-        envelope=envelopes.ApiGatewayWebSocketApiEnvelope,
+        envelope=envelopes.ApiGatewayWebSocketEnvelope,
     )
 
     assert parsed_event.message == "Hello Ran"
@@ -23,7 +23,7 @@ def test_apigw_websocket_api_message_event_with_envelope():
 
 def test_apigw_websocket_api_message_event():
     raw_event = load_event("apiGatewayWebSocketApiMessage.json")
-    parsed_event: APIGatewayWebSocketApiMessageEventModel = APIGatewayWebSocketApiMessageEventModel(**raw_event)
+    parsed_event: APIGatewayWebSocketMessageEventModel = APIGatewayWebSocketMessageEventModel(**raw_event)
 
     request_context = parsed_event.requestContext
     assert request_context.apiId == raw_event["requestContext"]["apiId"]
@@ -54,12 +54,12 @@ def test_apigw_websocket_api_message_event():
 def test_apigw_websocket_api_message_event_empty_body():
     event = load_event("apiGatewayWebSocketApiMessage.json")
     event["body"] = None
-    parse(event=event, model=APIGatewayWebSocketApiMessageEventModel)
+    parse(event=event, model=APIGatewayWebSocketMessageEventModel)
 
 
 def test_apigw_websocket_api_connect_event():
     raw_event = load_event("apiGatewayWebSocketApiConnect.json")
-    parsed_event: APIGatewayWebSocketApiConnectEventModel = APIGatewayWebSocketApiConnectEventModel(**raw_event)
+    parsed_event: APIGatewayWebSocketConnectEventModel = APIGatewayWebSocketConnectEventModel(**raw_event)
 
     request_context = parsed_event.requestContext
     assert request_context.apiId == raw_event["requestContext"]["apiId"]
@@ -88,7 +88,7 @@ def test_apigw_websocket_api_connect_event():
 
 def test_apigw_websocket_api_disconnect_event():
     raw_event = load_event("apiGatewayWebSocketApiDisconnect.json")
-    parsed_event: APIGatewayWebSocketApiDisconnectEventModel = APIGatewayWebSocketApiDisconnectEventModel(**raw_event)
+    parsed_event: APIGatewayWebSocketDisconnectEventModel = APIGatewayWebSocketDisconnectEventModel(**raw_event)
 
     request_context = parsed_event.requestContext
     assert request_context.apiId == raw_event["requestContext"]["apiId"]
