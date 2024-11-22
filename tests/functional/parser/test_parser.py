@@ -210,6 +210,7 @@ def test_parser_with_model_type_model_and_envelope():
                     source="source",
                     account="account",
                     time=datetime.now(),
+                    detail_type="MyEvent",
                     region="region",
                     resources=[],
                     detail={"key": "value"},
