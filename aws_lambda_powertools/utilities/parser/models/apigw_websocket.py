@@ -1,13 +1,15 @@
 from datetime import datetime
 from typing import Dict, List, Literal, Optional, Type, Union
 
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from pydantic.networks import IPvAnyNetwork
 
 
 class APIGatewayWebSocketEventIdentity(BaseModel):
+    model_config = ConfigDict(populate_by_name=True)
+
     sourceIp: IPvAnyNetwork
-    userAgent: Optional[str]
+    userAgent: Optional[str] = None
 
 class APIGatewayWebSocketEventRequestContextBase(BaseModel):
     extendedRequestId: str
