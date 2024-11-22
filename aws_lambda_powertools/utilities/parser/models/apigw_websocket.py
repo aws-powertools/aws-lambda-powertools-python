@@ -7,7 +7,7 @@ from pydantic.networks import IPvAnyNetwork
 
 class APIGatewayWebSocketEventIdentity(BaseModel):
     sourceIp: IPvAnyNetwork
-
+    userAgent: Optional[str]
 
 class APIGatewayWebSocketEventRequestContextBase(BaseModel):
     extendedRequestId: str
