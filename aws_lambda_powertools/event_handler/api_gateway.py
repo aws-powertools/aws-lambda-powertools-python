@@ -83,6 +83,7 @@ if TYPE_CHECKING:
         TypeModelOrEnum,
     )
     from aws_lambda_powertools.shared.cookies import Cookie
+    from aws_lambda_powertools.shared.types import AnyCallableT
     from aws_lambda_powertools.utilities.typing import LambdaContext
 
 
@@ -898,7 +899,6 @@ class ResponseBuilder(Generic[ResponseEventT]):
             **event.header_serializer().serialize(headers=self.response.headers, cookies=self.response.cookies),
         }
 
-T_route = TypeVar("T_route", bound=Callable[..., Any])
 
 class BaseRouter(ABC):
     current_event: BaseProxyEvent
@@ -925,7 +925,7 @@ class BaseRouter(ABC):
         security: list[dict[str, list[str]]] | None = None,
         openapi_extensions: dict[str, Any] | None = None,
         middlewares: list[Callable[..., Any]] | None = None,
-    ) -> Callable[[T_route], T_route]:
+    ) -> Callable[[AnyCallableT], AnyCallableT]:
         raise NotImplementedError()
 
     def use(self, middlewares: list[Callable[..., Response]]) -> None:
@@ -985,7 +985,7 @@ class BaseRouter(ABC):
         security: list[dict[str, list[str]]] | None = None,
         openapi_extensions: dict[str, Any] | None = None,
         middlewares: list[Callable[..., Any]] | None = None,
-    ) -> Callable[[T_route], T_route]:
+    ) -> Callable[[AnyCallableT], AnyCallableT]:
         """Get route decorator with GET `method`
 
         Examples
@@ -1042,7 +1042,7 @@ class BaseRouter(ABC):
         security: list[dict[str, list[str]]] | None = None,
         openapi_extensions: dict[str, Any] | None = None,
         middlewares: list[Callable[..., Any]] | None = None,
-    ) -> Callable[[T_route], T_route]:
+    ) -> Callable[[AnyCallableT], AnyCallableT]:
         """Post route decorator with POST `method`
 
         Examples
@@ -1100,7 +1100,7 @@ class BaseRouter(ABC):
         security: list[dict[str, list[str]]] | None = None,
         openapi_extensions: dict[str, Any] | None = None,
         middlewares: list[Callable[..., Any]] | None = None,
-    ) -> Callable[[T_route], T_route]:
+    ) -> Callable[[AnyCallableT], AnyCallableT]:
         """Put route decorator with PUT `method`
 
         Examples
@@ -1158,7 +1158,7 @@ class BaseRouter(ABC):
         security: list[dict[str, list[str]]] | None = None,
         openapi_extensions: dict[str, Any] | None = None,
         middlewares: list[Callable[..., Any]] | None = None,
-    ) -> Callable[[T_route], T_route]:
+    ) -> Callable[[AnyCallableT], AnyCallableT]:
         """Delete route decorator with DELETE `method`
 
         Examples
@@ -1215,7 +1215,7 @@ class BaseRouter(ABC):
         security: list[dict[str, list[str]]] | None = None,
         openapi_extensions: dict[str, Any] | None = None,
         middlewares: list[Callable] | None = None,
-    ) -> Callable[[T_route], T_route]:
+    ) -> Callable[[AnyCallableT], AnyCallableT]:
         """Patch route decorator with PATCH `method`
 
         Examples
@@ -1275,7 +1275,7 @@ class BaseRouter(ABC):
         security: list[dict[str, list[str]]] | None = None,
         openapi_extensions: dict[str, Any] | None = None,
         middlewares: list[Callable] | None = None,
-    ) -> Callable[[T_route], T_route]:
+    ) -> Callable[[AnyCallableT], AnyCallableT]:
         """Head route decorator with HEAD `method`
 
         Examples
@@ -1951,10 +1951,10 @@ class ApiGatewayResolver(BaseRouter):
         security: list[dict[str, list[str]]] | None = None,
         openapi_extensions: dict[str, Any] | None = None,
         middlewares: list[Callable[..., Any]] | None = None,
-    ) -> Callable[[T_route], T_route]:
+    ) -> Callable[[AnyCallableT], AnyCallableT]:
         """Route decorator includes parameter `method`"""
 
-        def register_resolver(func: T_route) -> T_route:
+        def register_resolver(func: AnyCallableT) -> AnyCallableT:
             methods = (method,) if isinstance(method, str) else method
             logger.debug(f"Adding route using rule {rule} and methods: {','.join(m.upper() for m in methods)}")
 
@@ -2493,8 +2493,8 @@ class Router(BaseRouter):
         security: list[dict[str, list[str]]] | None = None,
         openapi_extensions: dict[str, Any] | None = None,
         middlewares: list[Callable[..., Any]] | None = None,
-    ) -> Callable[[T_route], T_route]:
-        def register_route(func: T_route) -> T_route:
+    ) -> Callable[[AnyCallableT], AnyCallableT]:
+        def register_route(func: AnyCallableT) -> AnyCallableT:
             # All dict keys needs to be hashable. So we'll need to do some conversions:
             methods = (method,) if isinstance(method, str) else tuple(method)
             frozen_responses = _FrozenDict(responses) if responses else None
@@ -2599,7 +2599,7 @@ class APIGatewayRestResolver(ApiGatewayResolver):
         security: list[dict[str, list[str]]] | None = None,
         openapi_extensions: dict[str, Any] | None = None,
         middlewares: list[Callable[..., Any]] | None = None,
-    ) -> Callable[[T_route], T_route]:
+    ) -> Callable[[AnyCallableT], AnyCallableT]:
         # NOTE: see #1552 for more context.
         return super().route(
             rule.rstrip("/"),
