@@ -59,7 +59,6 @@ jobs:
         uses: actions/setup-python@0b93645e9fea7318ecaed2b359559ac225c90a2b # v5.3.0
         with:
           python-version: ${{ matrix.python-version }}
-          cache: "poetry"
       - name: Install dependencies
         run: make dev
       - name: Formatting and Linting
@@ -75,7 +74,7 @@ jobs:
       - name: Complexity baseline
         run: make complexity-baseline
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@05f5a9cfad807516dbbef9929c4a42df3eb78766 # 5.0.3
+        uses: codecov/codecov-action@015f24e6818733317a2da2edd6290ab26238649a # 5.0.7
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           file: ./coverage.xml
