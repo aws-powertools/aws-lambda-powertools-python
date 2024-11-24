@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 
 
 class ApiGatewayWebSocketEnvelope(BaseEnvelope):
-    """API Gateway WebSockets API envelope to extract data within body key of messages routes
+    """API Gateway WebSockets envelope to extract data within body key of messages routes
     (not disconnect or connect)"""
 
     def parse(self, data: dict[str, Any] | Any | None, model: type[Model]) -> Model | None:

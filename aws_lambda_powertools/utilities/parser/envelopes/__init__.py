@@ -1,5 +1,5 @@
 from .apigw import ApiGatewayEnvelope
-from .apigw_websocket_api import ApiGatewayWebSocketEnvelope
+from .apigw_websocket import ApiGatewayWebSocketEnvelope
 from .apigwv2 import ApiGatewayV2Envelope
 from .base import BaseEnvelope
 from .bedrock_agent import BedrockAgentEnvelope
