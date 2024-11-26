@@ -274,7 +274,7 @@ class AmazonCloudWatchEMFProvider(BaseProvider):
             raise SchemaValidationError(
                 f"Maximum number of dimensions exceeded ({MAX_DIMENSIONS}): Unable to add dimension {name}.",
             )
-        
+
         value = value if isinstance(value, str) else str(value)
 
         if not name.strip() or not value.strip():
@@ -294,6 +294,7 @@ class AmazonCloudWatchEMFProvider(BaseProvider):
             )
 
         self.dimension_set[name] = value
+
 
 
     def add_metadata(self, key: str, value: Any) -> None:
