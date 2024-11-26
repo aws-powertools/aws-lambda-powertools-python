@@ -222,7 +222,7 @@ class LambdaPowertoolsFormatter(BasePowertoolsFormatter):
         # NOTE: Python `time.strftime` doesn't provide msec directives
         # so we create a custom one (%F) and replace logging record_ts
         # Reason 2 is that std logging doesn't support msec after TZ
-        msecs = "%03d" % record.msecs
+        msecs = "%03d" % record.msecs  # noqa UP031
 
         # Datetime format codes is a superset of time format codes
         # therefore we only honour them if explicitly asked
@@ -425,7 +425,9 @@ JsonFormatter = LambdaPowertoolsFormatter  # alias to previous formatter
 RESERVED_FORMATTER_CUSTOM_KEYS: list[str] = inspect.getfullargspec(LambdaPowertoolsFormatter).args[1:]
 
 # ContextVar for thread local keys
-THREAD_LOCAL_KEYS: ContextVar[dict[str, Any]] = ContextVar("THREAD_LOCAL_KEYS", default={})
+default_contextvar: dict[str, Any] = {}
+
+THREAD_LOCAL_KEYS: ContextVar[dict[str, Any]] = ContextVar("THREAD_LOCAL_KEYS", default=default_contextvar)
 
 
 def _get_context() -> ContextVar[dict[str, Any]]:
