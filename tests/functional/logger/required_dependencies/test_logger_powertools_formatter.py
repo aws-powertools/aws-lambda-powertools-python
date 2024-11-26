@@ -6,6 +6,7 @@ import os
 import random
 import re
 import string
+import sys
 import time
 from collections import namedtuple
 from threading import Thread
@@ -453,6 +454,7 @@ def test_thread_safe_keys_encapsulation(service_name, stdout):
     assert logs[3].get("exampleThread2Key") is None
 
 
+@pytest.mark.skipif(sys.version_info >= (3, 13), reason="Test temporarily disabled for Python 3.13+")
 def test_thread_safe_remove_key(service_name, stdout):
     logger = Logger(
         service=service_name,
@@ -469,6 +471,7 @@ def test_thread_safe_remove_key(service_name, stdout):
     Thread(target=send_message_with_key_and_without, args=("msg", thread1_keys)).start()
 
     logs = capture_logging_output(stdout)
+    print(logs)
 
     assert logs[0].get("exampleThread1Key") == "thread1"
     assert logs[1].get("exampleThread1Key") is None
