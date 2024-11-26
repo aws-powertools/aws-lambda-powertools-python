@@ -469,6 +469,7 @@ def test_thread_safe_remove_key(service_name, stdout):
     Thread(target=send_message_with_key_and_without, args=("msg", thread1_keys)).start()
 
     logs = capture_logging_output(stdout)
+    print(logs)
 
     assert logs[0].get("exampleThread1Key") == "thread1"
     assert logs[1].get("exampleThread1Key") is None
