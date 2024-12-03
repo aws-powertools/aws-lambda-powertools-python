@@ -59,7 +59,7 @@ You can install Powertools for AWS Lambda (Python) using your favorite dependenc
     | **[Parser](./utilities/parser.md#install)**             | **`pip install "aws-lambda-powertools[parser]"`**{.copyMe}:clipboard:                    | `pydantic` _(v2)_ |
     | **[Data Masking](./utilities/data_masking.md#install)** | **`pip install "aws-lambda-powertools[datamasking]"`**{.copyMe}:clipboard:               | `aws-encryption-sdk`, `jsonpath-ng`                                          |
     | **All extra dependencies at once**                      | **`pip install "aws-lambda-powertools[all]"`**{.copyMe}:clipboard:                       |
-    | **Two or more extra dependencies only, not all**        | **`pip install "aws-lambda-powertools[tracer,parser,datamasking"]`**{.copyMe}:clipboard: |
+    | **Two or more extra dependencies only, not all**        | **`pip install "aws-lambda-powertools[tracer,parser,datamasking]"`**{.copyMe}:clipboard: |
 
 === "Lambda Layer"
 
