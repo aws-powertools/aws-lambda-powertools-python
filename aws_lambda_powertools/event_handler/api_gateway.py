@@ -1026,6 +1026,7 @@ class BaseRouter(ABC):
             security,
             openapi_extensions,
             middlewares,
+            deprecated,
         )
 
     def post(
