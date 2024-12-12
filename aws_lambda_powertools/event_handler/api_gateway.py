@@ -1972,6 +1972,7 @@ class ApiGatewayResolver(BaseRouter):
         security: list[dict[str, list[str]]] | None = None,
         openapi_extensions: dict[str, Any] | None = None,
         middlewares: list[Callable[..., Any]] | None = None,
+        deprecated: bool = False,
     ) -> Callable[[AnyCallableT], AnyCallableT]:
         """Route decorator includes parameter `method`"""
 
@@ -2000,6 +2001,7 @@ class ApiGatewayResolver(BaseRouter):
                     security,
                     openapi_extensions,
                     middlewares,
+                    deprecated,
                 )
 
                 # The more specific route wins.
