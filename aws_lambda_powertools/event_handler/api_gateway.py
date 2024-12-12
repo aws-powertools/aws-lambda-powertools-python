@@ -1045,6 +1045,7 @@ class BaseRouter(ABC):
         security: list[dict[str, list[str]]] | None = None,
         openapi_extensions: dict[str, Any] | None = None,
         middlewares: list[Callable[..., Any]] | None = None,
+        deprecated: bool = False,
     ) -> Callable[[AnyCallableT], AnyCallableT]:
         """Post route decorator with POST `method`
 
@@ -1085,6 +1086,7 @@ class BaseRouter(ABC):
             security,
             openapi_extensions,
             middlewares,
+            deprecated,
         )
 
     def put(
@@ -1103,6 +1105,7 @@ class BaseRouter(ABC):
         security: list[dict[str, list[str]]] | None = None,
         openapi_extensions: dict[str, Any] | None = None,
         middlewares: list[Callable[..., Any]] | None = None,
+        deprecated: bool = False,
     ) -> Callable[[AnyCallableT], AnyCallableT]:
         """Put route decorator with PUT `method`
 
@@ -1143,6 +1146,7 @@ class BaseRouter(ABC):
             security,
             openapi_extensions,
             middlewares,
+            deprecated,
         )
 
     def delete(
@@ -1161,6 +1165,7 @@ class BaseRouter(ABC):
         security: list[dict[str, list[str]]] | None = None,
         openapi_extensions: dict[str, Any] | None = None,
         middlewares: list[Callable[..., Any]] | None = None,
+        deprecated: bool = False,
     ) -> Callable[[AnyCallableT], AnyCallableT]:
         """Delete route decorator with DELETE `method`
 
@@ -1200,6 +1205,7 @@ class BaseRouter(ABC):
             security,
             openapi_extensions,
             middlewares,
+            deprecated,
         )
 
     def patch(
@@ -1218,6 +1224,7 @@ class BaseRouter(ABC):
         security: list[dict[str, list[str]]] | None = None,
         openapi_extensions: dict[str, Any] | None = None,
         middlewares: list[Callable] | None = None,
+        deprecated: bool = False,
     ) -> Callable[[AnyCallableT], AnyCallableT]:
         """Patch route decorator with PATCH `method`
 
@@ -1260,6 +1267,7 @@ class BaseRouter(ABC):
             security,
             openapi_extensions,
             middlewares,
+            deprecated,
         )
 
     def head(
@@ -1278,6 +1286,7 @@ class BaseRouter(ABC):
         security: list[dict[str, list[str]]] | None = None,
         openapi_extensions: dict[str, Any] | None = None,
         middlewares: list[Callable] | None = None,
+        deprecated: bool = False,
     ) -> Callable[[AnyCallableT], AnyCallableT]:
         """Head route decorator with HEAD `method`
 
@@ -1319,6 +1328,7 @@ class BaseRouter(ABC):
             security,
             openapi_extensions,
             middlewares,
+            deprecated,
         )
 
     def _push_processed_stack_frame(self, frame: str):
