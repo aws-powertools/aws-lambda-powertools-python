@@ -925,6 +925,7 @@ class BaseRouter(ABC):
         security: list[dict[str, list[str]]] | None = None,
         openapi_extensions: dict[str, Any] | None = None,
         middlewares: list[Callable[..., Any]] | None = None,
+        deprecated: bool = False,
     ) -> Callable[[AnyCallableT], AnyCallableT]:
         raise NotImplementedError()
 
