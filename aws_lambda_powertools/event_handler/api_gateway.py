@@ -2612,6 +2612,7 @@ class APIGatewayRestResolver(ApiGatewayResolver):
         security: list[dict[str, list[str]]] | None = None,
         openapi_extensions: dict[str, Any] | None = None,
         middlewares: list[Callable[..., Any]] | None = None,
+        deprecated: bool = False,
     ) -> Callable[[AnyCallableT], AnyCallableT]:
         # NOTE: see #1552 for more context.
         return super().route(
@@ -2630,6 +2631,7 @@ class APIGatewayRestResolver(ApiGatewayResolver):
             security,
             openapi_extensions,
             middlewares,
+            deprecated,
         )
 
     # Override _compile_regex to exclude trailing slashes for route resolution
