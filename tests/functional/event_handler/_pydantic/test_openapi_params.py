@@ -101,7 +101,14 @@ def test_openapi_with_scalar_params():
 def test_openapi_with_custom_params():
     app = APIGatewayRestResolver()
 
-    @app.get("/users", summary="Get Users", operation_id="GetUsers", description="Get paginated users", tags=["Users"])
+    @app.get(
+        "/users",
+        summary="Get Users",
+        operation_id="GetUsers",
+        description="Get paginated users",
+        tags=["Users"],
+        deprecated=True,
+    )
     def handler(
         count: Annotated[
             int,
@@ -119,6 +126,7 @@ def test_openapi_with_custom_params():
     assert get.operationId == "GetUsers"
     assert get.description == "Get paginated users"
     assert get.tags == ["Users"]
+    assert get.deprecated is True
 
     parameter = get.parameters[0]
     assert parameter.required is False
@@ -484,6 +492,7 @@ def test_openapi_with_example_as_list():
     assert get.operationId == "GetUsers"
     assert get.description == "Get paginated users"
     assert get.tags == ["Users"]
+    assert get.deprecated is None
 
     parameter = get.parameters[0]
     assert parameter.required is False
