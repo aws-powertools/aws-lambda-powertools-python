@@ -2448,12 +2448,16 @@ class ApiGatewayResolver(BaseRouter):
             # Middleware store the route without prefix, so we must not include prefix when grabbing
             middlewares = router._routes_with_middleware.get(route)
 
+            # Workaround to support backward-compatible interface
+            new_route = new_route[:-1]  # positional arguments until `middlewares` parameter
+            deprecated: bool = route[-1]  # see route_key in Router.route
+
             # Need to use "type: ignore" here since mypy does not like a named parameter after
             # tuple expansion since may cause duplicate named parameters in the function signature.
             # In this case this is not possible since the tuple expansion is from a hashable source
             # and the `middlewares` list is a non-hashable structure so will never be included.
             # Still need to ignore for mypy checks or will cause failures (false-positive)
-            self.route(*new_route, middlewares=middlewares)(func)  # type: ignore
+            self.route(*new_route, deprecated=deprecated, middlewares=middlewares)(func)  # type: ignore
 
     @staticmethod
     def _get_fields_from_routes(routes: Sequence[Route]) -> list[ModelField]:
@@ -2516,6 +2520,7 @@ class Router(BaseRouter):
         security: list[dict[str, list[str]]] | None = None,
         openapi_extensions: dict[str, Any] | None = None,
         middlewares: list[Callable[..., Any]] | None = None,
+        deprecated: bool = False,
     ) -> Callable[[AnyCallableT], AnyCallableT]:
         def register_route(func: AnyCallableT) -> AnyCallableT:
             # All dict keys needs to be hashable. So we'll need to do some conversions:
@@ -2540,6 +2545,7 @@ class Router(BaseRouter):
                 include_in_schema,
                 frozen_security,
                 fronzen_openapi_extensions,
+                deprecated,
             )
 
             # Collate Middleware for routes
