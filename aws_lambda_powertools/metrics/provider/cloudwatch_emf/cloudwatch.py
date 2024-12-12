@@ -24,7 +24,6 @@ from aws_lambda_powertools.shared import constants
 from aws_lambda_powertools.shared.functions import resolve_env_var_choice
 from aws_lambda_powertools.warnings import PowertoolsUserWarning
 
-
 if TYPE_CHECKING:
     from aws_lambda_powertools.metrics.provider.cloudwatch_emf.types import CloudWatchEMFOutput
     from aws_lambda_powertools.metrics.types import MetricNameUnitResolution
@@ -294,8 +293,6 @@ class AmazonCloudWatchEMFProvider(BaseProvider):
             )
 
         self.dimension_set[name] = value
-
-
 
     def add_metadata(self, key: str, value: Any) -> None:
         """Adds high cardinal metadata for metrics object

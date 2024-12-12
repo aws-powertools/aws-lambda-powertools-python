@@ -1,6 +1,8 @@
-import pytest
 import warnings
 
+import pytest
+
+from aws_lambda_powertools.metrics import Metrics
 from aws_lambda_powertools.metrics.functions import (
     extract_cloudwatch_metric_resolution_value,
     extract_cloudwatch_metric_unit_value,
@@ -10,8 +12,8 @@ from aws_lambda_powertools.metrics.provider.cloudwatch_emf.exceptions import (
     MetricUnitError,
 )
 from aws_lambda_powertools.metrics.provider.cloudwatch_emf.metric_properties import MetricResolution, MetricUnit
-from aws_lambda_powertools.metrics import Metrics
 from aws_lambda_powertools.warnings import PowertoolsUserWarning
+
 
 @pytest.fixture
 def warning_catcher(monkeypatch):
@@ -20,7 +22,7 @@ def warning_catcher(monkeypatch):
     def custom_warn(message, category=None, stacklevel=1, source=None):
         caught_warnings.append(PowertoolsUserWarning(message))
 
-    monkeypatch.setattr(warnings, 'warn', custom_warn)
+    monkeypatch.setattr(warnings, "warn", custom_warn)
     return caught_warnings
 
 
@@ -78,13 +80,13 @@ def test_extract_valid_cloudwatch_metric_unit_value():
 
 def test_add_dimension_overwrite_warning(warning_catcher):
     """
-    Adds a dimension and then tries to add another with the same name 
-    but a different value. Verifies if the dimension is updated with 
-    the new value and  warning is issued when an existing dimension 
+    Adds a dimension and then tries to add another with the same name
+    but a different value. Verifies if the dimension is updated with
+    the new value and  warning is issued when an existing dimension
     is overwritten.
     """
     metrics = Metrics(namespace="TestNamespace")
-    
+
     # GIVEN default dimension
     dimension_name = "test-dimension"
     value1 = "test-value-1"
@@ -100,5 +102,3 @@ def test_add_dimension_overwrite_warning(warning_catcher):
     # AND a warning should be issued with the exact message
     expected_warning = f"Dimension '{dimension_name}' has already been added. The previous value will be overwritten."
     assert any(str(w) == expected_warning for w in warning_catcher)
-
-
