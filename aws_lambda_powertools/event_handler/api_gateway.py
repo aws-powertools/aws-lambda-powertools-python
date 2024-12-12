@@ -310,6 +310,7 @@ class Route:
         security: list[dict[str, list[str]]] | None = None,
         openapi_extensions: dict[str, Any] | None = None,
         middlewares: list[Callable[..., Response]] | None = None,
+        deprecated: bool = False,
     ):
         """
 
@@ -350,6 +351,8 @@ class Route:
             Additional OpenAPI extensions as a dictionary.
         middlewares: list[Callable[..., Response]] | None
             The list of route middlewares to be called in order.
+        deprecated: bool
+            Whether or not to mark this route as deprecated in the OpenAPI schema
         """
         self.method = method.upper()
         self.path = "/" if path.strip() == "" else path
@@ -374,6 +377,7 @@ class Route:
         self.openapi_extensions = openapi_extensions
         self.middlewares = middlewares or []
         self.operation_id = operation_id or self._generate_operation_id()
+        self.deprecated = deprecated
 
         # _middleware_stack_built is used to ensure the middleware stack is only built once.
         self._middleware_stack_built = False
@@ -669,6 +673,10 @@ class Route:
         # Adds the operation
         operation_ids.add(self.operation_id)
         operation["operationId"] = self.operation_id
+
+        # Mark as deprecated if necessary
+        if self.deprecated:
+            operation["deprecated"] = True
 
         return operation
 
