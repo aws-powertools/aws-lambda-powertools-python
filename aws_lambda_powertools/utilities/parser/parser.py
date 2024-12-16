@@ -111,10 +111,10 @@ def event_parser(
 
         logger.debug(f"Calling handler {handler.__name__}")
         return handler(parsed_event, context, **kwargs)
-    except ValidationError as exc:
+    except ValidationError:
         # Raise Pydantic validation errors as is
         raise
-    except InvalidModelTypeError as exc:
+    except InvalidModelTypeError:
         # Raise invalid model type errors as is
         raise
     except (TypeError, ValueError) as exc:
@@ -201,7 +201,7 @@ def parse(event: dict[str, Any], model: type[T], envelope: type[Envelope] | None
         
         return _parse_and_validate_event(data=event, adapter=adapter)
     
-    except ValidationError as exc:
+    except ValidationError:
         # Raise validation errors as is
         raise
         
