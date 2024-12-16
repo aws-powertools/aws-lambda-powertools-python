@@ -4,7 +4,7 @@ name: Deploy V3 SAR
 #
 # 1. This workflow starts after the layer artifact is produced on `publish_v3_layer`
 # 2. We use the same layer artifact to ensure the SAR app is consistent with the published Lambda Layer
-# 3. We publish the SAR for 3.8 to 3.12 Python runtime and both x86_64 and arm64 (see `matrix` section)
+# 3. We publish the SAR for 3.8 to 3.13 Python runtime and both x86_64 and arm64 (see `matrix` section)
 # 4. We use `sam package` and `sam publish` to publish the SAR app
 # 5. We remove the previous Canary stack (if present) and deploy a new one to test the SAR App. We retain the Canary in the account for debugging purposes
 # 6. Finally the published SAR app is made public on the PROD environment
@@ -72,10 +72,10 @@ jobs:
     strategy:
       matrix:
         architecture: ["x86_64", "arm64"]
-        python-version: ["3.8","3.9","3.10","3.11","3.12"]
+        python-version: ["3.8","3.9","3.10","3.11","3.12","3.13"]
     steps:
       - name: checkout
-        uses: actions/checkout@d632683dd7b4114ad314bca15554477dd762a938  # v4.2.0
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683  # v4.2.2
         with:
           ref: ${{ env.RELEASE_COMMIT }}
 
@@ -107,7 +107,7 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
           role-to-assume: ${{ secrets.AWS_SAR_V2_ROLE_ARN }}
       - name: Setup Node.js
-        uses: actions/setup-node@0a44ba7841725637a19e28fa30b79a866c81b0a6 # v4.0.4
+        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
         with:
           node-version: ${{ env.NODE_VERSION }}
       - name: Download artifact

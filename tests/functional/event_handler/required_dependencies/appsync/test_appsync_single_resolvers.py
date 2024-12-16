@@ -289,3 +289,65 @@ def test_app_access_current_event():
 
     # THEN the resolver must be able to return a field in the current_event
     assert ret == mock_event["identity"]["sub"]
+
+
+def test_route_context_is_not_cleared_after_resolve_async():
+    # GIVEN
+    app = AppSyncResolver()
+    event = {"typeName": "Query", "fieldName": "listLocations", "arguments": {"name": "value"}}
+
+    @app.resolver(field_name="listLocations")
+    async def get_locations(name: str):
+        return f"get_locations#{name}"
+
+    # WHEN event resolution kicks in
+    app.append_context(is_admin=True)
+    app.resolve(event, {})
+
+    # THEN context should be empty
+    assert app.context == {"is_admin": True}
+
+
+def test_route_context_is_manually_cleared_after_resolve_async():
+    # GIVEN
+    # GIVEN
+    app = AppSyncResolver()
+
+    mock_event = {"typeName": "Customer", "fieldName": "field", "arguments": {}}
+
+    @app.resolver(field_name="field")
+    async def get_async():
+        app.context.clear()
+        await asyncio.sleep(0.0001)
+        return "value"
+
+    # WHEN
+    mock_context = LambdaContext()
+    app.append_context(is_admin=True)
+    result = app.resolve(mock_event, mock_context)
+
+    # THEN
+    assert asyncio.run(result) == "value"
+    assert app.context == {}
+
+
+def test_exception_handler_with_single_resolver():
+    # GIVEN a AppSyncResolver instance
+    mock_event = load_event("appSyncDirectResolver.json")
+
+    app = AppSyncResolver()
+
+    # WHEN we configure exception handler for ValueError
+    @app.exception_handler(ValueError)
+    def handle_value_error(ex: ValueError):
+        return {"message": "error"}
+
+    @app.resolver(field_name="createSomething")
+    def create_something(id: str):  # noqa AA03 VNE003
+        raise ValueError("Error")
+
+    # Call the implicit handler
+    result = app(mock_event, {})
+
+    # THEN the return must be the Exception Handler error message
+    assert result["message"] == "error"
