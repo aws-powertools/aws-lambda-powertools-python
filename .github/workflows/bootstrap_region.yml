@@ -32,7 +32,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@e3dd6a429d7300a6a4c196c26e071d42e0343502
         with: 
           aws-region: ${{ inputs.region }}
-          role-to-assume: ${{ secrets.AWS_IAM_ROLE }}
+          role-to-assume: ${{ secrets.REGION_IAM_ROLE }}
           mask-aws-account-id: true
       - id: workdir
         name: Create Workdir
@@ -78,7 +78,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@e3dd6a429d7300a6a4c196c26e071d42e0343502
         with: 
           aws-region: us-east-1
-          role-to-assume: ${{ secrets.AWS_IAM_ROLE }}
+          role-to-assume: ${{ secrets.REGION_IAM_ROLE }}
           mask-aws-account-id: true
       - id: go-setup
         name: Setup Go
