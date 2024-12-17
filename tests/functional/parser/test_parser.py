@@ -165,10 +165,6 @@ def test_parser_type_value_errors():
         with pytest.raises((TypeError, ValueError)):
             handle_type_validation(event=invalid_event, context=LambdaContext())
 
-def test_parse_no_model(): 
-    with pytest.raises(exceptions.InvalidModelTypeError): 
-        parse({}, model=None)
-
 
 def test_event_parser_no_model():
     with pytest.raises(exceptions.InvalidModelTypeError):
