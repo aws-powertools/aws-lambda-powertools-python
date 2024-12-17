@@ -130,6 +130,41 @@ def test_parser_event_with_payload_not_match_schema(dummy_event, dummy_schema):
     with pytest.raises(ValidationError):
         handler({"project": "powertools"}, LambdaContext())
 
+def test_parser_validation_error():
+    class StrictModel(pydantic.BaseModel):
+        age: int
+        name: str
+
+    @event_parser(model=StrictModel)
+    def handle_validation(event: Dict, _: LambdaContext):
+        return event
+
+    invalid_event = {"age": "not_a_number", "name": 123}  # intentionally wrong types
+
+    with pytest.raises(ValidationError) as exc_info:
+        handle_validation(event=invalid_event, context=LambdaContext())
+    
+    assert "age" in str(exc_info.value)  # Verify the error mentions the invalid field
+
+def test_parser_type_value_errors():
+    class CustomModel(pydantic.BaseModel):
+        timestamp: datetime
+        status: Literal["SUCCESS", "FAILURE"]
+
+    @event_parser(model=CustomModel)
+    def handle_type_validation(event: Dict, _: LambdaContext):
+        return event
+
+    # Test both TypeError and ValueError scenarios
+    invalid_events = [
+        {"timestamp": "invalid-date", "status": "SUCCESS"},  # Will raise ValueError for invalid date
+        {"timestamp": datetime.now(), "status": "INVALID"}   # Will raise ValueError for invalid literal
+    ]
+
+    for invalid_event in invalid_events:
+        with pytest.raises((TypeError, ValueError)):
+            handle_type_validation(event=invalid_event, context=LambdaContext())
+
 
 @pytest.mark.parametrize(
     "test_input,expected",
