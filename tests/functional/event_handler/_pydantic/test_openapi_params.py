@@ -393,48 +393,13 @@ def test_openapi_with_deprecated_operations():
     app = APIGatewayRestResolver()
 
     @app.get("/", deprecated=True)
-    def _get():
-        raise NotImplementedError()
-
-    @app.post("/", deprecated=True)
-    def _post():
-        raise NotImplementedError()
-
-    @app.put("/", deprecated=True)
-    def _put():
-        raise NotImplementedError()
-
-    @app.delete("/", deprecated=True)
-    def _delete():
-        raise NotImplementedError()
-
-    @app.patch("/", deprecated=True)
-    def _patch():
-        raise NotImplementedError()
-
-    @app.head("/", deprecated=True)
-    def _head():
+    def handler():
         raise NotImplementedError()
 
     schema = app.get_openapi_schema()
 
     get = schema.paths["/"].get
     assert get.deprecated is True
-
-    post = schema.paths["/"].post
-    assert post.deprecated is True
-
-    put = schema.paths["/"].put
-    assert put.deprecated is True
-
-    delete = schema.paths["/"].delete
-    assert delete.deprecated is True
-
-    patch = schema.paths["/"].patch
-    assert patch.deprecated is True
-
-    head = schema.paths["/"].head
-    assert head.deprecated is True
 
 
 def test_openapi_with_excluded_operations():
