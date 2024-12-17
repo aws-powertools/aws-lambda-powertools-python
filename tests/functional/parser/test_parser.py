@@ -5,7 +5,6 @@ from typing import Any, Dict, Literal, Union
 import pydantic
 import pytest
 from pydantic import ValidationError, BaseModel
-from typing_extensions import Annotated
 
 from aws_lambda_powertools.utilities.parser import event_parser, exceptions, parse
 from aws_lambda_powertools.utilities.parser.envelopes.sqs import SqsEnvelope
