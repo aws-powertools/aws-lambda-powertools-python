@@ -4,7 +4,7 @@ from typing import Any, Dict, Literal, Union
 
 import pydantic
 import pytest
-from pydantic import ValidationError, BaseModel, InvalidModelTypeError
+from pydantic import ValidationError, BaseModel
 from typing_extensions import Annotated
 
 from aws_lambda_powertools.utilities.parser import event_parser, exceptions, parse
@@ -167,7 +167,7 @@ def test_parser_type_value_errors():
 
 
 def test_event_parser_no_model():
-    with pytest.raises(InvalidModelTypeError):
+    with pytest.raises(exceptions.InvalidModelTypeError):
         @event_parser
         def handler(event, _):
             return event
@@ -192,23 +192,31 @@ def test_event_parser_invalid_event():
     with pytest.raises(ValidationError):
         parse(event, model=Shopping)
 
-
 class NonPydanticModel:
     pass
 
 def test_event_parser_invalid_model_type():
+    """Test that event_parser raises InvalidModelTypeError when given an invalid model type"""
     event = {"id": 123, "breed": "Staffie", "bath": False}
 
     @event_parser(model=NonPydanticModel)
     def handler(event, _):
         return event
 
-    with pytest.raises(InvalidModelTypeError):
+    # Test direct handler invocation
+    with pytest.raises(exceptions.InvalidModelTypeError) as exc_info:
         handler(event, None)
+    assert "Please ensure" in str(exc_info.value)
 
-    with pytest.raises(InvalidModelTypeError) as excinfo:
-        parse(event, model=NonPydanticModel, envelope=NonPydanticModel)
-        assert "Please ensure the type you're trying to parse into is correct" in str(excinfo.value)
+    # Test parse function
+    with pytest.raises(exceptions.InvalidModelTypeError) as exc_info:
+        parse(event=event, model=NonPydanticModel)
+    assert "Please ensure" in str(exc_info.value)
+
+    # Test with both model and envelope
+    with pytest.raises(exceptions.InvalidEnvelopeError) as exc_info:
+        parse(event=event, model=NonPydanticModel, envelope=NonPydanticModel)
+    assert "Please ensure" in str(exc_info.value)
 
 @pytest.mark.parametrize(
     "test_input,expected",
@@ -217,7 +225,10 @@ def test_event_parser_invalid_model_type():
             {"status": "succeeded", "name": "Clifford", "breed": "Labrador"},
             "Successfully retrieved Labrador named Clifford",
         ),
-        ({"status": "failed", "error": "oh some error"}, "Uh oh. Had a problem: oh some error"),
+        (
+            {"status": "failed", "error": "oh some error"},
+            "Uh oh. Had a problem: oh some error",
+        ),
     ],
 )
 def test_parser_unions(test_input, expected):
@@ -230,18 +241,19 @@ def test_parser_unions(test_input, expected):
         status: Literal["failed"]
         error: str
 
-    DogCallback = Annotated[Union[SuccessfulCallback, FailedCallback], pydantic.Field(discriminator="status")]
+    class DogCallback(pydantic.BaseModel):
+        root: Union[SuccessfulCallback, FailedCallback] = pydantic.Field(discriminator="status")
 
     @event_parser(model=DogCallback)
     def handler(event, _: Any) -> str:
-        if isinstance(event, FailedCallback):
-            return f"Uh oh. Had a problem: {event.error}"
+        if isinstance(event.root, FailedCallback):
+            return f"Uh oh. Had a problem: {event.root.error}"
 
-        return f"Successfully retrieved {event.breed} named {event.name}"
+        return f"Successfully retrieved {event.root.breed} named {event.root.name}"
 
-    ret = handler(test_input, None)
+    wrapped_input = {"root": test_input}
+    ret = handler(wrapped_input, None)
     assert ret == expected
-
 
 @pytest.mark.parametrize(
     "test_input,expected",
@@ -250,7 +262,10 @@ def test_parser_unions(test_input, expected):
             {"status": "succeeded", "name": "Clifford", "breed": "Labrador"},
             "Successfully retrieved Labrador named Clifford",
         ),
-        ({"status": "failed", "error": "oh some error"}, "Uh oh. Had a problem: oh some error"),
+        (
+            {"status": "failed", "error": "oh some error"},
+            "Uh oh. Had a problem: oh some error",
+        ),
     ],
 )
 def test_parser_unions_with_type_adapter_instance(test_input, expected):
@@ -263,17 +278,18 @@ def test_parser_unions_with_type_adapter_instance(test_input, expected):
         status: Literal["failed"]
         error: str
 
-    DogCallback = Annotated[Union[SuccessfulCallback, FailedCallback], pydantic.Field(discriminator="status")]
-    DogCallbackTypeAdapter = pydantic.TypeAdapter(DogCallback)
+    class DogCallbackModel(pydantic.BaseModel):
+        data: Union[SuccessfulCallback, FailedCallback] = pydantic.Field(discriminator="status")
 
-    @event_parser(model=DogCallbackTypeAdapter)
+    @event_parser(model=DogCallbackModel)
     def handler(event, _: Any) -> str:
-        if isinstance(event, FailedCallback):
-            return f"Uh oh. Had a problem: {event.error}"
+        if isinstance(event.data, FailedCallback):
+            return f"Uh oh. Had a problem: {event.data.error}"
 
-        return f"Successfully retrieved {event.breed} named {event.name}"
+        return f"Successfully retrieved {event.data.breed} named {event.data.name}"
 
-    ret = handler(test_input, None)
+    wrapped_input = {"data": test_input}
+    ret = handler(wrapped_input, None)
     assert ret == expected
 
 

@@ -84,11 +84,11 @@ def event_parser(
     Raises
     ------
     ValidationError
-        When input event does not conform with model provided
+        When input event does not conform with the provided model
     InvalidModelTypeError
-        When model given does not implement BaseModel or is not provided
-    InvalidEnvelopeError
-        When envelope given does not implement BaseEnvelope
+        When the model given does not implement BaseModel, is not provided
+    TypeError, ValueError
+        When there's an error during model instantiation, re-raised as InvalidModelTypeError
     """
 
     if model is None:
@@ -180,8 +180,8 @@ def parse(event: dict[str, Any], model: type[T], envelope: type[Envelope] | None
         When input event does not conform with model provided
     InvalidModelTypeError
         When model given does not implement BaseModel
-    InvalidEnvelopeError
-        When envelope given does not implement BaseEnvelope
+    TypeError, ValueError
+        When there's an error during model instantiation, re-raised as InvalidModelTypeError
     """
     if envelope and callable(envelope):
         try:
