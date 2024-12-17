@@ -4,7 +4,7 @@ from typing import Any, Dict, Literal, Union
 
 import pydantic
 import pytest
-from pydantic import ValidationError
+from pydantic import ValidationError, BaseModel
 from typing_extensions import Annotated
 
 from aws_lambda_powertools.utilities.parser import event_parser, exceptions, parse
@@ -165,6 +165,53 @@ def test_parser_type_value_errors():
         with pytest.raises((TypeError, ValueError)):
             handle_type_validation(event=invalid_event, context=LambdaContext())
 
+def test_parse_no_model(): 
+    with pytest.raises(exceptions.InvalidModelTypeError): 
+        parse({}, model=None)
+
+
+def test_event_parser_no_model():
+    with pytest.raises(exceptions.InvalidModelTypeError):
+        @event_parser
+        def handler(event, _):
+            return event
+        
+        handler({}, None)
+
+
+class Shopping(BaseModel):
+    id: int
+    description: str
+
+def test_event_parser_invalid_event():
+    event = {"id": "forgot-the-id", "description": "really nice blouse"}  # 'id' is invalid
+
+    @event_parser(model=Shopping)
+    def handler(event, _):
+        return event
+
+    with pytest.raises(ValidationError):
+        handler(event, None)
+
+    with pytest.raises(ValidationError):
+        parse(event, model=Shopping)
+
+
+class NonPydanticModel:
+    pass
+
+def test_event_parser_invalid_model_type():
+    event = {"id": 123, "breed": "Staffie", "bath": False}
+
+    @event_parser(model=NonPydanticModel)
+    def handler(event, _):
+        return event
+
+    with pytest.raises(exceptions.InvalidModelTypeError):
+        handler(event, None)
+
+    with pytest.raises(exceptions.InvalidEnvelopeError):
+        parse(event, model=NonPydanticModel, envelope=NonPydanticModel)
 
 @pytest.mark.parametrize(
     "test_input,expected",
