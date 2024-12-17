@@ -44,6 +44,7 @@ def test_openapi_no_params():
     get = path.get
     assert get.summary == "GET /"
     assert get.operationId == "handler__get"
+    assert get.deprecated is None
 
     assert get.responses is not None
     assert 200 in get.responses.keys()
@@ -101,14 +102,7 @@ def test_openapi_with_scalar_params():
 def test_openapi_with_custom_params():
     app = APIGatewayRestResolver()
 
-    @app.get(
-        "/users",
-        summary="Get Users",
-        operation_id="GetUsers",
-        description="Get paginated users",
-        tags=["Users"],
-        deprecated=True,
-    )
+    @app.get("/users", summary="Get Users", operation_id="GetUsers", description="Get paginated users", tags=["Users"])
     def handler(
         count: Annotated[
             int,
@@ -126,7 +120,6 @@ def test_openapi_with_custom_params():
     assert get.operationId == "GetUsers"
     assert get.description == "Get paginated users"
     assert get.tags == ["Users"]
-    assert get.deprecated is True
 
     parameter = get.parameters[0]
     assert parameter.required is False
@@ -396,6 +389,54 @@ def test_openapi_with_body_description():
     assert request_body.content[JSON_CONTENT_TYPE].schema_.description == "This is a user"
 
 
+def test_openapi_with_deprecated_operations():
+    app = APIGatewayRestResolver()
+
+    @app.get("/", deprecated=True)
+    def _get():
+        raise NotImplementedError()
+
+    @app.post("/", deprecated=True)
+    def _post():
+        raise NotImplementedError()
+
+    @app.put("/", deprecated=True)
+    def _put():
+        raise NotImplementedError()
+
+    @app.delete("/", deprecated=True)
+    def _delete():
+        raise NotImplementedError()
+
+    @app.patch("/", deprecated=True)
+    def _patch():
+        raise NotImplementedError()
+
+    @app.head("/", deprecated=True)
+    def _head():
+        raise NotImplementedError()
+
+    schema = app.get_openapi_schema()
+
+    get = schema.paths["/"].get
+    assert get.deprecated is True
+
+    post = schema.paths["/"].post
+    assert post.deprecated is True
+
+    put = schema.paths["/"].put
+    assert put.deprecated is True
+
+    delete = schema.paths["/"].delete
+    assert delete.deprecated is True
+
+    patch = schema.paths["/"].patch
+    assert patch.deprecated is True
+
+    head = schema.paths["/"].head
+    assert head.deprecated is True
+
+
 def test_openapi_with_excluded_operations():
     app = APIGatewayRestResolver()
 
@@ -492,7 +533,6 @@ def test_openapi_with_example_as_list():
     assert get.operationId == "GetUsers"
     assert get.description == "Get paginated users"
     assert get.tags == ["Users"]
-    assert get.deprecated is None
 
     parameter = get.parameters[0]
     assert parameter.required is False
