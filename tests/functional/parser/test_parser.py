@@ -4,7 +4,7 @@ from typing import Any, Dict, Literal, Union
 
 import pydantic
 import pytest
-from pydantic import ValidationError, BaseModel
+from pydantic import ValidationError, BaseModel, InvalidModelTypeError
 from typing_extensions import Annotated
 
 from aws_lambda_powertools.utilities.parser import event_parser, exceptions, parse
@@ -167,7 +167,7 @@ def test_parser_type_value_errors():
 
 
 def test_event_parser_no_model():
-    with pytest.raises(exceptions.InvalidModelTypeError):
+    with pytest.raises(InvalidModelTypeError):
         @event_parser
         def handler(event, _):
             return event
@@ -203,11 +203,12 @@ def test_event_parser_invalid_model_type():
     def handler(event, _):
         return event
 
-    with pytest.raises(exceptions.InvalidModelTypeError):
+    with pytest.raises(InvalidModelTypeError):
         handler(event, None)
 
-    with pytest.raises(exceptions.InvalidEnvelopeError):
+    with pytest.raises(InvalidModelTypeError) as excinfo:
         parse(event, model=NonPydanticModel, envelope=NonPydanticModel)
+        assert "Please ensure the type you're trying to parse into is correct" in str(excinfo.value)
 
 @pytest.mark.parametrize(
     "test_input,expected",
