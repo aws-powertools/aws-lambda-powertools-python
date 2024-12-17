@@ -434,13 +434,13 @@ crt = ["botocore[crt] (>=1.21.0,<2.0a0)"]
 
 [[package]]
 name = "boto3-stubs"
-version = "1.35.80"
-description = "Type annotations for boto3 1.35.80 generated with mypy-boto3-builder 8.6.3"
+version = "1.35.81"
+description = "Type annotations for boto3 1.35.81 generated with mypy-boto3-builder 8.6.3"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "boto3_stubs-1.35.80-py3-none-any.whl", hash = "sha256:a71b7dbae835ac045703282001a7f35b284c3c5c82e083b8804494516e23c028"},
-    {file = "boto3_stubs-1.35.80.tar.gz", hash = "sha256:b0d1034cce5c666176991b3be93f084c51c5745d054f756c533cde46bf25acf3"},
+    {file = "boto3_stubs-1.35.81-py3-none-any.whl", hash = "sha256:e9b82779553ae5ec3b35d1a6f245b148f6c5313152b9e591f542ff915fb20bfe"},
+    {file = "boto3_stubs-1.35.81.tar.gz", hash = "sha256:d690a7286e7bb680ddbd0493f7f4119386f4f4389401cac227b8087b19f688cf"},
 ]
 
 [package.dependencies]
@@ -506,7 +506,7 @@ bedrock-data-automation-runtime = ["mypy-boto3-bedrock-data-automation-runtime (
 bedrock-runtime = ["mypy-boto3-bedrock-runtime (>=1.35.0,<1.36.0)"]
 billing = ["mypy-boto3-billing (>=1.35.0,<1.36.0)"]
 billingconductor = ["mypy-boto3-billingconductor (>=1.35.0,<1.36.0)"]
-boto3 = ["boto3 (==1.35.80)"]
+boto3 = ["boto3 (==1.35.81)"]
 braket = ["mypy-boto3-braket (>=1.35.0,<1.36.0)"]
 budgets = ["mypy-boto3-budgets (>=1.35.0,<1.36.0)"]
 ce = ["mypy-boto3-ce (>=1.35.0,<1.36.0)"]
@@ -1078,13 +1078,13 @@ pycparser = "*"
 
 [[package]]
 name = "cfn-lint"
-version = "1.22.1"
+version = "1.22.2"
 description = "Checks CloudFormation templates for practices and behaviour that could potentially be improved"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "cfn_lint-1.22.1-py3-none-any.whl", hash = "sha256:33f976cdbc4cdeaf9d939821e906baac91e615588574aecaa7033811297496a9"},
-    {file = "cfn_lint-1.22.1.tar.gz", hash = "sha256:11085a8196ca1f381735782b4977be62a5860e26d3e0b578d2d4a244b9031b16"},
+    {file = "cfn_lint-1.22.2-py3-none-any.whl", hash = "sha256:dd8f575f3cec51f07940fd2564a20a68377937ccac2d0c25b7f94713a7ccbad2"},
+    {file = "cfn_lint-1.22.2.tar.gz", hash = "sha256:83b3fb9ada7caf94bc75b4bf13999371f74aae39bad92280fd8c9d114ba4006c"},
 ]
 
 [package.dependencies]
@@ -4412,4 +4412,4 @@ validation = ["fastjsonschema"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.8,<4.0.0"
-content-hash = "a08c859295828298d975efa5bb034fb2fcf95fad890d7f3d973d8a8abcd2429b"
+content-hash = "1795c08511fb4d9ed96e1d9d639bb673d3c86f7afaca525bf4b8589edd24a103"
