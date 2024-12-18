@@ -74,7 +74,7 @@ jobs:
       - name: Complexity baseline
         run: make complexity-baseline
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@7f8b4b4bde536c465e797be725718b88c5d95e0e # 5.1.1
+        uses: codecov/codecov-action@1e68e06f1dbfde0e4cefc87efeba9e4643565303 # 5.1.2
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           file: ./coverage.xml
