@@ -73,7 +73,7 @@ jobs:
           mask-aws-account-id: true
       - id: write-version
         env:
-          prefix: ${{ inputs.environment == 'beta' && '/aws/service/powertools/beta' || '/aws-service/powertools' }}
+          prefix: ${{ inputs.environment == 'beta' && '/aws/service/powertools/beta' || '/aws/service/powertools' }}
         run: |
           aws ssm put-parameter --name ${{ env.prefix }}/python/arm64/python3.8/${{ inputs.package_version }} --value "arn:aws:lambda:${{ matrix.region }}:017000801446:layer:AWSLambdaPowertoolsPythonV3-python38-arm64:${{ inputs.layer_version }}" --type String
           aws ssm put-parameter --name ${{ env.prefix }}/python/arm64/python3.9/${{ inputs.package_version }} --value "arn:aws:lambda:${{ matrix.region }}:017000801446:layer:AWSLambdaPowertoolsPythonV3-python39-arm64:${{ inputs.layer_version }}" --type String
@@ -92,7 +92,7 @@ jobs:
       - id: write-latest
         if: inputs.write_latest == true
         env:
-          prefix: ${{ inputs.environment == 'beta' && '/aws/service/powertools/beta' || '/aws-service/powertools' }}
+          prefix: ${{ inputs.environment == 'beta' && '/aws/service/powertools/beta' || '/aws/service/powertools' }}
         run: |
           aws ssm put-parameter --name ${{ env.prefix }}/python/arm64/python3.8/latest --value "arn:aws:lambda:${{ matrix.region }}:017000801446:layer:AWSLambdaPowertoolsPythonV3-python38-arm64:${{ inputs.layer_version }}" --type String
           aws ssm put-parameter --name ${{ env.prefix }}/python/arm64/python3.9/latest --value "arn:aws:lambda:${{ matrix.region }}:017000801446:layer:AWSLambdaPowertoolsPythonV3-python39-arm64:${{ inputs.layer_version }}" --type String
