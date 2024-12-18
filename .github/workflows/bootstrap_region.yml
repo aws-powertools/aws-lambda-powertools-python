@@ -1,3 +1,18 @@
+# bootstraps new regions
+#
+# PURPOSE
+# Ensures new regions are deployable in future releases
+#
+# JOB 1 PROCESS
+#
+# 1. Installs CDK
+# 2. Bootstraps region
+#
+# JOB 2 PROCESS
+# 1. Sets up Go
+# 2. Installs the balance script
+# 3. Runs balance script to copy layers between aws regions
+
 on:
   workflow_dispatch:
     inputs:
@@ -30,7 +45,7 @@ jobs:
       - id: credentials
         name: AWS Credentials
         uses: aws-actions/configure-aws-credentials@e3dd6a429d7300a6a4c196c26e071d42e0343502
-        with: 
+        with:
           aws-region: ${{ inputs.region }}
           role-to-assume: ${{ secrets.REGION_IAM_ROLE }}
           mask-aws-account-id: true
@@ -76,7 +91,7 @@ jobs:
       - id: credentials
         name: AWS Credentials
         uses: aws-actions/configure-aws-credentials@e3dd6a429d7300a6a4c196c26e071d42e0343502
-        with: 
+        with:
           aws-region: us-east-1
           role-to-assume: ${{ secrets.REGION_IAM_ROLE }}
           mask-aws-account-id: true
