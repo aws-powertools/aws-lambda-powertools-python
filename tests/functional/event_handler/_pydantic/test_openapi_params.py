@@ -409,6 +409,26 @@ def test_openapi_with_deprecated_operations():
     assert post.deprecated is True
 
 
+def test_openapi_without_deprecated_operations():
+    app = APIGatewayRestResolver()
+
+    @app.get("/")
+    def _get():
+        raise NotImplementedError()
+
+    @app.post("/", deprecated=False)
+    def _post():
+        raise NotImplementedError()
+
+    schema = app.get_openapi_schema()
+
+    get = schema.paths["/"].get
+    assert get.deprecated is None
+
+    post = schema.paths["/"].post
+    assert post.deprecated is None
+
+
 def test_openapi_with_excluded_operations():
     app = APIGatewayRestResolver()
 

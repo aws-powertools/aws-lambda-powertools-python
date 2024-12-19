@@ -8,7 +8,6 @@ import traceback
 import warnings
 import zlib
 from abc import ABC, abstractmethod
-from collections import defaultdict
 from enum import Enum
 from functools import partial
 from http import HTTPStatus
@@ -676,8 +675,7 @@ class Route:
         operation["operationId"] = self.operation_id
 
         # Mark as deprecated if necessary
-        if self.deprecated:
-            operation["deprecated"] = True
+        operation["deprecated"] = self.deprecated or None
 
         return operation
 
@@ -2493,7 +2491,7 @@ class Router(BaseRouter):
 
     def __init__(self):
         self._routes: dict[tuple, Callable] = {}
-        self._routes_with_middleware: defaultdict[tuple, list[Callable]] = defaultdict(list)
+        self._routes_with_middleware: dict[tuple, list[Callable]] = {}
         self.api_resolver: BaseRouter | None = None
         self.context = {}  # early init as customers might add context before event resolution
         self._exception_handlers: dict[type, Callable] = {}
@@ -2546,7 +2544,12 @@ class Router(BaseRouter):
             # Collate Middleware for routes
             if middlewares is not None:
                 for handler in middlewares:
-                    self._routes_with_middleware[route_key].append(handler)
+                    if self._routes_with_middleware.get(route_key) is None:
+                        self._routes_with_middleware[route_key] = [handler]
+                    else:
+                        self._routes_with_middleware[route_key].append(handler)
+            else:
+                self._routes_with_middleware[route_key] = []
 
             self._routes[route_key] = func
 
