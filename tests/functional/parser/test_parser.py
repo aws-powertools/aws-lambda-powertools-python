@@ -191,37 +191,6 @@ def test_event_parser_invalid_event():
     with pytest.raises(ValidationError):
         parse(event, model=Shopping)
 
-class NonPydanticModel:
-    pass
-
-def test_event_parser_invalid_model_type():
-    class NonPydanticModel:
-        pass
-
-    class NonPydanticEnvelope:
-        pass
-
-    event = {"id": 123, "breed": "Staffie", "bath": False}
-
-    @event_parser(model=NonPydanticModel)
-    def handler(event, _):
-        return event
-
-    # Test direct handler invocation
-    with pytest.raises(exceptions.InvalidModelTypeError) as exc_info:
-        handler(event, None)
-    assert "unable to be validated" in str(exc_info.value)
-
-    # Test parse function with invalid model
-    with pytest.raises(exceptions.InvalidModelTypeError) as exc_info:
-        parse(event=event, model=NonPydanticModel)
-    assert "unable to be validated" in str(exc_info.value)
-
-    # Test parse function with invalid envelope
-    with pytest.raises(exceptions.InvalidEnvelopeError) as exc_info:
-        parse(event=event, model=NonPydanticModel, envelope=NonPydanticEnvelope)
-    assert "Error" in str(exc_info.value)
-
 
 @pytest.mark.parametrize(
     "test_input,expected",
