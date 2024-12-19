@@ -9,6 +9,7 @@ class APIGatewayWebSocketEventIdentity(BaseModel):
     source_ip: IPvAnyNetwork = Field(alias="sourceIp")
     user_agent: Optional[str] = Field(None, alias="userAgent")
 
+
 class APIGatewayWebSocketEventRequestContextBase(BaseModel):
     extended_request_id: str = Field(alias="extendedRequestId")
     request_time: str = Field(alias="requestTime")
