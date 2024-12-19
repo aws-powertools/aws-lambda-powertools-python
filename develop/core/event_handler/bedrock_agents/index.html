@@ -3737,6 +3737,11 @@ use a combination of <a href="https://docs.pydantic.dev/latest/concepts/models/"
 <td><code>bool</code></td>
 <td>A boolean value that determines whether or not this operation should be included in the OpenAPI schema. Setting it to <code>False</code> can hide the endpoint from generated documentation and schema exports, which might be useful for private or experimental endpoints.</td>
 </tr>
+<tr>
+<td><code>deprecated</code></td>
+<td><code>bool</code></td>
+<td>A boolean value that determines whether or not this operation should be marked as deprecated in the OpenAPI schema.</td>
+</tr>
 </tbody>
 </table>
 <p>To implement these customizations, include extra parameters when defining your routes:</p>
