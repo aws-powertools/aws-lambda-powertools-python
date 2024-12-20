@@ -72,32 +72,51 @@ You can install Powertools for AWS Lambda (Python) using your favorite dependenc
     | x86_64          | __arn:aws:lambda:{region}:017000801446:layer:AWSLambdaPowertoolsPythonV3-{python_version}-x86_64:4__{: .copyMe}:clipboard:       |
     | ARM          | __arn:aws:lambda:{region}:017000801446:layer:AWSLambdaPowertoolsPythonV3-{python_version}-arm64:4__{: .copyMe}:clipboard: |
 
-=== "Lambda Layer (GovCloud)"
-
-    [Lambda Layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html){target="_blank"} is a .zip file archive that can contain additional code, pre-packaged dependencies, data,  or configuration files. We compile and optimize [all dependencies](#install), and remove duplicate dependencies [already available in the Lambda runtime](https://github.com/aws-powertools/powertools-lambda-layer-cdk/blob/d24716744f7d1f37617b4998c992c4c067e19e64/layer/Python/Dockerfile#L36){target="_blank"} to achieve the most optimal size.
-
-    For the latter, make sure to replace `{python_version}` without the period (.), e.g., `python313` for `Python 3.13`.
-
-    **AWS GovCloud (us-gov-east-1)**
-
-    | Architecture | Layer ARN                                                                                                 |
-    | ------------ | --------------------------------------------------------------------------------------------------------- |
-    | x86_64          | __arn:aws-us-gov:lambda:us-gov-east-1:165087284144:layer:AWSLambdaPowertoolsPythonV3-{python_version}-x86_64:4__{: .copyMe}:clipboard:       |
-    | ARM          | __arn:aws-us-gov:lambda:us-gov-east-1:165087284144:layer:AWSLambdaPowertoolsPythonV3-{python_version}-arm64:4__{: .copyMe}:clipboard: |
-
-    **AWS GovCloud (us-gov-west-1)**
-
-    | Architecture | Layer ARN                                                                                                 |
-    | ------------ | --------------------------------------------------------------------------------------------------------- |
-    | x86_64          | __arn:aws-us-gov:lambda:us-gov-west-1:165093116878:layer:AWSLambdaPowertoolsPythonV3-{python_version}-x86_64:4__{: .copyMe}:clipboard:       |
-    | ARM          | __arn:aws-us-gov:lambda:us-gov-west-1:165093116878:layer:AWSLambdaPowertoolsPythonV3-{python_version}-arm64:4__{: .copyMe}:clipboard: |
-
     === "AWS Console"
 
         You can add our layer using the [AWS Lambda Console _(direct link)_](https://console.aws.amazon.com/lambda/home#/add/layer){target="_blank"}:
 
         * Under Layers, choose `AWS layers` or `Specify an ARN`
         * Click to copy the [correct ARN](#lambda-layer) value based on your AWS Lambda function architecture and region
+
+
+    === "AWS SSM Parameter Store"
+        We offer Parameter Store aliases for releases too, allowing you to specify either specific versions or use the latest version on every deploy. To use these you can add these snippets to your AWS CloudFormation or Terraform projects:
+
+        **CloudFormation**
+
+        Sample Placeholders:
+
+        - `{arch}` is either `arm64` (Graviton based functions) or `x86_64`
+        - `{python_version}` is the Python version without the period (.), e.g., `python313` for `Python 3.13`.
+        - `{version}` is the semantic version number (e,g. 3.1.0) for a release or `latest`
+
+        ```yaml
+        MyFunction:
+            Type: "AWS::Lambda::Function"
+            Properties:
+                ...
+                Layers:
+                - {{resolve:ssm:/aws/service/powertools/python/{arch}/{python_version}/{version}}}
+        ```
+
+        **Terraform**
+
+        Using the [`aws_ssm_parameter`](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ssm_parameter) data provider from the AWS Terraform provider allows you to lookup the value of parameters to use later in your project.
+
+        ```hcl
+        data "aws_ssm_parameter" "powertools_version" {
+            name = "/aws/service/powertools/python/{arch}/{python_version}/{version}"
+        }
+
+        resource "aws_lambda_function" "test_lambda" {
+            ...
+
+            runtime = "python3.13"
+
+            layers = [data.aws_ssm_parameter.powertools_version.value]
+        }
+        ```
 
     === "Infrastructure as Code (IaC)"
 
@@ -190,6 +209,26 @@ You can install Powertools for AWS Lambda (Python) using your favorite dependenc
         ```
 
         You'll find the pre-signed URL under `Location` key as part of the CLI command output.
+
+=== "Lambda Layer (GovCloud)"
+
+    [Lambda Layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html){target="_blank"} is a .zip file archive that can contain additional code, pre-packaged dependencies, data,  or configuration files. We compile and optimize [all dependencies](#install), and remove duplicate dependencies [already available in the Lambda runtime](https://github.com/aws-powertools/powertools-lambda-layer-cdk/blob/d24716744f7d1f37617b4998c992c4c067e19e64/layer/Python/Dockerfile#L36){target="_blank"} to achieve the most optimal size.
+
+    For the latter, make sure to replace `{python_version}` without the period (.), e.g., `python313` for `Python 3.13`.
+
+    **AWS GovCloud (us-gov-east-1)**
+
+    | Architecture | Layer ARN                                                                                                 |
+    | ------------ | --------------------------------------------------------------------------------------------------------- |
+    | x86_64          | __arn:aws-us-gov:lambda:us-gov-east-1:165087284144:layer:AWSLambdaPowertoolsPythonV3-{python_version}-x86_64:4__{: .copyMe}:clipboard:       |
+    | ARM          | __arn:aws-us-gov:lambda:us-gov-east-1:165087284144:layer:AWSLambdaPowertoolsPythonV3-{python_version}-arm64:4__{: .copyMe}:clipboard: |
+
+    **AWS GovCloud (us-gov-west-1)**
+
+    | Architecture | Layer ARN                                                                                                 |
+    | ------------ | --------------------------------------------------------------------------------------------------------- |
+    | x86_64          | __arn:aws-us-gov:lambda:us-gov-west-1:165093116878:layer:AWSLambdaPowertoolsPythonV3-{python_version}-x86_64:4__{: .copyMe}:clipboard:       |
+    | ARM          | __arn:aws-us-gov:lambda:us-gov-west-1:165093116878:layer:AWSLambdaPowertoolsPythonV3-{python_version}-arm64:4__{: .copyMe}:clipboard: |
 
 === "Serverless Application Repository (SAR)"
 
