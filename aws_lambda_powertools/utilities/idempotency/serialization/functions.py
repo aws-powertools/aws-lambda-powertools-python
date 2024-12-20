@@ -1,5 +1,9 @@
-from types import UnionType
 from typing import Any, Optional, Union, get_args, get_origin
+
+try:
+    from types import UnionType
+except ImportError:
+    UnionType = None
 
 from aws_lambda_powertools.utilities.idempotency.exceptions import (
     IdempotencyModelTypeError,
@@ -9,10 +13,8 @@ from aws_lambda_powertools.utilities.idempotency.exceptions import (
 def get_actual_type(model_type: Any) -> Any:
     """
     Extract the actual type from a potentially Optional or Union type.
-
     This function handles types that may be wrapped in Optional or Union,
     including the Python 3.10+ Union syntax (Type | None).
-
     Parameters
     ----------
     model_type: Any
@@ -20,13 +22,12 @@ def get_actual_type(model_type: Any) -> Any:
     Returns
     -------
     The actual type without Optional or Union wrappers.
-
     Raises:
         IdempotencyModelTypeError: If the type specification is invalid
                                    (e.g., Union with multiple non-None types).
     """
     # Check if the type is Optional, Union, or the new Union syntax
-    if get_origin(model_type) in (Optional, Union, UnionType):
+    if get_origin(model_type) in (Optional, Union) or (UnionType is not None and get_origin(model_type) is UnionType):
         # Get the arguments of the type (e.g., for Optional[int], this would be (int, NoneType))
         args = get_args(model_type)
 
