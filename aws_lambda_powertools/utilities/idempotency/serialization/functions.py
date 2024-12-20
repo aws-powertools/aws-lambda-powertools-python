@@ -3,7 +3,7 @@ from typing import Any, Optional, Union, get_args, get_origin
 try:
     from types import UnionType
 except ImportError:
-    UnionType = None
+    UnionType = None  # type: ignore[assignment, misc]
 
 from aws_lambda_powertools.utilities.idempotency.exceptions import (
     IdempotencyModelTypeError,
