@@ -44,6 +44,7 @@ def test_openapi_no_params():
     get = path.get
     assert get.summary == "GET /"
     assert get.operationId == "handler__get"
+    assert get.deprecated is None
 
     assert get.responses is not None
     assert 200 in get.responses.keys()
@@ -386,6 +387,46 @@ def test_openapi_with_body_description():
     # Description should appear in two places: on the request body and on the schema
     assert request_body.description == "This is a user"
     assert request_body.content[JSON_CONTENT_TYPE].schema_.description == "This is a user"
+
+
+def test_openapi_with_deprecated_operations():
+    app = APIGatewayRestResolver()
+
+    @app.get("/", deprecated=True)
+    def _get():
+        raise NotImplementedError()
+
+    @app.post("/", deprecated=True)
+    def _post():
+        raise NotImplementedError()
+
+    schema = app.get_openapi_schema()
+
+    get = schema.paths["/"].get
+    assert get.deprecated is True
+
+    post = schema.paths["/"].post
+    assert post.deprecated is True
+
+
+def test_openapi_without_deprecated_operations():
+    app = APIGatewayRestResolver()
+
+    @app.get("/")
+    def _get():
+        raise NotImplementedError()
+
+    @app.post("/", deprecated=False)
+    def _post():
+        raise NotImplementedError()
+
+    schema = app.get_openapi_schema()
+
+    get = schema.paths["/"].get
+    assert get.deprecated is None
+
+    post = schema.paths["/"].post
+    assert post.deprecated is None
 
 
 def test_openapi_with_excluded_operations():
