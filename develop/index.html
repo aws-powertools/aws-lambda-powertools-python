@@ -1783,49 +1783,7 @@ On March 25st, 2025 v2 of Powertools for AWS Lambda (Python) <a
 </tr>
 </tbody>
 </table>
-</div>
-<div class="tabbed-block">
-<p><a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html" target="_blank">Lambda Layer</a> is a .zip file archive that can contain additional code, pre-packaged dependencies, data,  or configuration files. We compile and optimize <a href="#install">all dependencies</a>, and remove duplicate dependencies <a href="https://github.com/aws-powertools/powertools-lambda-layer-cdk/blob/d24716744f7d1f37617b4998c992c4c067e19e64/layer/Python/Dockerfile#L36" target="_blank">already available in the Lambda runtime</a> to achieve the most optimal size.</p>
-<p>For the latter, make sure to replace <code>{python_version}</code> without the period (.), e.g., <code>python313</code> for <code>Python 3.13</code>.</p>
-<p><strong>AWS GovCloud (us-gov-east-1)</strong></p>
-<table>
-<thead>
-<tr>
-<th>Architecture</th>
-<th>Layer ARN</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>x86_64</td>
-<td><strong class="copyMe">arn:aws-us-gov:lambda:us-gov-east-1:165087284144:layer:AWSLambdaPowertoolsPythonV3-{python_version}-x86_64:4</strong><img alt="📋" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f4cb.svg" title=":clipboard:" /></td>
-</tr>
-<tr>
-<td>ARM</td>
-<td><strong class="copyMe">arn:aws-us-gov:lambda:us-gov-east-1:165087284144:layer:AWSLambdaPowertoolsPythonV3-{python_version}-arm64:4</strong><img alt="📋" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f4cb.svg" title=":clipboard:" /></td>
-</tr>
-</tbody>
-</table>
-<p><strong>AWS GovCloud (us-gov-west-1)</strong></p>
-<table>
-<thead>
-<tr>
-<th>Architecture</th>
-<th>Layer ARN</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>x86_64</td>
-<td><strong class="copyMe">arn:aws-us-gov:lambda:us-gov-west-1:165093116878:layer:AWSLambdaPowertoolsPythonV3-{python_version}-x86_64:4</strong><img alt="📋" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f4cb.svg" title=":clipboard:" /></td>
-</tr>
-<tr>
-<td>ARM</td>
-<td><strong class="copyMe">arn:aws-us-gov:lambda:us-gov-west-1:165093116878:layer:AWSLambdaPowertoolsPythonV3-{python_version}-arm64:4</strong><img alt="📋" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f4cb.svg" title=":clipboard:" /></td>
-</tr>
-</tbody>
-</table>
-<div class="tabbed-set tabbed-alternate" data-tabs="2:3"><input checked="checked" id="aws-console" name="__tabbed_2" type="radio" /><input id="infrastructure-as-code-iac" name="__tabbed_2" type="radio" /><input id="inspect-lambda-layer-contents" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="aws-console">AWS Console</label><label for="infrastructure-as-code-iac">Infrastructure as Code (IaC)</label><label for="inspect-lambda-layer-contents">Inspect Lambda Layer contents</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:4"><input checked="checked" id="aws-console" name="__tabbed_2" type="radio" /><input id="aws-ssm-parameter-store" name="__tabbed_2" type="radio" /><input id="infrastructure-as-code-iac" name="__tabbed_2" type="radio" /><input id="inspect-lambda-layer-contents" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="aws-console">AWS Console</label><label for="aws-ssm-parameter-store">AWS SSM Parameter Store</label><label for="infrastructure-as-code-iac">Infrastructure as Code (IaC)</label><label for="inspect-lambda-layer-contents">Inspect Lambda Layer contents</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <p>You can add our layer using the <a href="https://console.aws.amazon.com/lambda/home#/add/layer" target="_blank">AWS Lambda Console <em>(direct link)</em></a>:</p>
@@ -1833,6 +1791,52 @@ On March 25st, 2025 v2 of Powertools for AWS Lambda (Python) <a
 <li>Under Layers, choose <code>AWS layers</code> or <code>Specify an ARN</code></li>
 <li>Click to copy the <a href="#lambda-layer">correct ARN</a> value based on your AWS Lambda function architecture and region</li>
 </ul>
+</div>
+<div class="tabbed-block">
+<p>We offer Parameter Store aliases for releases too, allowing you to specify either specific versions or use the latest version on every deploy. To use these you can add these snippets to your AWS CloudFormation or Terraform projects:</p>
+<p><strong>CloudFormation</strong></p>
+<p>Sample Placeholders:</p>
+<ul>
+<li><code>{arch}</code> is either <code>arm64</code> (Graviton based functions) or <code>x86_64</code></li>
+<li><code>{python_version}</code> is the Python version without the period (.), e.g., <code>python313</code> for <code>Python 3.13</code>.</li>
+<li><code>{version}</code> is the semantic version number (e,g. 3.1.0) for a release or <code>latest</code></li>
+</ul>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">MyFunction</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;AWS::Lambda::Function&quot;</span>
+<span class="w">    </span><span class="nt">Properties</span><span class="p">:</span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">Layers</span><span class="p p-Indicator">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{{</span><span class="nv">resolve</span><span class="p p-Indicator">:</span><span class="nv">ssm</span><span class="p p-Indicator">:</span><span class="nv">/aws/service/powertools/python/</span><span class="p p-Indicator">{</span><span class="nv">arch</span><span class="p p-Indicator">}</span><span class="nv">/</span><span class="p p-Indicator">{</span><span class="nv">python_version</span><span class="p p-Indicator">}</span><span class="nv">/</span><span class="p p-Indicator">{</span><span class="nv">version</span><span class="p p-Indicator">}}}</span>
+</code></pre></div></td></tr></table></div>
+<p><strong>Terraform</strong></p>
+<p>Using the <a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ssm_parameter"><code>aws_ssm_parameter</code></a> data provider from the AWS Terraform provider allows you to lookup the value of parameters to use later in your project.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kr">data</span><span class="w"> </span><span class="nc">&quot;aws_ssm_parameter&quot;</span><span class="w"> </span><span class="nv">&quot;powertools_version&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;/aws/service/powertools/python/{arch}/{python_version}/{version}&quot;</span>
+<span class="p">}</span>
+
+<span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_lambda_function&quot;</span><span class="w"> </span><span class="nv">&quot;test_lambda&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">...</span>
+
+<span class="w">    </span><span class="na">runtime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;python3.13&quot;</span>
+
+<span class="w">    </span><span class="na">layers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="nv">data.aws_ssm_parameter.powertools_version.value</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
 <blockquote>
@@ -2458,6 +2462,48 @@ General<span class="w"> </span>information
 </div>
 </div>
 </div>
+</div>
+<div class="tabbed-block">
+<p><a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html" target="_blank">Lambda Layer</a> is a .zip file archive that can contain additional code, pre-packaged dependencies, data,  or configuration files. We compile and optimize <a href="#install">all dependencies</a>, and remove duplicate dependencies <a href="https://github.com/aws-powertools/powertools-lambda-layer-cdk/blob/d24716744f7d1f37617b4998c992c4c067e19e64/layer/Python/Dockerfile#L36" target="_blank">already available in the Lambda runtime</a> to achieve the most optimal size.</p>
+<p>For the latter, make sure to replace <code>{python_version}</code> without the period (.), e.g., <code>python313</code> for <code>Python 3.13</code>.</p>
+<p><strong>AWS GovCloud (us-gov-east-1)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Architecture</th>
+<th>Layer ARN</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x86_64</td>
+<td><strong class="copyMe">arn:aws-us-gov:lambda:us-gov-east-1:165087284144:layer:AWSLambdaPowertoolsPythonV3-{python_version}-x86_64:4</strong><img alt="📋" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f4cb.svg" title=":clipboard:" /></td>
+</tr>
+<tr>
+<td>ARM</td>
+<td><strong class="copyMe">arn:aws-us-gov:lambda:us-gov-east-1:165087284144:layer:AWSLambdaPowertoolsPythonV3-{python_version}-arm64:4</strong><img alt="📋" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f4cb.svg" title=":clipboard:" /></td>
+</tr>
+</tbody>
+</table>
+<p><strong>AWS GovCloud (us-gov-west-1)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Architecture</th>
+<th>Layer ARN</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x86_64</td>
+<td><strong class="copyMe">arn:aws-us-gov:lambda:us-gov-west-1:165093116878:layer:AWSLambdaPowertoolsPythonV3-{python_version}-x86_64:4</strong><img alt="📋" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f4cb.svg" title=":clipboard:" /></td>
+</tr>
+<tr>
+<td>ARM</td>
+<td><strong class="copyMe">arn:aws-us-gov:lambda:us-gov-west-1:165093116878:layer:AWSLambdaPowertoolsPythonV3-{python_version}-arm64:4</strong><img alt="📋" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f4cb.svg" title=":clipboard:" /></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="tabbed-block">
 <p>We provide a SAR App that deploys a CloudFormation stack with a copy of our Lambda Layer in your AWS account and region.</p>
@@ -5158,7 +5204,7 @@ General<span class="w"> </span>information
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    2024-12-06
+    2024-12-20
   </span>
 
     
