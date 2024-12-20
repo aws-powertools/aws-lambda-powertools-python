@@ -309,6 +309,7 @@ class Route:
         include_in_schema: bool = True,
         security: list[dict[str, list[str]]] | None = None,
         openapi_extensions: dict[str, Any] | None = None,
+        deprecated: bool = False,
         middlewares: list[Callable[..., Response]] | None = None,
     ):
         """
@@ -348,6 +349,8 @@ class Route:
             The OpenAPI security for this route
         openapi_extensions: dict[str, Any], optional
             Additional OpenAPI extensions as a dictionary.
+        deprecated: bool
+            Whether or not to mark this route as deprecated in the OpenAPI schema
         middlewares: list[Callable[..., Response]] | None
             The list of route middlewares to be called in order.
         """
@@ -374,6 +377,7 @@ class Route:
         self.openapi_extensions = openapi_extensions
         self.middlewares = middlewares or []
         self.operation_id = operation_id or self._generate_operation_id()
+        self.deprecated = deprecated
 
         # _middleware_stack_built is used to ensure the middleware stack is only built once.
         self._middleware_stack_built = False
@@ -670,6 +674,9 @@ class Route:
         operation_ids.add(self.operation_id)
         operation["operationId"] = self.operation_id
 
+        # Mark as deprecated if necessary
+        operation["deprecated"] = self.deprecated or None
+
         return operation
 
     @staticmethod
@@ -924,6 +931,7 @@ class BaseRouter(ABC):
         include_in_schema: bool = True,
         security: list[dict[str, list[str]]] | None = None,
         openapi_extensions: dict[str, Any] | None = None,
+        deprecated: bool = False,
         middlewares: list[Callable[..., Any]] | None = None,
     ) -> Callable[[AnyCallableT], AnyCallableT]:
         raise NotImplementedError()
@@ -984,6 +992,7 @@ class BaseRouter(ABC):
         include_in_schema: bool = True,
         security: list[dict[str, list[str]]] | None = None,
         openapi_extensions: dict[str, Any] | None = None,
+        deprecated: bool = False,
         middlewares: list[Callable[..., Any]] | None = None,
     ) -> Callable[[AnyCallableT], AnyCallableT]:
         """Get route decorator with GET `method`
@@ -1023,6 +1032,7 @@ class BaseRouter(ABC):
             include_in_schema,
             security,
             openapi_extensions,
+            deprecated,
             middlewares,
         )
 
@@ -1041,6 +1051,7 @@ class BaseRouter(ABC):
         include_in_schema: bool = True,
         security: list[dict[str, list[str]]] | None = None,
         openapi_extensions: dict[str, Any] | None = None,
+        deprecated: bool = False,
         middlewares: list[Callable[..., Any]] | None = None,
     ) -> Callable[[AnyCallableT], AnyCallableT]:
         """Post route decorator with POST `method`
@@ -1081,6 +1092,7 @@ class BaseRouter(ABC):
             include_in_schema,
             security,
             openapi_extensions,
+            deprecated,
             middlewares,
         )
 
@@ -1099,6 +1111,7 @@ class BaseRouter(ABC):
         include_in_schema: bool = True,
         security: list[dict[str, list[str]]] | None = None,
         openapi_extensions: dict[str, Any] | None = None,
+        deprecated: bool = False,
         middlewares: list[Callable[..., Any]] | None = None,
     ) -> Callable[[AnyCallableT], AnyCallableT]:
         """Put route decorator with PUT `method`
@@ -1139,6 +1152,7 @@ class BaseRouter(ABC):
             include_in_schema,
             security,
             openapi_extensions,
+            deprecated,
             middlewares,
         )
 
@@ -1157,6 +1171,7 @@ class BaseRouter(ABC):
         include_in_schema: bool = True,
         security: list[dict[str, list[str]]] | None = None,
         openapi_extensions: dict[str, Any] | None = None,
+        deprecated: bool = False,
         middlewares: list[Callable[..., Any]] | None = None,
     ) -> Callable[[AnyCallableT], AnyCallableT]:
         """Delete route decorator with DELETE `method`
@@ -1196,6 +1211,7 @@ class BaseRouter(ABC):
             include_in_schema,
             security,
             openapi_extensions,
+            deprecated,
             middlewares,
         )
 
@@ -1214,6 +1230,7 @@ class BaseRouter(ABC):
         include_in_schema: bool = True,
         security: list[dict[str, list[str]]] | None = None,
         openapi_extensions: dict[str, Any] | None = None,
+        deprecated: bool = False,
         middlewares: list[Callable] | None = None,
     ) -> Callable[[AnyCallableT], AnyCallableT]:
         """Patch route decorator with PATCH `method`
@@ -1256,6 +1273,7 @@ class BaseRouter(ABC):
             include_in_schema,
             security,
             openapi_extensions,
+            deprecated,
             middlewares,
         )
 
@@ -1274,6 +1292,7 @@ class BaseRouter(ABC):
         include_in_schema: bool = True,
         security: list[dict[str, list[str]]] | None = None,
         openapi_extensions: dict[str, Any] | None = None,
+        deprecated: bool = False,
         middlewares: list[Callable] | None = None,
     ) -> Callable[[AnyCallableT], AnyCallableT]:
         """Head route decorator with HEAD `method`
@@ -1315,6 +1334,7 @@ class BaseRouter(ABC):
             include_in_schema,
             security,
             openapi_extensions,
+            deprecated,
             middlewares,
         )
 
@@ -1629,7 +1649,6 @@ class ApiGatewayResolver(BaseRouter):
 
         # Add routes to the OpenAPI schema
         for route in all_routes:
-
             if route.security and not _validate_openapi_security_parameters(
                 security=route.security,
                 security_schemes=security_schemes,
@@ -1694,7 +1713,6 @@ class ApiGatewayResolver(BaseRouter):
 
     @staticmethod
     def _determine_openapi_version(openapi_version: str):
-
         # Pydantic V2 has no support for OpenAPI schema 3.0
         if not openapi_version.startswith("3.1"):
             warnings.warn(
@@ -1950,6 +1968,7 @@ class ApiGatewayResolver(BaseRouter):
         include_in_schema: bool = True,
         security: list[dict[str, list[str]]] | None = None,
         openapi_extensions: dict[str, Any] | None = None,
+        deprecated: bool = False,
         middlewares: list[Callable[..., Any]] | None = None,
     ) -> Callable[[AnyCallableT], AnyCallableT]:
         """Route decorator includes parameter `method`"""
@@ -1978,6 +1997,7 @@ class ApiGatewayResolver(BaseRouter):
                     include_in_schema,
                     security,
                     openapi_extensions,
+                    deprecated,
                     middlewares,
                 )
 
@@ -2492,6 +2512,7 @@ class Router(BaseRouter):
         include_in_schema: bool = True,
         security: list[dict[str, list[str]]] | None = None,
         openapi_extensions: dict[str, Any] | None = None,
+        deprecated: bool = False,
         middlewares: list[Callable[..., Any]] | None = None,
     ) -> Callable[[AnyCallableT], AnyCallableT]:
         def register_route(func: AnyCallableT) -> AnyCallableT:
@@ -2517,6 +2538,7 @@ class Router(BaseRouter):
                 include_in_schema,
                 frozen_security,
                 fronzen_openapi_extensions,
+                deprecated,
             )
 
             # Collate Middleware for routes
@@ -2598,6 +2620,7 @@ class APIGatewayRestResolver(ApiGatewayResolver):
         include_in_schema: bool = True,
         security: list[dict[str, list[str]]] | None = None,
         openapi_extensions: dict[str, Any] | None = None,
+        deprecated: bool = False,
         middlewares: list[Callable[..., Any]] | None = None,
     ) -> Callable[[AnyCallableT], AnyCallableT]:
         # NOTE: see #1552 for more context.
@@ -2616,6 +2639,7 @@ class APIGatewayRestResolver(ApiGatewayResolver):
             include_in_schema,
             security,
             openapi_extensions,
+            deprecated,
             middlewares,
         )
 
