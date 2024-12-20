@@ -4,6 +4,7 @@ from typing import Any, Dict, Literal, Union
 
 import pydantic
 import pytest
+from typing_extensions import Annotated
 from pydantic import ValidationError, BaseModel
 
 from aws_lambda_powertools.utilities.parser import event_parser, exceptions, parse
@@ -251,19 +252,18 @@ def test_parser_unions_with_type_adapter_instance(test_input, expected):
     class FailedCallback(pydantic.BaseModel):
         status: Literal["failed"]
         error: str
+        
+    DogCallback = Annotated[Union[SuccessfulCallback, FailedCallback], pydantic.Field(discriminator="status")]
+    DogCallbackTypeAdapter = pydantic.TypeAdapter(DogCallback)
 
-    class DogCallbackModel(pydantic.BaseModel):
-        data: Union[SuccessfulCallback, FailedCallback] = pydantic.Field(discriminator="status")
-
-    @event_parser(model=DogCallbackModel)
+    @event_parser(model=DogCallbackTypeAdapter)
     def handler(event, _: Any) -> str:
-        if isinstance(event.data, FailedCallback):
-            return f"Uh oh. Had a problem: {event.data.error}"
+        if isinstance(event, FailedCallback):
+            return f"Uh oh. Had a problem: {event.error}"
 
-        return f"Successfully retrieved {event.data.breed} named {event.data.name}"
+        return f"Successfully retrieved {event.breed} named {event.name}"
 
-    wrapped_input = {"data": test_input}
-    ret = handler(wrapped_input, None)
+    ret = handler(test_input, None)
     assert ret == expected
 
 

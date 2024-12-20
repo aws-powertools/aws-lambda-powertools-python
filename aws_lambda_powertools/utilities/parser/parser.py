@@ -202,4 +202,4 @@ def parse(event: dict[str, Any], model: type[T], envelope: type[Envelope] | None
             f"Error: {str(exc)}. Please ensure the Input model inherits from BaseModel,\n"
             "and your payload adheres to the specified Input model structure.\n"
             f"Model={model}",
-        )
+        ) from exc
