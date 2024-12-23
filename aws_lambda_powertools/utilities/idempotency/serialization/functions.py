@@ -33,7 +33,7 @@ def get_actual_type(model_type: Any) -> Any:
     origin = get_origin(model_type)
 
     # Check if type is Union, Optional, or UnionType (Python 3.10+)
-    if origin in (Union, Optional) or (sys.version_info >= (3, 10) and isinstance(origin, UnionType)):
+    if origin in (Union, Optional) or (sys.version_info >= (3, 10) and origin in (Union, UnionType)):
         # Get type arguments
         args = get_args(model_type)
 
