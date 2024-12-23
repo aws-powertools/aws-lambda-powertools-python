@@ -1,9 +1,11 @@
+import sys
 from typing import Any, Optional, Union, get_args, get_origin
 
-try:
-    from types import UnionType
-except ImportError:
-    UnionType = None  # type: ignore[assignment, misc]
+# Conditionally import or define UnionType based on Python version
+if sys.version_info >= (3, 10):
+    from types import UnionType  # Available in Python 3.10+
+else:
+    UnionType = Union  # Fallback for Python 3.8 and 3.9
 
 from aws_lambda_powertools.utilities.idempotency.exceptions import (
     IdempotencyModelTypeError,
@@ -26,19 +28,30 @@ def get_actual_type(model_type: Any) -> Any:
         IdempotencyModelTypeError: If the type specification is invalid
                                    (e.g., Union with multiple non-None types).
     """
-    # Check if the type is Optional, Union, or the new Union syntax
-    if get_origin(model_type) in (Optional, Union) or (UnionType is not None and get_origin(model_type) is UnionType):
-        # Get the arguments of the type (e.g., for Optional[int], this would be (int, NoneType))
+
+    # Get the origin of the type (e.g., Union, Optional)
+    origin = get_origin(model_type)
+
+    # Check if type is Union, Optional, or UnionType (Python 3.10+)
+    if origin in (Union, Optional) or (sys.version_info >= (3, 10) and isinstance(origin, UnionType)):
+        # Get type arguments
         args = get_args(model_type)
 
-        # Filter out NoneType to get the actual type(s)
-        actual_type = [arg for arg in args if arg is not type(None)]
+        # Filter out NoneType
+        actual_type = _extract_non_none_types(args)
 
-        # Ensure there's exactly one non-None type
+        # Ensure only one non-None type exists
         if len(actual_type) != 1:
             raise IdempotencyModelTypeError(
                 "Invalid type: expected a single type, optionally wrapped in Optional or Union with None.",
             )
+
         return actual_type[0]
 
+    # If not a Union/Optional type, return original type
     return model_type
+
+
+def _extract_non_none_types(args: tuple) -> list:
+    """Extract non-None types from type arguments."""
+    return [arg for arg in args if arg is not type(None)]
