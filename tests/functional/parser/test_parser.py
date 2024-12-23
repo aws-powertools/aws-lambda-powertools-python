@@ -4,8 +4,8 @@ from typing import Any, Dict, Literal, Union
 
 import pydantic
 import pytest
-from pydantic import ValidationError
 from typing_extensions import Annotated
+from pydantic import ValidationError, BaseModel
 
 from aws_lambda_powertools.utilities.parser import event_parser, exceptions, parse
 from aws_lambda_powertools.utilities.parser.envelopes.sqs import SqsEnvelope
@@ -130,6 +130,68 @@ def test_parser_event_with_payload_not_match_schema(dummy_event, dummy_schema):
     with pytest.raises(ValidationError):
         handler({"project": "powertools"}, LambdaContext())
 
+def test_parser_validation_error():
+    class StrictModel(pydantic.BaseModel):
+        age: int
+        name: str
+
+    @event_parser(model=StrictModel)
+    def handle_validation(event: Dict, _: LambdaContext):
+        return event
+
+    invalid_event = {"age": "not_a_number", "name": 123}  # intentionally wrong types
+
+    with pytest.raises(ValidationError) as exc_info:
+        handle_validation(event=invalid_event, context=LambdaContext())
+    
+    assert "age" in str(exc_info.value)  # Verify the error mentions the invalid field
+
+def test_parser_type_value_errors():
+    class CustomModel(pydantic.BaseModel):
+        timestamp: datetime
+        status: Literal["SUCCESS", "FAILURE"]
+
+    @event_parser(model=CustomModel)
+    def handle_type_validation(event: Dict, _: LambdaContext):
+        return event
+
+    # Test both TypeError and ValueError scenarios
+    invalid_events = [
+        {"timestamp": "invalid-date", "status": "SUCCESS"},  # Will raise ValueError for invalid date
+        {"timestamp": datetime.now(), "status": "INVALID"}   # Will raise ValueError for invalid literal
+    ]
+
+    for invalid_event in invalid_events:
+        with pytest.raises((TypeError, ValueError)):
+            handle_type_validation(event=invalid_event, context=LambdaContext())
+
+
+def test_event_parser_no_model():
+    with pytest.raises(exceptions.InvalidModelTypeError):
+        @event_parser
+        def handler(event, _):
+            return event
+        
+        handler({}, None)
+
+
+class Shopping(BaseModel):
+    id: int
+    description: str
+
+def test_event_parser_invalid_event():
+    event = {"id": "forgot-the-id", "description": "really nice blouse"}  # 'id' is invalid
+
+    @event_parser(model=Shopping)
+    def handler(event, _):
+        return event
+
+    with pytest.raises(ValidationError):
+        handler(event, None)
+
+    with pytest.raises(ValidationError):
+        parse(event, model=Shopping)
+
 
 @pytest.mark.parametrize(
     "test_input,expected",
@@ -138,7 +200,10 @@ def test_parser_event_with_payload_not_match_schema(dummy_event, dummy_schema):
             {"status": "succeeded", "name": "Clifford", "breed": "Labrador"},
             "Successfully retrieved Labrador named Clifford",
         ),
-        ({"status": "failed", "error": "oh some error"}, "Uh oh. Had a problem: oh some error"),
+        (
+            {"status": "failed", "error": "oh some error"},
+            "Uh oh. Had a problem: oh some error",
+        ),
     ],
 )
 def test_parser_unions(test_input, expected):
@@ -163,7 +228,6 @@ def test_parser_unions(test_input, expected):
     ret = handler(test_input, None)
     assert ret == expected
 
-
 @pytest.mark.parametrize(
     "test_input,expected",
     [
@@ -171,7 +235,10 @@ def test_parser_unions(test_input, expected):
             {"status": "succeeded", "name": "Clifford", "breed": "Labrador"},
             "Successfully retrieved Labrador named Clifford",
         ),
-        ({"status": "failed", "error": "oh some error"}, "Uh oh. Had a problem: oh some error"),
+        (
+            {"status": "failed", "error": "oh some error"},
+            "Uh oh. Had a problem: oh some error",
+        ),
     ],
 )
 def test_parser_unions_with_type_adapter_instance(test_input, expected):

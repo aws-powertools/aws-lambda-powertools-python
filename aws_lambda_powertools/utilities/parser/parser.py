@@ -84,9 +84,9 @@ def event_parser(
     Raises
     ------
     ValidationError
-        When input event does not conform with model provided
+        When input event does not conform with the provided model
     InvalidModelTypeError
-        When model given does not implement BaseModel or is not provided
+        When the model given does not implement BaseModel, is not provided
     InvalidEnvelopeError
         When envelope given does not implement BaseEnvelope
     """
@@ -103,17 +103,14 @@ def event_parser(
                 "or as the type hint of `event` in the handler that it wraps",
             )
 
-    try:
-        if envelope:
-            parsed_event = parse(event=event, model=model, envelope=envelope)
-        else:
-            parsed_event = parse(event=event, model=model)
+    if envelope:
+        parsed_event = parse(event=event, model=model, envelope=envelope)
+    else:
+        parsed_event = parse(event=event, model=model)
 
-        logger.debug(f"Calling handler {handler.__name__}")
-        return handler(parsed_event, context, **kwargs)
-    except AttributeError as exc:
-        raise InvalidModelTypeError(f"Error: {str(exc)}. Please ensure the type you're trying to parse into is correct")
-
+    logger.debug(f"Calling handler {handler.__name__}")
+    return handler(parsed_event, context, **kwargs)
+  
 
 @overload
 def parse(event: dict[str, Any], model: type[T]) -> T: ...  # pragma: no cover
@@ -192,6 +189,7 @@ def parse(event: dict[str, Any], model: type[T], envelope: type[Envelope] | None
         adapter = _retrieve_or_set_model_from_cache(model=model)
 
         logger.debug("Parsing and validating event model; no envelope used")
+        
         return _parse_and_validate_event(data=event, adapter=adapter)
 
     # Pydantic raises PydanticSchemaGenerationError when the model is not a Pydantic model
