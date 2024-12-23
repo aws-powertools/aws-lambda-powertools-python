@@ -6,6 +6,9 @@
 
 ## Maintenance
 
+* **ci:** new pre-release 3.4.1a0 ([#5783](https://github.com/aws-powertools/powertools-lambda-python/issues/5783))
+* **deps-dev:** bump boto3-stubs from 1.35.85 to 1.35.86 ([#5780](https://github.com/aws-powertools/powertools-lambda-python/issues/5780))
+* **deps-dev:** bump mypy from 1.13.0 to 1.14.0 ([#5779](https://github.com/aws-powertools/powertools-lambda-python/issues/5779))
 
 
 <a name="v3.4.0"></a>
