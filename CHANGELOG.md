@@ -4,11 +4,23 @@
 <a name="unreleased"></a>
 # Unreleased
 
+## Bug Fixes
+
+* **idempotency:** add support for Optional type when serializing output ([#5590](https://github.com/aws-powertools/powertools-lambda-python/issues/5590))
+
+## Documentation
+
+* **layer:** update layer version number - v3.4.0 ([#5785](https://github.com/aws-powertools/powertools-lambda-python/issues/5785))
+
 ## Maintenance
 
+* **ci:** new pre-release 3.4.1a1 ([#5789](https://github.com/aws-powertools/powertools-lambda-python/issues/5789))
 * **ci:** new pre-release 3.4.1a0 ([#5783](https://github.com/aws-powertools/powertools-lambda-python/issues/5783))
+* **deps:** bump jinja2 from 3.1.4 to 3.1.5 in /docs ([#5787](https://github.com/aws-powertools/powertools-lambda-python/issues/5787))
+* **deps-dev:** bump jinja2 from 3.1.4 to 3.1.5 ([#5788](https://github.com/aws-powertools/powertools-lambda-python/issues/5788))
 * **deps-dev:** bump boto3-stubs from 1.35.85 to 1.35.86 ([#5780](https://github.com/aws-powertools/powertools-lambda-python/issues/5780))
 * **deps-dev:** bump mypy from 1.13.0 to 1.14.0 ([#5779](https://github.com/aws-powertools/powertools-lambda-python/issues/5779))
+* **deps-dev:** bump boto3-stubs from 1.35.86 to 1.35.87 ([#5786](https://github.com/aws-powertools/powertools-lambda-python/issues/5786))
 
 
 <a name="v3.4.0"></a>
