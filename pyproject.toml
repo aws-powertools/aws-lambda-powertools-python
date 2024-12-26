@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "aws_lambda_powertools"
-version = "3.4.1a2"
+version = "3.4.1a3"
 description = "Powertools for AWS Lambda (Python) is a developer toolkit to implement Serverless best practices and increase developer velocity."
 authors = ["Amazon Web Services"]
 include = ["aws_lambda_powertools/py.typed", "THIRD-PARTY-LICENSES"]
@@ -77,7 +77,7 @@ aws-cdk-lib = "^2.173.2"
 "aws-cdk.aws-apigatewayv2-integrations-alpha" = "^2.38.1-alpha.0"
 "aws-cdk.aws-apigatewayv2-authorizers-alpha" = "^2.38.1-alpha.0"
 "aws-cdk.aws-lambda-python-alpha" = "^2.173.2a0"
-"cdklabs.generative-ai-cdk-constructs" = "^0.1.287"
+"cdklabs.generative-ai-cdk-constructs" = "^0.1.288"
 pytest-benchmark = "^4.0.0"
 types-requests = "^2.31.0"
 typing-extensions = "^4.12.2"
