@@ -14,6 +14,7 @@
 
 ## Maintenance
 
+* **ci:** new pre-release 3.4.1a2 ([#5791](https://github.com/aws-powertools/powertools-lambda-python/issues/5791))
 * **ci:** new pre-release 3.4.1a1 ([#5789](https://github.com/aws-powertools/powertools-lambda-python/issues/5789))
 * **ci:** new pre-release 3.4.1a0 ([#5783](https://github.com/aws-powertools/powertools-lambda-python/issues/5783))
 * **deps:** bump jinja2 from 3.1.4 to 3.1.5 in /docs ([#5787](https://github.com/aws-powertools/powertools-lambda-python/issues/5787))
