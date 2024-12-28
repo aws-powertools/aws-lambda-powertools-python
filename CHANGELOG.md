@@ -10,20 +10,22 @@
 
 ## Documentation
 
+* **home:** fix date typo and shorten message. ([#5798](https://github.com/aws-powertools/powertools-lambda-python/issues/5798))
 * **layer:** update layer version number - v3.4.0 ([#5785](https://github.com/aws-powertools/powertools-lambda-python/issues/5785))
 
 ## Maintenance
 
+* **ci:** new pre-release 3.4.1a4 ([#5796](https://github.com/aws-powertools/powertools-lambda-python/issues/5796))
 * **ci:** new pre-release 3.4.1a0 ([#5783](https://github.com/aws-powertools/powertools-lambda-python/issues/5783))
 * **ci:** new pre-release 3.4.1a3 ([#5794](https://github.com/aws-powertools/powertools-lambda-python/issues/5794))
 * **ci:** new pre-release 3.4.1a2 ([#5791](https://github.com/aws-powertools/powertools-lambda-python/issues/5791))
 * **ci:** new pre-release 3.4.1a1 ([#5789](https://github.com/aws-powertools/powertools-lambda-python/issues/5789))
 * **deps:** bump jinja2 from 3.1.4 to 3.1.5 in /docs ([#5787](https://github.com/aws-powertools/powertools-lambda-python/issues/5787))
 * **deps-dev:** bump boto3-stubs from 1.35.86 to 1.35.87 ([#5786](https://github.com/aws-powertools/powertools-lambda-python/issues/5786))
-* **deps-dev:** bump jinja2 from 3.1.4 to 3.1.5 ([#5788](https://github.com/aws-powertools/powertools-lambda-python/issues/5788))
 * **deps-dev:** bump boto3-stubs from 1.35.85 to 1.35.86 ([#5780](https://github.com/aws-powertools/powertools-lambda-python/issues/5780))
 * **deps-dev:** bump mypy from 1.13.0 to 1.14.0 ([#5779](https://github.com/aws-powertools/powertools-lambda-python/issues/5779))
 * **deps-dev:** bump cdklabs-generative-ai-cdk-constructs from 0.1.287 to 0.1.288 ([#5793](https://github.com/aws-powertools/powertools-lambda-python/issues/5793))
+* **deps-dev:** bump jinja2 from 3.1.4 to 3.1.5 ([#5788](https://github.com/aws-powertools/powertools-lambda-python/issues/5788))
 
 
 <a name="v3.4.0"></a>
