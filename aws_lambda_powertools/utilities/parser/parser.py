@@ -110,7 +110,7 @@ def event_parser(
 
     logger.debug(f"Calling handler {handler.__name__}")
     return handler(parsed_event, context, **kwargs)
-  
+
 
 @overload
 def parse(event: dict[str, Any], model: type[T]) -> T: ...  # pragma: no cover
@@ -189,7 +189,7 @@ def parse(event: dict[str, Any], model: type[T], envelope: type[Envelope] | None
         adapter = _retrieve_or_set_model_from_cache(model=model)
 
         logger.debug("Parsing and validating event model; no envelope used")
-        
+
         return _parse_and_validate_event(data=event, adapter=adapter)
 
     # Pydantic raises PydanticSchemaGenerationError when the model is not a Pydantic model

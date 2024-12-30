@@ -4,8 +4,8 @@ from typing import Any, Dict, Literal, Union
 
 import pydantic
 import pytest
+from pydantic import BaseModel, ValidationError
 from typing_extensions import Annotated
-from pydantic import ValidationError, BaseModel
 
 from aws_lambda_powertools.utilities.parser import event_parser, exceptions, parse
 from aws_lambda_powertools.utilities.parser.envelopes.sqs import SqsEnvelope
@@ -130,6 +130,7 @@ def test_parser_event_with_payload_not_match_schema(dummy_event, dummy_schema):
     with pytest.raises(ValidationError):
         handler({"project": "powertools"}, LambdaContext())
 
+
 def test_parser_validation_error():
     class StrictModel(pydantic.BaseModel):
         age: int
@@ -143,8 +144,9 @@ def test_parser_validation_error():
 
     with pytest.raises(ValidationError) as exc_info:
         handle_validation(event=invalid_event, context=LambdaContext())
-    
+
     assert "age" in str(exc_info.value)  # Verify the error mentions the invalid field
+
 
 def test_parser_type_value_errors():
     class CustomModel(pydantic.BaseModel):
@@ -158,7 +160,7 @@ def test_parser_type_value_errors():
     # Test both TypeError and ValueError scenarios
     invalid_events = [
         {"timestamp": "invalid-date", "status": "SUCCESS"},  # Will raise ValueError for invalid date
-        {"timestamp": datetime.now(), "status": "INVALID"}   # Will raise ValueError for invalid literal
+        {"timestamp": datetime.now(), "status": "INVALID"},  # Will raise ValueError for invalid literal
     ]
 
     for invalid_event in invalid_events:
@@ -168,16 +170,18 @@ def test_parser_type_value_errors():
 
 def test_event_parser_no_model():
     with pytest.raises(exceptions.InvalidModelTypeError):
+
         @event_parser
         def handler(event, _):
             return event
-        
+
         handler({}, None)
 
 
 class Shopping(BaseModel):
     id: int
     description: str
+
 
 def test_event_parser_invalid_event():
     event = {"id": "forgot-the-id", "description": "really nice blouse"}  # 'id' is invalid
@@ -227,6 +231,7 @@ def test_parser_unions(test_input, expected):
 
     ret = handler(test_input, None)
     assert ret == expected
+
 
 @pytest.mark.parametrize(
     "test_input,expected",

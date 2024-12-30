@@ -26,6 +26,40 @@ def test_direct_resolver():
     assert result == "my identifier"
 
 
+def test_direct_resolver_with_parent_name():
+    # Check whether we can handle an example appsync direct resolver
+    mock_event = load_event("appSyncDirectResolver.json")
+
+    app = AppSyncResolver()
+
+    @app.resolver(field_name="createSomething", type_name="Mutation")
+    def create_something(id: str):  # noqa AA03 VNE003
+        assert app.lambda_context == {}
+        return id
+
+    # Call the implicit handler
+    result = app(mock_event, {})
+
+    assert result == "my identifier"
+
+
+def test_custom_resolver_with_fields():
+    # Check whether we can handle an example appsync with custom resolver
+    mock_event = load_event("appSyncCustomResolverEvent.json")
+
+    app = AppSyncResolver()
+
+    @app.resolver(field_name="locations", type_name="Merchant")
+    def create_something(page: int):  # noqa AA03 VNE003
+        assert app.lambda_context == {}
+        return page
+
+    # Call the implicit handler
+    result = app(mock_event, {})
+
+    assert result == 2
+
+
 def test_amplify_resolver():
     # Check whether we can handle an example appsync resolver
     mock_event = load_event("appSyncResolverEvent.json")
