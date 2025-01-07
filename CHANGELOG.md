@@ -33,14 +33,14 @@
 * **deps-dev:** bump boto3-stubs from 1.35.89 to 1.35.90 ([#5809](https://github.com/aws-powertools/powertools-lambda-python/issues/5809))
 * **deps-dev:** bump cfn-lint from 1.22.2 to 1.22.3 ([#5810](https://github.com/aws-powertools/powertools-lambda-python/issues/5810))
 * **deps-dev:** bump jinja2 from 3.1.4 to 3.1.5 ([#5788](https://github.com/aws-powertools/powertools-lambda-python/issues/5788))
-* **deps-dev:** bump aws-cdk-lib from 2.173.2 to 2.173.4 ([#5803](https://github.com/aws-powertools/powertools-lambda-python/issues/5803))
+* **deps-dev:** bump aws-cdk from 2.173.2 to 2.173.4 ([#5802](https://github.com/aws-powertools/powertools-lambda-python/issues/5802))
 * **deps-dev:** bump boto3-stubs from 1.35.86 to 1.35.87 ([#5786](https://github.com/aws-powertools/powertools-lambda-python/issues/5786))
 * **deps-dev:** bump aws-cdk-aws-lambda-python-alpha from 2.173.2a0 to 2.173.4a0 ([#5811](https://github.com/aws-powertools/powertools-lambda-python/issues/5811))
 * **deps-dev:** bump cdklabs-generative-ai-cdk-constructs from 0.1.287 to 0.1.288 ([#5793](https://github.com/aws-powertools/powertools-lambda-python/issues/5793))
 * **deps-dev:** bump boto3-stubs from 1.35.85 to 1.35.86 ([#5780](https://github.com/aws-powertools/powertools-lambda-python/issues/5780))
 * **deps-dev:** bump mypy from 1.13.0 to 1.14.0 ([#5779](https://github.com/aws-powertools/powertools-lambda-python/issues/5779))
 * **deps-dev:** bump boto3-stubs from 1.35.90 to 1.35.92 ([#5827](https://github.com/aws-powertools/powertools-lambda-python/issues/5827))
-* **deps-dev:** bump aws-cdk from 2.173.2 to 2.173.4 ([#5802](https://github.com/aws-powertools/powertools-lambda-python/issues/5802))
+* **deps-dev:** bump aws-cdk-lib from 2.173.2 to 2.173.4 ([#5803](https://github.com/aws-powertools/powertools-lambda-python/issues/5803))
 
 
 <a name="v3.4.0"></a>
