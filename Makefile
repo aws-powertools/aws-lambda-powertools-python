@@ -6,7 +6,7 @@ target:
 
 dev:
 	pip install --upgrade pip pre-commit poetry
-	@$(MAKE) dev-version-plugin
+#	@$(MAKE) dev-version-plugin
 	poetry install --extras "all redis datamasking"
 	pre-commit install
 
