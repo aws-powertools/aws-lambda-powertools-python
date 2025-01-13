@@ -10,6 +10,11 @@ dev:
 	poetry install --extras "all redis datamasking"
 	pre-commit install
 
+dev-quality-code:
+	pip install --upgrade pip pre-commit poetry
+	poetry install --extras "all redis datamasking"
+	pre-commit install
+
 dev-gitpod:
 	pip install --upgrade pip poetry
 	poetry install --extras "all redis datamasking"
