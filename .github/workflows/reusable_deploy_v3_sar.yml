@@ -86,11 +86,12 @@ jobs:
           artifact_name: ${{ inputs.source_code_artifact_name }}
 
 
-      - name: AWS credentials
-        uses: aws-actions/configure-aws-credentials@5fd3084fc36e372ff1fff382a39b10d03659f355 # v2.2.0
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@e3dd6a429d7300a6a4c196c26e071d42e0343502 # v4.0.2
         with:
           aws-region: ${{ env.AWS_REGION }}
           role-to-assume: ${{ secrets.AWS_LAYERS_ROLE_ARN }}
+          mask-aws-account-id: true
 
       # NOTE
       # We connect to Layers account to log our intent to publish a SAR Layer

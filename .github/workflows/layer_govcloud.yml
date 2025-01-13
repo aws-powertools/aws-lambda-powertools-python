@@ -1,3 +1,5 @@
+name: Layer Deployment (GovCloud)
+
 # GovCloud Layer Publish
 # ---
 # This workflow publishes a specific layer version in an AWS account based on the environment input.
@@ -32,8 +34,10 @@ on:
         type: string
         required: true
 
-name: Layer Deployment (GovCloud)
 run-name: Layer Deployment (GovCloud) - ${{ inputs.environment }}
+
+permissions:
+  contents: read
 
 jobs:
   download:
