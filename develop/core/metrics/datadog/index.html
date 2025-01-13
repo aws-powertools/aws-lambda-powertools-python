@@ -2084,14 +2084,14 @@ You're not viewing the latest version.
 <span class="normal">6</span>
 <span class="normal">7</span>
 <span class="normal">8</span>
-<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">aws_lambda_powertools.metrics.provider.datadog</span> <span class="kn">import</span> <span class="n">DatadogMetrics</span>
-<span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.typing</span> <span class="kn">import</span> <span class="n">LambdaContext</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.metrics.provider.datadog</span><span class="w"> </span><span class="kn">import</span> <span class="n">DatadogMetrics</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">LambdaContext</span>
 
 <span class="hll"><span class="n">metrics</span> <span class="o">=</span> <span class="n">DatadogMetrics</span><span class="p">()</span>
 </span>
 
 <span class="hll"><span class="nd">@metrics</span><span class="o">.</span><span class="n">log_metrics</span>  <span class="c1"># ensures metrics are flushed upon request completion/failure</span>
-</span><span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">LambdaContext</span><span class="p">):</span>
+</span><span class="k">def</span><span class="w"> </span><span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">LambdaContext</span><span class="p">):</span>
 <span class="hll">    <span class="n">metrics</span><span class="o">.</span><span class="n">add_metric</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;SuccessfulBooking&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
@@ -2106,16 +2106,16 @@ You're not viewing the latest version.
 <span class="normal"> 8</span>
 <span class="normal"> 9</span>
 <span class="normal">10</span>
-<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">import</span> <span class="nn">time</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
 
-<span class="kn">from</span> <span class="nn">aws_lambda_powertools.metrics.provider.datadog</span> <span class="kn">import</span> <span class="n">DatadogMetrics</span>
-<span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.typing</span> <span class="kn">import</span> <span class="n">LambdaContext</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.metrics.provider.datadog</span><span class="w"> </span><span class="kn">import</span> <span class="n">DatadogMetrics</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">LambdaContext</span>
 
 <span class="n">metrics</span> <span class="o">=</span> <span class="n">DatadogMetrics</span><span class="p">()</span>
 
 
 <span class="nd">@metrics</span><span class="o">.</span><span class="n">log_metrics</span>  <span class="c1"># ensures metrics are flushed upon request completion/failure</span>
-<span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">LambdaContext</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">LambdaContext</span><span class="p">):</span>
 <span class="hll">    <span class="n">metrics</span><span class="o">.</span><span class="n">add_metric</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;SuccessfulBooking&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">timestamp</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()))</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
@@ -2141,14 +2141,14 @@ You're not viewing the latest version.
 <span class="normal">6</span>
 <span class="normal">7</span>
 <span class="normal">8</span>
-<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">aws_lambda_powertools.metrics.provider.datadog</span> <span class="kn">import</span> <span class="n">DatadogMetrics</span>
-<span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.typing</span> <span class="kn">import</span> <span class="n">LambdaContext</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.metrics.provider.datadog</span><span class="w"> </span><span class="kn">import</span> <span class="n">DatadogMetrics</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">LambdaContext</span>
 
 <span class="n">metrics</span> <span class="o">=</span> <span class="n">DatadogMetrics</span><span class="p">()</span>
 
 
 <span class="nd">@metrics</span><span class="o">.</span><span class="n">log_metrics</span>  <span class="c1"># ensures metrics are flushed upon request completion/failure</span>
-<span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">LambdaContext</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">LambdaContext</span><span class="p">):</span>
 <span class="hll">    <span class="n">metrics</span><span class="o">.</span><span class="n">add_metric</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;SuccessfulBooking&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">tag1</span><span class="o">=</span><span class="s2">&quot;powertools&quot;</span><span class="p">,</span> <span class="n">tag2</span><span class="o">=</span><span class="s2">&quot;python&quot;</span><span class="p">)</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
@@ -2173,15 +2173,15 @@ You're not viewing the latest version.
 <span class="normal"> 7</span>
 <span class="normal"> 8</span>
 <span class="normal"> 9</span>
-<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">aws_lambda_powertools.metrics.provider.datadog</span> <span class="kn">import</span> <span class="n">DatadogMetrics</span>
-<span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.typing</span> <span class="kn">import</span> <span class="n">LambdaContext</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.metrics.provider.datadog</span><span class="w"> </span><span class="kn">import</span> <span class="n">DatadogMetrics</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">LambdaContext</span>
 
 <span class="n">metrics</span> <span class="o">=</span> <span class="n">DatadogMetrics</span><span class="p">()</span>
 <span class="hll"><span class="n">metrics</span><span class="o">.</span><span class="n">set_default_tags</span><span class="p">(</span><span class="n">tag1</span><span class="o">=</span><span class="s2">&quot;powertools&quot;</span><span class="p">,</span> <span class="n">tag2</span><span class="o">=</span><span class="s2">&quot;python&quot;</span><span class="p">)</span>
 </span>
 
 <span class="nd">@metrics</span><span class="o">.</span><span class="n">log_metrics</span>  <span class="c1"># ensures metrics are flushed upon request completion/failure</span>
-<span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">LambdaContext</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">LambdaContext</span><span class="p">):</span>
     <span class="n">metrics</span><span class="o">.</span><span class="n">add_metric</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;SuccessfulBooking&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -2196,8 +2196,8 @@ You're not viewing the latest version.
 <span class="normal"> 8</span>
 <span class="normal"> 9</span>
 <span class="normal">10</span>
-<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">aws_lambda_powertools.metrics.provider.datadog</span> <span class="kn">import</span> <span class="n">DatadogMetrics</span>
-<span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.typing</span> <span class="kn">import</span> <span class="n">LambdaContext</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.metrics.provider.datadog</span><span class="w"> </span><span class="kn">import</span> <span class="n">DatadogMetrics</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">LambdaContext</span>
 
 <span class="n">metrics</span> <span class="o">=</span> <span class="n">DatadogMetrics</span><span class="p">()</span>
 
@@ -2205,7 +2205,7 @@ You're not viewing the latest version.
 </span>
 
 <span class="hll"><span class="nd">@metrics</span><span class="o">.</span><span class="n">log_metrics</span><span class="p">(</span><span class="n">default_tags</span><span class="o">=</span><span class="n">default_tags</span><span class="p">)</span>  <span class="c1"># ensures metrics are flushed upon request completion/failure</span>
-</span><span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">LambdaContext</span><span class="p">):</span>
+</span><span class="k">def</span><span class="w"> </span><span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">LambdaContext</span><span class="p">):</span>
     <span class="n">metrics</span><span class="o">.</span><span class="n">add_metric</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;SuccessfulBooking&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -2225,14 +2225,14 @@ You're not viewing the latest version.
 <span class="normal">6</span>
 <span class="normal">7</span>
 <span class="normal">8</span>
-<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">aws_lambda_powertools.metrics.provider.datadog</span> <span class="kn">import</span> <span class="n">DatadogMetrics</span>
-<span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.typing</span> <span class="kn">import</span> <span class="n">LambdaContext</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.metrics.provider.datadog</span><span class="w"> </span><span class="kn">import</span> <span class="n">DatadogMetrics</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">LambdaContext</span>
 
 <span class="n">metrics</span> <span class="o">=</span> <span class="n">DatadogMetrics</span><span class="p">()</span>
 
 
 <span class="hll"><span class="nd">@metrics</span><span class="o">.</span><span class="n">log_metrics</span>  <span class="c1"># ensures metrics are flushed upon request completion/failure</span>
-</span><span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">LambdaContext</span><span class="p">):</span>
+</span><span class="k">def</span><span class="w"> </span><span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">LambdaContext</span><span class="p">):</span>
     <span class="n">metrics</span><span class="o">.</span><span class="n">add_metric</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;SuccessfulBooking&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">tag1</span><span class="o">=</span><span class="s2">&quot;powertools&quot;</span><span class="p">,</span> <span class="n">tag2</span><span class="o">=</span><span class="s2">&quot;python&quot;</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -2269,14 +2269,14 @@ You're not viewing the latest version.
 <span class="normal"> 7</span>
 <span class="normal"> 8</span>
 <span class="normal"> 9</span>
-<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">aws_lambda_powertools.metrics.provider.datadog</span> <span class="kn">import</span> <span class="n">DatadogMetrics</span>
-<span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.typing</span> <span class="kn">import</span> <span class="n">LambdaContext</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.metrics.provider.datadog</span><span class="w"> </span><span class="kn">import</span> <span class="n">DatadogMetrics</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">LambdaContext</span>
 
 <span class="n">metrics</span> <span class="o">=</span> <span class="n">DatadogMetrics</span><span class="p">()</span>
 
 
 <span class="hll"><span class="nd">@metrics</span><span class="o">.</span><span class="n">log_metrics</span><span class="p">(</span><span class="n">raise_on_empty_metrics</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># ensures metrics are flushed upon request completion/failure</span>
-</span><span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">LambdaContext</span><span class="p">):</span>
+</span><span class="k">def</span><span class="w"> </span><span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">LambdaContext</span><span class="p">):</span>
     <span class="c1"># no metrics being created will now raise SchemaValidationError</span>
     <span class="k">return</span>
 </code></pre></div></td></tr></table></div>
@@ -2297,14 +2297,14 @@ You're not viewing the latest version.
 <span class="normal">6</span>
 <span class="normal">7</span>
 <span class="normal">8</span>
-<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">aws_lambda_powertools.metrics.provider.datadog</span> <span class="kn">import</span> <span class="n">DatadogMetrics</span>
-<span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.typing</span> <span class="kn">import</span> <span class="n">LambdaContext</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.metrics.provider.datadog</span><span class="w"> </span><span class="kn">import</span> <span class="n">DatadogMetrics</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">LambdaContext</span>
 
 <span class="n">metrics</span> <span class="o">=</span> <span class="n">DatadogMetrics</span><span class="p">()</span>
 
 
 <span class="hll"><span class="nd">@metrics</span><span class="o">.</span><span class="n">log_metrics</span><span class="p">(</span><span class="n">capture_cold_start_metric</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</span><span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">LambdaContext</span><span class="p">):</span>
+</span><span class="k">def</span><span class="w"> </span><span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">LambdaContext</span><span class="p">):</span>
     <span class="k">return</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -2388,19 +2388,19 @@ You're not viewing the latest version.
 <span class="normal">14</span>
 <span class="normal">15</span>
 <span class="normal">16</span>
-<span class="normal">17</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">aws_lambda_powertools.metrics.provider.datadog</span> <span class="kn">import</span> <span class="n">DatadogMetrics</span>
-<span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.typing</span> <span class="kn">import</span> <span class="n">LambdaContext</span>
+<span class="normal">17</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.metrics.provider.datadog</span><span class="w"> </span><span class="kn">import</span> <span class="n">DatadogMetrics</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">LambdaContext</span>
 
 <span class="n">metrics</span> <span class="o">=</span> <span class="n">DatadogMetrics</span><span class="p">()</span>
 
 
-<span class="k">def</span> <span class="nf">book_flight</span><span class="p">(</span><span class="n">flight_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">book_flight</span><span class="p">(</span><span class="n">flight_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="c1"># logic to book flight</span>
     <span class="o">...</span>
     <span class="n">metrics</span><span class="o">.</span><span class="n">add_metric</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;SuccessfulBooking&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">LambdaContext</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">LambdaContext</span><span class="p">):</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">book_flight</span><span class="p">(</span><span class="n">flight_id</span><span class="o">=</span><span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;flight_id&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">))</span>
     <span class="k">finally</span><span class="p">:</span>
@@ -2420,14 +2420,14 @@ You're not viewing the latest version.
 <span class="normal">6</span>
 <span class="normal">7</span>
 <span class="normal">8</span>
-<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">aws_lambda_powertools.metrics.provider.datadog</span> <span class="kn">import</span> <span class="n">DatadogMetrics</span>
-<span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.typing</span> <span class="kn">import</span> <span class="n">LambdaContext</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.metrics.provider.datadog</span><span class="w"> </span><span class="kn">import</span> <span class="n">DatadogMetrics</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">LambdaContext</span>
 
 <span class="hll"><span class="n">metrics</span> <span class="o">=</span> <span class="n">DatadogMetrics</span><span class="p">(</span><span class="n">flush_to_log</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </span>
 
 <span class="nd">@metrics</span><span class="o">.</span><span class="n">log_metrics</span>  <span class="c1"># ensures metrics are flushed upon request completion/failure</span>
-<span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">LambdaContext</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">LambdaContext</span><span class="p">):</span>
     <span class="n">metrics</span><span class="o">.</span><span class="n">add_metric</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;SuccessfulBooking&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -2482,14 +2482,14 @@ You're not viewing the latest version.
 <span class="normal">10</span>
 <span class="normal">11</span>
 <span class="normal">12</span>
-<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">import</span> <span class="nn">pytest</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">pytest</span>
 
-<span class="kn">from</span> <span class="nn">aws_lambda_powertools.metrics.provider</span> <span class="kn">import</span> <span class="n">cold_start</span>
-<span class="kn">from</span> <span class="nn">aws_lambda_powertools.metrics.provider.datadog</span> <span class="kn">import</span> <span class="n">DatadogMetrics</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.metrics.provider</span><span class="w"> </span><span class="kn">import</span> <span class="n">cold_start</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.metrics.provider.datadog</span><span class="w"> </span><span class="kn">import</span> <span class="n">DatadogMetrics</span>
 
 
 <span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s2">&quot;function&quot;</span><span class="p">,</span> <span class="n">autouse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">reset_metric_set</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">reset_metric_set</span><span class="p">():</span>
     <span class="c1"># Clear out every metric data prior to every test</span>
     <span class="n">metrics</span> <span class="o">=</span> <span class="n">DatadogMetrics</span><span class="p">()</span>
     <span class="n">metrics</span><span class="o">.</span><span class="n">clear_metrics</span><span class="p">()</span>
@@ -2509,10 +2509,10 @@ You're not viewing the latest version.
 <span class="normal">6</span>
 <span class="normal">7</span>
 <span class="normal">8</span>
-<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">import</span> <span class="nn">add_datadog_metrics</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">add_datadog_metrics</span>
 
 
-<span class="k">def</span> <span class="nf">test_log_metrics</span><span class="p">(</span><span class="n">capsys</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_log_metrics</span><span class="p">(</span><span class="n">capsys</span><span class="p">):</span>
     <span class="n">add_datadog_metrics</span><span class="o">.</span><span class="n">lambda_handler</span><span class="p">({},</span> <span class="p">{})</span>
 
 <span class="hll">    <span class="n">log</span> <span class="o">=</span> <span class="n">capsys</span><span class="o">.</span><span class="n">readouterr</span><span class="p">()</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>  <span class="c1"># remove any extra line</span>
@@ -2529,14 +2529,14 @@ You're not viewing the latest version.
 <span class="normal">6</span>
 <span class="normal">7</span>
 <span class="normal">8</span>
-<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">aws_lambda_powertools.metrics.provider.datadog</span> <span class="kn">import</span> <span class="n">DatadogMetrics</span>
-<span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.typing</span> <span class="kn">import</span> <span class="n">LambdaContext</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.metrics.provider.datadog</span><span class="w"> </span><span class="kn">import</span> <span class="n">DatadogMetrics</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">LambdaContext</span>
 
 <span class="n">metrics</span> <span class="o">=</span> <span class="n">DatadogMetrics</span><span class="p">()</span>
 
 
 <span class="nd">@metrics</span><span class="o">.</span><span class="n">log_metrics</span>  <span class="c1"># ensures metrics are flushed upon request completion/failure</span>
-<span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">LambdaContext</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">LambdaContext</span><span class="p">):</span>
     <span class="n">metrics</span><span class="o">.</span><span class="n">add_metric</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;SuccessfulBooking&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 </div>

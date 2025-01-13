@@ -2960,14 +2960,14 @@ Release complete : milestone, m6, 10:31,2m</code></pre>
 <span class="normal">15</span>
 <span class="normal">16</span>
 <span class="normal">17</span>
-<span class="normal">18</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">EventHandlerStack</span><span class="p">(</span><span class="n">BaseInfrastructure</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">create_resources</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="normal">18</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">EventHandlerStack</span><span class="p">(</span><span class="n">BaseInfrastructure</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_resources</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">functions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_lambda_functions</span><span class="p">()</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_create_alb</span><span class="p">(</span><span class="n">function</span><span class="o">=</span><span class="n">functions</span><span class="p">[</span><span class="s2">&quot;AlbHandler&quot;</span><span class="p">])</span>
         <span class="o">...</span>
 
-    <span class="k">def</span> <span class="nf">_create_alb</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function</span><span class="p">:</span> <span class="n">Function</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_create_alb</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function</span><span class="p">:</span> <span class="n">Function</span><span class="p">):</span>
         <span class="n">vpc</span> <span class="o">=</span> <span class="n">ec2</span><span class="o">.</span><span class="n">Vpc</span><span class="o">.</span><span class="n">from_lookup</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">stack</span><span class="p">,</span>
             <span class="s2">&quot;VPC&quot;</span><span class="p">,</span>
@@ -2999,13 +2999,13 @@ Release complete : milestone, m6, 10:31,2m</code></pre>
 <span class="normal">15</span>
 <span class="normal">16</span>
 <span class="normal">17</span>
-<span class="normal">18</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">aws_lambda_powertools.event_handler</span> <span class="kn">import</span> <span class="n">ALBResolver</span><span class="p">,</span> <span class="n">Response</span><span class="p">,</span> <span class="n">content_types</span>
+<span class="normal">18</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.event_handler</span><span class="w"> </span><span class="kn">import</span> <span class="n">ALBResolver</span><span class="p">,</span> <span class="n">Response</span><span class="p">,</span> <span class="n">content_types</span>
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">ALBResolver</span><span class="p">()</span>
 
 
 <span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/todos&quot;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">hello</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">hello</span><span class="p">():</span>
     <span class="k">return</span> <span class="n">Response</span><span class="p">(</span>
         <span class="n">status_code</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
         <span class="n">content_type</span><span class="o">=</span><span class="n">content_types</span><span class="o">.</span><span class="n">TEXT_PLAIN</span><span class="p">,</span>
@@ -3015,7 +3015,7 @@ Release complete : milestone, m6, 10:31,2m</code></pre>
     <span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">app</span><span class="o">.</span><span class="n">resolve</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 <h4 id="2-deploydelete-infrastructure-when-tests-run">2. Deploy/Delete infrastructure when tests run<a class="headerlink" href="#2-deploydelete-infrastructure-when-tests-run" title="Permanent link">&para;</a></h4>
@@ -3042,13 +3042,13 @@ Release complete : milestone, m6, 10:31,2m</code></pre>
 <span class="normal">16</span>
 <span class="normal">17</span>
 <span class="normal">18</span>
-<span class="normal">19</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">import</span> <span class="nn">pytest</span>
+<span class="normal">19</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">pytest</span>
 
-<span class="kn">from</span> <span class="nn">tests.e2e.event_handler.infrastructure</span> <span class="kn">import</span> <span class="n">EventHandlerStack</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tests.e2e.event_handler.infrastructure</span><span class="w"> </span><span class="kn">import</span> <span class="n">EventHandlerStack</span>
 
 
 <span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">autouse</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">scope</span><span class="o">=</span><span class="s2">&quot;module&quot;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">infrastructure</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">infrastructure</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Setup and teardown logic for E2E test infrastructure</span>
 
 <span class="sd">    Yields</span>
@@ -3079,13 +3079,13 @@ Release complete : milestone, m6, 10:31,2m</code></pre>
 <span class="normal"> 9</span>
 <span class="normal">10</span>
 <span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
-<span class="k">def</span> <span class="nf">alb_basic_listener_endpoint</span><span class="p">(</span><span class="n">infrastructure</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">alb_basic_listener_endpoint</span><span class="p">(</span><span class="n">infrastructure</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="n">dns_name</span> <span class="o">=</span> <span class="n">infrastructure</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;ALBDnsName&quot;</span><span class="p">)</span>
     <span class="n">port</span> <span class="o">=</span> <span class="n">infrastructure</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;ALBBasicListenerPort&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
     <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;http://</span><span class="si">{</span><span class="n">dns_name</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">port</span><span class="si">}</span><span class="s2">&quot;</span>
 
 
-<span class="k">def</span> <span class="nf">test_alb_headers_serializer</span><span class="p">(</span><span class="n">alb_basic_listener_endpoint</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_alb_headers_serializer</span><span class="p">(</span><span class="n">alb_basic_listener_endpoint</span><span class="p">):</span>
     <span class="c1"># GIVEN</span>
     <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">alb_basic_listener_endpoint</span><span class="si">}</span><span class="s2">/todos&quot;</span>
     <span class="o">...</span>
@@ -3137,7 +3137,7 @@ Release complete : milestone, m6, 10:31,2m</code></pre>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
-<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">tests.e2e.event_handler.infrastructure</span> <span class="kn">import</span> <span class="n">EventHandlerStack</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">tests.e2e.event_handler.infrastructure</span><span class="w"> </span><span class="kn">import</span> <span class="n">EventHandlerStack</span>
 <span class="n">stack</span> <span class="o">=</span> <span class="n">EventHandlerStack</span><span class="p">()</span>
 <span class="n">stack</span><span class="o">.</span><span class="n">create_resources</span><span class="p">()</span>
 <span class="n">stack</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">synth</span><span class="p">()</span>

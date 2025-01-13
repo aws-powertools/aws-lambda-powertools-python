@@ -2486,9 +2486,9 @@ by using the <code>event_source</code> decorator.</p>
 <span class="normal">3</span>
 <span class="normal">4</span>
 <span class="normal">5</span>
-<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="hll"><span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.data_classes</span> <span class="kn">import</span> <span class="n">APIGatewayProxyEvent</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="hll"><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.data_classes</span><span class="w"> </span><span class="kn">import</span> <span class="n">APIGatewayProxyEvent</span>
 </span>
-<span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
 <span class="hll">    <span class="n">event</span> <span class="o">=</span> <span class="n">APIGatewayProxyEvent</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
 </span>    <span class="k">if</span> <span class="s1">&#39;helloworld&#39;</span> <span class="ow">in</span> <span class="n">event</span><span class="o">.</span><span class="n">path</span> <span class="ow">and</span> <span class="n">event</span><span class="o">.</span><span class="n">http_method</span> <span class="o">==</span> <span class="s1">&#39;GET&#39;</span><span class="p">:</span>
         <span class="n">do_something_with</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">body</span><span class="p">,</span> <span class="n">user</span><span class="p">)</span>
@@ -2505,10 +2505,10 @@ by using the <code>event_source</code> decorator.</p>
 <span class="normal">3</span>
 <span class="normal">4</span>
 <span class="normal">5</span>
-<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="hll"><span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.data_classes</span> <span class="kn">import</span> <span class="n">event_source</span><span class="p">,</span> <span class="n">APIGatewayProxyEvent</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="hll"><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.data_classes</span><span class="w"> </span><span class="kn">import</span> <span class="n">event_source</span><span class="p">,</span> <span class="n">APIGatewayProxyEvent</span>
 </span>
 <span class="hll"><span class="nd">@event_source</span><span class="p">(</span><span class="n">data_class</span><span class="o">=</span><span class="n">APIGatewayProxyEvent</span><span class="p">)</span>
-</span><span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">APIGatewayProxyEvent</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+</span><span class="k">def</span><span class="w"> </span><span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">APIGatewayProxyEvent</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
     <span class="k">if</span> <span class="s1">&#39;helloworld&#39;</span> <span class="ow">in</span> <span class="n">event</span><span class="o">.</span><span class="n">path</span> <span class="ow">and</span> <span class="n">event</span><span class="o">.</span><span class="n">http_method</span> <span class="o">==</span> <span class="s1">&#39;GET&#39;</span><span class="p">:</span>
         <span class="n">do_something_with</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">body</span><span class="p">,</span> <span class="n">user</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
@@ -2526,13 +2526,13 @@ by using the <code>event_source</code> decorator.</p>
 <span class="normal">5</span>
 <span class="normal">6</span>
 <span class="normal">7</span>
-<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.data_classes</span> <span class="kn">import</span> <span class="n">event_source</span><span class="p">,</span> <span class="n">APIGatewayProxyEvent</span>
-<span class="kn">from</span> <span class="nn">aws_lambda_powertools.logging.logger</span> <span class="kn">import</span> <span class="n">Logger</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.data_classes</span><span class="w"> </span><span class="kn">import</span> <span class="n">event_source</span><span class="p">,</span> <span class="n">APIGatewayProxyEvent</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.logging.logger</span><span class="w"> </span><span class="kn">import</span> <span class="n">Logger</span>
 
 <span class="hll"><span class="n">logger</span> <span class="o">=</span> <span class="n">Logger</span><span class="p">(</span><span class="n">service</span><span class="o">=</span><span class="s2">&quot;hello_logs&quot;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="s2">&quot;DEBUG&quot;</span><span class="p">)</span>
 </span>
 <span class="nd">@event_source</span><span class="p">(</span><span class="n">data_class</span><span class="o">=</span><span class="n">APIGatewayProxyEvent</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">APIGatewayProxyEvent</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">APIGatewayProxyEvent</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
 <span class="hll">    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
@@ -2712,16 +2712,16 @@ for more details.</p>
 <span class="normal">11</span>
 <span class="normal">12</span>
 <span class="normal">13</span>
-<span class="normal">14</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span>
+<span class="normal">14</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span>
 
-<span class="kn">from</span> <span class="nn">aws_lambda_powertools</span> <span class="kn">import</span> <span class="n">Logger</span>
-<span class="hll"><span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.data_classes</span> <span class="kn">import</span> <span class="n">event_source</span>
-</span><span class="hll"><span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.data_classes.active_mq_event</span> <span class="kn">import</span> <span class="n">ActiveMQEvent</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">Logger</span>
+<span class="hll"><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.data_classes</span><span class="w"> </span><span class="kn">import</span> <span class="n">event_source</span>
+</span><span class="hll"><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.data_classes.active_mq_event</span><span class="w"> </span><span class="kn">import</span> <span class="n">ActiveMQEvent</span>
 </span>
 <span class="n">logger</span> <span class="o">=</span> <span class="n">Logger</span><span class="p">()</span>
 
 <span class="hll"><span class="nd">@event_source</span><span class="p">(</span><span class="n">data_class</span><span class="o">=</span><span class="n">ActiveMQEvent</span><span class="p">)</span>
-</span><span class="hll"><span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">ActiveMQEvent</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+</span><span class="hll"><span class="k">def</span><span class="w"> </span><span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">ActiveMQEvent</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
 </span>    <span class="k">for</span> <span class="n">message</span> <span class="ow">in</span> <span class="n">event</span><span class="o">.</span><span class="n">messages</span><span class="p">:</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;MessageID: </span><span class="si">{</span><span class="n">message</span><span class="o">.</span><span class="n">message_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="n">data</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="n">message</span><span class="o">.</span><span class="n">json_data</span>
@@ -2791,17 +2791,17 @@ for more details.</p>
 <span class="normal">48</span>
 <span class="normal">49</span>
 <span class="normal">50</span>
-<span class="normal">51</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.data_classes</span> <span class="kn">import</span> <span class="n">event_source</span>
-<span class="hll"><span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.data_classes.api_gateway_authorizer_event</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="normal">51</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.data_classes</span><span class="w"> </span><span class="kn">import</span> <span class="n">event_source</span>
+<span class="hll"><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.data_classes.api_gateway_authorizer_event</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
 </span><span class="hll">    <span class="n">DENY_ALL_RESPONSE</span><span class="p">,</span>
 </span><span class="hll">    <span class="n">APIGatewayAuthorizerRequestEvent</span><span class="p">,</span>
 </span><span class="hll">    <span class="n">APIGatewayAuthorizerResponse</span><span class="p">,</span>
 </span><span class="hll">    <span class="n">HttpVerb</span><span class="p">,</span>
 </span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">secrets</span> <span class="kn">import</span> <span class="n">compare_digest</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">secrets</span><span class="w"> </span><span class="kn">import</span> <span class="n">compare_digest</span>
 
 
-<span class="k">def</span> <span class="nf">get_user_by_token</span><span class="p">(</span><span class="n">token</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_user_by_token</span><span class="p">(</span><span class="n">token</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">compare_digest</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="s2">&quot;admin-foo&quot;</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Admin&quot;</span><span class="p">,</span> <span class="s2">&quot;isAdmin&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
     <span class="k">elif</span> <span class="n">compare_digest</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="s2">&quot;regular-foo&quot;</span><span class="p">):</span>
@@ -2811,7 +2811,7 @@ for more details.</p>
 
 
 <span class="nd">@event_source</span><span class="p">(</span><span class="n">data_class</span><span class="o">=</span><span class="n">APIGatewayAuthorizerRequestEvent</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">APIGatewayAuthorizerRequestEvent</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">APIGatewayAuthorizerRequestEvent</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
     <span class="n">user</span> <span class="o">=</span> <span class="n">get_user_by_token</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s2">&quot;Authorization&quot;</span><span class="p">])</span>
 
     <span class="k">if</span> <span class="n">user</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -2868,15 +2868,15 @@ for more details.</p>
 <span class="normal">21</span>
 <span class="normal">22</span>
 <span class="normal">23</span>
-<span class="normal">24</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.data_classes</span> <span class="kn">import</span> <span class="n">event_source</span>
-<span class="hll"><span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.data_classes.api_gateway_authorizer_event</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="normal">24</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.data_classes</span><span class="w"> </span><span class="kn">import</span> <span class="n">event_source</span>
+<span class="hll"><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.data_classes.api_gateway_authorizer_event</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
 </span><span class="hll">    <span class="n">APIGatewayAuthorizerTokenEvent</span><span class="p">,</span>
 </span><span class="hll">    <span class="n">APIGatewayAuthorizerResponse</span><span class="p">,</span>
 </span><span class="hll"><span class="p">)</span>
 </span>
 
 <span class="nd">@event_source</span><span class="p">(</span><span class="n">data_class</span><span class="o">=</span><span class="n">APIGatewayAuthorizerTokenEvent</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">APIGatewayAuthorizerTokenEvent</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">APIGatewayAuthorizerTokenEvent</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
     <span class="n">arn</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">parsed_arn</span>
 
 <span class="hll">    <span class="n">policy</span> <span class="o">=</span> <span class="n">APIGatewayAuthorizerResponse</span><span class="p">(</span>
@@ -2929,22 +2929,22 @@ See also <a href="https://aws.amazon.com/blogs/compute/introducing-iam-and-lambd
 <span class="normal">21</span>
 <span class="normal">22</span>
 <span class="normal">23</span>
-<span class="normal">24</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.data_classes</span> <span class="kn">import</span> <span class="n">event_source</span>
-<span class="hll"><span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.data_classes.api_gateway_authorizer_event</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="normal">24</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.data_classes</span><span class="w"> </span><span class="kn">import</span> <span class="n">event_source</span>
+<span class="hll"><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.data_classes.api_gateway_authorizer_event</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
 </span><span class="hll">    <span class="n">APIGatewayAuthorizerEventV2</span><span class="p">,</span>
 </span><span class="hll">    <span class="n">APIGatewayAuthorizerResponseV2</span><span class="p">,</span>
 </span><span class="hll"><span class="p">)</span>
-</span><span class="kn">from</span> <span class="nn">secrets</span> <span class="kn">import</span> <span class="n">compare_digest</span>
+</span><span class="kn">from</span><span class="w"> </span><span class="nn">secrets</span><span class="w"> </span><span class="kn">import</span> <span class="n">compare_digest</span>
 
 
-<span class="k">def</span> <span class="nf">get_user_by_token</span><span class="p">(</span><span class="n">token</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_user_by_token</span><span class="p">(</span><span class="n">token</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">compare_digest</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="s2">&quot;Foo&quot;</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Foo&quot;</span><span class="p">}</span>
     <span class="k">return</span> <span class="kc">None</span>
 
 
 <span class="nd">@event_source</span><span class="p">(</span><span class="n">data_class</span><span class="o">=</span><span class="n">APIGatewayAuthorizerEventV2</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">APIGatewayAuthorizerEventV2</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">APIGatewayAuthorizerEventV2</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
     <span class="n">user</span> <span class="o">=</span> <span class="n">get_user_by_token</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s2">&quot;x-token&quot;</span><span class="p">])</span>
 
     <span class="k">if</span> <span class="n">user</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -2970,10 +2970,10 @@ See also <a href="https://aws.amazon.com/blogs/compute/introducing-iam-and-lambd
 <span class="normal">6</span>
 <span class="normal">7</span>
 <span class="normal">8</span>
-<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.data_classes</span> <span class="kn">import</span> <span class="n">event_source</span><span class="p">,</span> <span class="n">APIGatewayProxyEvent</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.data_classes</span><span class="w"> </span><span class="kn">import</span> <span class="n">event_source</span><span class="p">,</span> <span class="n">APIGatewayProxyEvent</span>
 
 <span class="nd">@event_source</span><span class="p">(</span><span class="n">data_class</span><span class="o">=</span><span class="n">APIGatewayProxyEvent</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">APIGatewayProxyEvent</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">APIGatewayProxyEvent</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
     <span class="k">if</span> <span class="s2">&quot;helloworld&quot;</span> <span class="ow">in</span> <span class="n">event</span><span class="o">.</span><span class="n">path</span> <span class="ow">and</span> <span class="n">event</span><span class="o">.</span><span class="n">http_method</span> <span class="o">==</span> <span class="s2">&quot;GET&quot;</span><span class="p">:</span>
         <span class="n">request_context</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">request_context</span>
         <span class="n">identity</span> <span class="o">=</span> <span class="n">request_context</span><span class="o">.</span><span class="n">identity</span>
@@ -2993,10 +2993,10 @@ See also <a href="https://aws.amazon.com/blogs/compute/introducing-iam-and-lambd
 <span class="normal">3</span>
 <span class="normal">4</span>
 <span class="normal">5</span>
-<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.data_classes</span> <span class="kn">import</span> <span class="n">event_source</span><span class="p">,</span> <span class="n">APIGatewayProxyEventV2</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.data_classes</span><span class="w"> </span><span class="kn">import</span> <span class="n">event_source</span><span class="p">,</span> <span class="n">APIGatewayProxyEventV2</span>
 
 <span class="nd">@event_source</span><span class="p">(</span><span class="n">data_class</span><span class="o">=</span><span class="n">APIGatewayProxyEventV2</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">APIGatewayProxyEventV2</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">APIGatewayProxyEventV2</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
     <span class="k">if</span> <span class="s2">&quot;helloworld&quot;</span> <span class="ow">in</span> <span class="n">event</span><span class="o">.</span><span class="n">path</span> <span class="ow">and</span> <span class="n">event</span><span class="o">.</span><span class="n">http_method</span> <span class="o">==</span> <span class="s2">&quot;POST&quot;</span><span class="p">:</span>
         <span class="n">do_something_with</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">json_body</span><span class="p">,</span> <span class="n">event</span><span class="o">.</span><span class="n">query_string_parameters</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
@@ -3013,10 +3013,10 @@ See also <a href="https://aws.amazon.com/blogs/compute/introducing-iam-and-lambd
 <span class="normal">3</span>
 <span class="normal">4</span>
 <span class="normal">5</span>
-<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.data_classes</span> <span class="kn">import</span> <span class="n">event_source</span><span class="p">,</span> <span class="n">ALBEvent</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.data_classes</span><span class="w"> </span><span class="kn">import</span> <span class="n">event_source</span><span class="p">,</span> <span class="n">ALBEvent</span>
 
 <span class="nd">@event_source</span><span class="p">(</span><span class="n">data_class</span><span class="o">=</span><span class="n">ALBEvent</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">ALBEvent</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">ALBEvent</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
     <span class="k">if</span> <span class="s2">&quot;helloworld&quot;</span> <span class="ow">in</span> <span class="n">event</span><span class="o">.</span><span class="n">path</span> <span class="ow">and</span> <span class="n">event</span><span class="o">.</span><span class="n">http_method</span> <span class="o">==</span> <span class="s2">&quot;POST&quot;</span><span class="p">:</span>
         <span class="n">do_something_with</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">json_body</span><span class="p">,</span> <span class="n">event</span><span class="o">.</span><span class="n">query_string_parameters</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
@@ -3066,27 +3066,27 @@ or read the Amplify documentation on using <a href="https://docs.amplify.aws/lib
 <span class="normal">30</span>
 <span class="normal">31</span>
 <span class="normal">32</span>
-<span class="normal">33</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span>
+<span class="normal">33</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span>
 
-<span class="kn">from</span> <span class="nn">aws_lambda_powertools.logging</span> <span class="kn">import</span> <span class="n">correlation_paths</span>
-<span class="kn">from</span> <span class="nn">aws_lambda_powertools.logging.logger</span> <span class="kn">import</span> <span class="n">Logger</span>
-<span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.data_classes.appsync_authorizer_event</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.logging</span><span class="w"> </span><span class="kn">import</span> <span class="n">correlation_paths</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.logging.logger</span><span class="w"> </span><span class="kn">import</span> <span class="n">Logger</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.data_classes.appsync_authorizer_event</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">AppSyncAuthorizerEvent</span><span class="p">,</span>
     <span class="n">AppSyncAuthorizerResponse</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.data_classes.event_source</span> <span class="kn">import</span> <span class="n">event_source</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.data_classes.event_source</span><span class="w"> </span><span class="kn">import</span> <span class="n">event_source</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">Logger</span><span class="p">()</span>
 
 
-<span class="k">def</span> <span class="nf">get_user_by_token</span><span class="p">(</span><span class="n">token</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_user_by_token</span><span class="p">(</span><span class="n">token</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Look a user by token&quot;&quot;&quot;</span>
     <span class="o">...</span>
 
 
 <span class="nd">@logger</span><span class="o">.</span><span class="n">inject_lambda_context</span><span class="p">(</span><span class="n">correlation_id_path</span><span class="o">=</span><span class="n">correlation_paths</span><span class="o">.</span><span class="n">APPSYNC_AUTHORIZER</span><span class="p">)</span>
 <span class="nd">@event_source</span><span class="p">(</span><span class="n">data_class</span><span class="o">=</span><span class="n">AppSyncAuthorizerEvent</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">AppSyncAuthorizerEvent</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">AppSyncAuthorizerEvent</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
     <span class="n">user</span> <span class="o">=</span> <span class="n">get_user_by_token</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">authorization_token</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">user</span><span class="p">:</span>
@@ -3144,19 +3144,19 @@ and <a href="https://aws.amazon.com/blogs/mobile/appsync-direct-lambda/" target=
 <span class="normal">29</span>
 <span class="normal">30</span>
 <span class="normal">31</span>
-<span class="normal">32</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">aws_lambda_powertools.logging</span> <span class="kn">import</span> <span class="n">Logger</span><span class="p">,</span> <span class="n">correlation_paths</span>
-<span class="hll"><span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.data_classes.appsync_resolver_event</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="normal">32</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.logging</span><span class="w"> </span><span class="kn">import</span> <span class="n">Logger</span><span class="p">,</span> <span class="n">correlation_paths</span>
+<span class="hll"><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.data_classes.appsync_resolver_event</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
 </span><span class="hll">    <span class="n">AppSyncResolverEvent</span><span class="p">,</span>
 </span><span class="hll">    <span class="n">AppSyncIdentityCognito</span>
 </span><span class="hll"><span class="p">)</span>
 </span>
 <span class="n">logger</span> <span class="o">=</span> <span class="n">Logger</span><span class="p">()</span>
 
-<span class="k">def</span> <span class="nf">get_locations</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">page</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_locations</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">page</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Your resolver logic here&quot;&quot;&quot;</span>
 
 <span class="hll"><span class="nd">@logger</span><span class="o">.</span><span class="n">inject_lambda_context</span><span class="p">(</span><span class="n">correlation_id_path</span><span class="o">=</span><span class="n">correlation_paths</span><span class="o">.</span><span class="n">APPSYNC_RESOLVER</span><span class="p">)</span>
-</span><span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+</span><span class="k">def</span><span class="w"> </span><span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
 <span class="hll">    <span class="n">event</span><span class="p">:</span> <span class="n">AppSyncResolverEvent</span> <span class="o">=</span> <span class="n">AppSyncResolverEvent</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
 </span>
     <span class="c1"># Case insensitive look up of request headers</span>
@@ -3288,18 +3288,18 @@ and <a href="https://aws.amazon.com/blogs/mobile/appsync-direct-lambda/" target=
 <span class="normal">14</span>
 <span class="normal">15</span>
 <span class="normal">16</span>
-<span class="normal">17</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">aws_lambda_powertools</span> <span class="kn">import</span> <span class="n">Logger</span>
-<span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.data_classes</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="normal">17</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">Logger</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.data_classes</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
 <span class="hll">    <span class="n">AWSConfigRuleEvent</span><span class="p">,</span>
 </span>    <span class="n">event_source</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.typing</span> <span class="kn">import</span> <span class="n">LambdaContext</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">LambdaContext</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">Logger</span><span class="p">()</span>
 
 
 <span class="hll"><span class="nd">@event_source</span><span class="p">(</span><span class="n">data_class</span><span class="o">=</span><span class="n">AWSConfigRuleEvent</span><span class="p">)</span>
-</span><span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">AWSConfigRuleEvent</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">LambdaContext</span><span class="p">):</span>
+</span><span class="k">def</span><span class="w"> </span><span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">AWSConfigRuleEvent</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">LambdaContext</span><span class="p">):</span>
     <span class="n">message_type</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">invoking_event</span><span class="o">.</span><span class="n">message_type</span>
 
     <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Logging </span><span class="si">{</span><span class="n">message_type</span><span class="si">}</span><span class="s2"> event rule&quot;</span><span class="p">,</span> <span class="n">invoke_event</span><span class="o">=</span><span class="n">event</span><span class="o">.</span><span class="n">raw_invoking_event</span><span class="p">)</span>
@@ -3419,15 +3419,15 @@ and <a href="https://aws.amazon.com/blogs/mobile/appsync-direct-lambda/" target=
 <span class="normal">22</span>
 <span class="normal">23</span>
 <span class="normal">24</span>
-<span class="normal">25</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">aws_lambda_powertools</span> <span class="kn">import</span> <span class="n">Logger</span>
-<span class="hll"><span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.data_classes</span> <span class="kn">import</span> <span class="n">BedrockAgentEvent</span><span class="p">,</span> <span class="n">event_source</span>
-</span><span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.typing</span> <span class="kn">import</span> <span class="n">LambdaContext</span>
+<span class="normal">25</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">Logger</span>
+<span class="hll"><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.data_classes</span><span class="w"> </span><span class="kn">import</span> <span class="n">BedrockAgentEvent</span><span class="p">,</span> <span class="n">event_source</span>
+</span><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">LambdaContext</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">Logger</span><span class="p">()</span>
 
 
 <span class="hll"><span class="nd">@event_source</span><span class="p">(</span><span class="n">data_class</span><span class="o">=</span><span class="n">BedrockAgentEvent</span><span class="p">)</span>
-</span><span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">BedrockAgentEvent</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">LambdaContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+</span><span class="k">def</span><span class="w"> </span><span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">BedrockAgentEvent</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">LambdaContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
 <span class="hll">    <span class="n">input_text</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">input_text</span>
 </span>
     <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Bedrock Agent </span><span class="si">{</span><span class="n">event</span><span class="o">.</span><span class="n">action_group</span><span class="si">}</span><span class="s2"> invoked with input&quot;</span><span class="p">,</span> <span class="n">input_text</span><span class="o">=</span><span class="n">input_text</span><span class="p">)</span>
@@ -3494,18 +3494,18 @@ and <a href="https://aws.amazon.com/blogs/mobile/appsync-direct-lambda/" target=
 <span class="normal">40</span>
 <span class="normal">41</span>
 <span class="normal">42</span>
-<span class="normal">43</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">aws_lambda_powertools</span> <span class="kn">import</span> <span class="n">Logger</span>
-<span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.data_classes</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="normal">43</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">Logger</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.data_classes</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">CloudFormationCustomResourceEvent</span><span class="p">,</span>
     <span class="n">event_source</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.typing</span> <span class="kn">import</span> <span class="n">LambdaContext</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">LambdaContext</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">Logger</span><span class="p">()</span>
 
 
 <span class="hll"><span class="nd">@event_source</span><span class="p">(</span><span class="n">data_class</span><span class="o">=</span><span class="n">CloudFormationCustomResourceEvent</span><span class="p">)</span>
-</span><span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">CloudFormationCustomResourceEvent</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">LambdaContext</span><span class="p">):</span>
+</span><span class="k">def</span><span class="w"> </span><span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">CloudFormationCustomResourceEvent</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">LambdaContext</span><span class="p">):</span>
 <span class="hll">    <span class="n">request_type</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">request_type</span>
 </span>
 <span class="hll">    <span class="k">if</span> <span class="n">request_type</span> <span class="o">==</span> <span class="s2">&quot;Create&quot;</span><span class="p">:</span>
@@ -3516,7 +3516,7 @@ and <a href="https://aws.amazon.com/blogs/mobile/appsync-direct-lambda/" target=
 </span>        <span class="k">return</span> <span class="n">on_delete</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">on_create</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">CloudFormationCustomResourceEvent</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">on_create</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">CloudFormationCustomResourceEvent</span><span class="p">):</span>
     <span class="n">props</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">resource_properties</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Create new resource with props </span><span class="si">{</span><span class="n">props</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
 
@@ -3526,14 +3526,14 @@ and <a href="https://aws.amazon.com/blogs/mobile/appsync-direct-lambda/" target=
     <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;PhysicalResourceId&quot;</span><span class="p">:</span> <span class="n">physical_id</span><span class="p">}</span>
 
 
-<span class="k">def</span> <span class="nf">on_update</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">CloudFormationCustomResourceEvent</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">on_update</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">CloudFormationCustomResourceEvent</span><span class="p">):</span>
     <span class="n">physical_id</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">physical_resource_id</span>
     <span class="n">props</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">resource_properties</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Update resource </span><span class="si">{</span><span class="n">physical_id</span><span class="si">}</span><span class="s2"> with props </span><span class="si">{</span><span class="n">props</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
     <span class="c1"># ...</span>
 
 
-<span class="k">def</span> <span class="nf">on_delete</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">CloudFormationCustomResourceEvent</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">on_delete</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">CloudFormationCustomResourceEvent</span><span class="p">):</span>
     <span class="n">physical_id</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">physical_resource_id</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Delete resource </span><span class="si">{</span><span class="n">physical_id</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
     <span class="c1"># ...</span>
@@ -3571,7 +3571,7 @@ and <a href="https://aws.amazon.com/blogs/mobile/appsync-direct-lambda/" target=
 <span class="normal">24</span>
 <span class="normal">25</span>
 <span class="normal">26</span>
-<span class="normal">27</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.data_classes</span> <span class="kn">import</span> <span class="n">event_source</span><span class="p">,</span> <span class="n">CloudWatchDashboardCustomWidgetEvent</span>
+<span class="normal">27</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.data_classes</span><span class="w"> </span><span class="kn">import</span> <span class="n">event_source</span><span class="p">,</span> <span class="n">CloudWatchDashboardCustomWidgetEvent</span>
 
 <span class="n">const</span> <span class="n">DOCS</span> <span class="o">=</span> <span class="err">`</span>
 <span class="c1">## Echo</span>
@@ -3589,7 +3589,7 @@ and <a href="https://aws.amazon.com/blogs/mobile/appsync-direct-lambda/" target=
 <span class="err">`</span>
 
 <span class="nd">@event_source</span><span class="p">(</span><span class="n">data_class</span><span class="o">=</span><span class="n">CloudWatchDashboardCustomWidgetEvent</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">CloudWatchDashboardCustomWidgetEvent</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">CloudWatchDashboardCustomWidgetEvent</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
 
     <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">describe</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">DOCS</span>
@@ -3626,15 +3626,15 @@ You can use the <code>CloudWathAlarmEvent</code> data class to access the fields
 <span class="normal">16</span>
 <span class="normal">17</span>
 <span class="normal">18</span>
-<span class="normal">19</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">aws_lambda_powertools</span> <span class="kn">import</span> <span class="n">Logger</span>
-<span class="hll"><span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.data_classes</span> <span class="kn">import</span> <span class="n">CloudWatchAlarmEvent</span><span class="p">,</span> <span class="n">event_source</span>
-</span><span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.typing</span> <span class="kn">import</span> <span class="n">LambdaContext</span>
+<span class="normal">19</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">Logger</span>
+<span class="hll"><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.data_classes</span><span class="w"> </span><span class="kn">import</span> <span class="n">CloudWatchAlarmEvent</span><span class="p">,</span> <span class="n">event_source</span>
+</span><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">LambdaContext</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">Logger</span><span class="p">()</span>
 
 
 <span class="hll"><span class="nd">@event_source</span><span class="p">(</span><span class="n">data_class</span><span class="o">=</span><span class="n">CloudWatchAlarmEvent</span><span class="p">)</span>
-</span><span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">CloudWatchAlarmEvent</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">LambdaContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+</span><span class="k">def</span><span class="w"> </span><span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">CloudWatchAlarmEvent</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">LambdaContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Alarm </span><span class="si">{</span><span class="n">event</span><span class="o">.</span><span class="n">alarm_data</span><span class="o">.</span><span class="n">alarm_name</span><span class="si">}</span><span class="s2"> state is </span><span class="si">{</span><span class="n">event</span><span class="o">.</span><span class="n">alarm_data</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
     <span class="c1"># You can now work with event. For example, you can enrich the received data, and</span>
@@ -3663,11 +3663,11 @@ decompress and parse json data from the event.</p>
 <span class="normal">6</span>
 <span class="normal">7</span>
 <span class="normal">8</span>
-<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.data_classes</span> <span class="kn">import</span> <span class="n">event_source</span><span class="p">,</span> <span class="n">CloudWatchLogsEvent</span>
-<span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.data_classes.cloud_watch_logs_event</span> <span class="kn">import</span> <span class="n">CloudWatchLogsDecodedData</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.data_classes</span><span class="w"> </span><span class="kn">import</span> <span class="n">event_source</span><span class="p">,</span> <span class="n">CloudWatchLogsEvent</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.data_classes.cloud_watch_logs_event</span><span class="w"> </span><span class="kn">import</span> <span class="n">CloudWatchLogsDecodedData</span>
 
 <span class="nd">@event_source</span><span class="p">(</span><span class="n">data_class</span><span class="o">=</span><span class="n">CloudWatchLogsEvent</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">CloudWatchLogsEvent</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">CloudWatchLogsEvent</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
     <span class="n">decompressed_log</span><span class="p">:</span> <span class="n">CloudWatchLogsDecodedData</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">parse_logs_data</span><span class="p">()</span>
     <span class="n">log_events</span> <span class="o">=</span> <span class="n">decompressed_log</span><span class="o">.</span><span class="n">log_events</span>
     <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">log_events</span><span class="p">:</span>
@@ -3695,16 +3695,16 @@ decompress and parse json data from the event.</p>
 <span class="normal">12</span>
 <span class="normal">13</span>
 <span class="normal">14</span>
-<span class="normal">15</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+<span class="normal">15</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span>
 
-<span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.data_classes</span> <span class="kn">import</span> <span class="n">event_source</span>
-<span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.data_classes.cloud_watch_logs_event</span> <span class="kn">import</span> <span class="n">CloudWatchLogsDecodedData</span>
-<span class="hll"><span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.data_classes.kinesis_stream_event</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.data_classes</span><span class="w"> </span><span class="kn">import</span> <span class="n">event_source</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.data_classes.cloud_watch_logs_event</span><span class="w"> </span><span class="kn">import</span> <span class="n">CloudWatchLogsDecodedData</span>
+<span class="hll"><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.data_classes.kinesis_stream_event</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
 </span><span class="hll">    <span class="n">KinesisStreamEvent</span><span class="p">,</span> <span class="n">extract_cloudwatch_logs_from_event</span><span class="p">)</span>
 </span>
 
 <span class="nd">@event_source</span><span class="p">(</span><span class="n">data_class</span><span class="o">=</span><span class="n">KinesisStreamEvent</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">simple_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">KinesisStreamEvent</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">simple_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">KinesisStreamEvent</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
 <span class="hll">    <span class="n">logs</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">CloudWatchLogsDecodedData</span><span class="p">]</span> <span class="o">=</span> <span class="n">extract_cloudwatch_logs_from_event</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
 </span>    <span class="k">for</span> <span class="n">log</span> <span class="ow">in</span> <span class="n">logs</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">log</span><span class="o">.</span><span class="n">message_type</span> <span class="o">==</span> <span class="s2">&quot;DATA_MESSAGE&quot;</span><span class="p">:</span>
@@ -3733,21 +3733,21 @@ decompress and parse json data from the event.</p>
 <span class="normal">13</span>
 <span class="normal">14</span>
 <span class="normal">15</span>
-<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.batch</span> <span class="kn">import</span> <span class="p">(</span><span class="n">BatchProcessor</span><span class="p">,</span> <span class="n">EventType</span><span class="p">,</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.batch</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span><span class="n">BatchProcessor</span><span class="p">,</span> <span class="n">EventType</span><span class="p">,</span>
                                                    <span class="n">batch_processor</span><span class="p">)</span>
-<span class="hll"><span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.data_classes.kinesis_stream_event</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="hll"><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.data_classes.kinesis_stream_event</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
 </span><span class="hll">    <span class="n">KinesisStreamRecord</span><span class="p">,</span> <span class="n">extract_cloudwatch_logs_from_record</span><span class="p">)</span>
 </span>
 <span class="n">processor</span> <span class="o">=</span> <span class="n">BatchProcessor</span><span class="p">(</span><span class="n">event_type</span><span class="o">=</span><span class="n">EventType</span><span class="o">.</span><span class="n">KinesisDataStreams</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">record_handler</span><span class="p">(</span><span class="n">record</span><span class="p">:</span> <span class="n">KinesisStreamRecord</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">record_handler</span><span class="p">(</span><span class="n">record</span><span class="p">:</span> <span class="n">KinesisStreamRecord</span><span class="p">):</span>
 <span class="hll">    <span class="n">log</span> <span class="o">=</span> <span class="n">extract_cloudwatch_logs_from_record</span><span class="p">(</span><span class="n">record</span><span class="p">)</span>
 </span>    <span class="k">return</span> <span class="n">log</span><span class="o">.</span><span class="n">message_type</span> <span class="o">==</span> <span class="s2">&quot;DATA_MESSAGE&quot;</span>
 
 
 <span class="nd">@batch_processor</span><span class="p">(</span><span class="n">record_handler</span><span class="o">=</span><span class="n">record_handler</span><span class="p">,</span> <span class="n">processor</span><span class="o">=</span><span class="n">processor</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">processor</span><span class="o">.</span><span class="n">response</span><span class="p">()</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -3772,15 +3772,15 @@ to test applications at different stages of deployment.</p>
 <span class="normal">10</span>
 <span class="normal">11</span>
 <span class="normal">12</span>
-<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">aws_lambda_powertools</span> <span class="kn">import</span> <span class="n">Logger</span>
-<span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.data_classes</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">Logger</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.data_classes</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">event_source</span><span class="p">,</span>
     <span class="n">CodeDeployLifecycleHookEvent</span><span class="p">,</span>
 <span class="p">)</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">Logger</span><span class="p">()</span>
 
-<span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">lambda_handler</span><span class="p">(</span>
     <span class="n">event</span><span class="p">:</span> <span class="n">CodeDeployLifecycleHookEvent</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">LambdaContext</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="n">deployment_id</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">deployment_id</span>
@@ -3841,13 +3841,13 @@ to test applications at different stages of deployment.</p>
 <span class="normal">45</span>
 <span class="normal">46</span>
 <span class="normal">47</span>
-<span class="normal">48</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">aws_lambda_powertools</span> <span class="kn">import</span> <span class="n">Logger</span>
-<span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.data_classes</span> <span class="kn">import</span> <span class="n">event_source</span><span class="p">,</span> <span class="n">CodePipelineJobEvent</span>
+<span class="normal">48</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">Logger</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.data_classes</span><span class="w"> </span><span class="kn">import</span> <span class="n">event_source</span><span class="p">,</span> <span class="n">CodePipelineJobEvent</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">Logger</span><span class="p">()</span>
 
 <span class="nd">@event_source</span><span class="p">(</span><span class="n">data_class</span><span class="o">=</span><span class="n">CodePipelineJobEvent</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;The Lambda function handler</span>
 
 <span class="sd">    If a continuing job then checks the CloudFormation stack status</span>
@@ -3968,9 +3968,9 @@ can be imported from <code>aws_lambda_powertools.data_classes.cognito_user_pool_
 <span class="normal">4</span>
 <span class="normal">5</span>
 <span class="normal">6</span>
-<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.data_classes.cognito_user_pool_event</span> <span class="kn">import</span> <span class="n">PostConfirmationTriggerEvent</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.data_classes.cognito_user_pool_event</span><span class="w"> </span><span class="kn">import</span> <span class="n">PostConfirmationTriggerEvent</span>
 
-<span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
     <span class="n">event</span><span class="p">:</span> <span class="n">PostConfirmationTriggerEvent</span> <span class="o">=</span> <span class="n">PostConfirmationTriggerEvent</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
 
     <span class="n">user_attributes</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">user_attributes</span>
@@ -4018,9 +4018,9 @@ can be imported from <code>aws_lambda_powertools.data_classes.cognito_user_pool_
 <span class="normal">28</span>
 <span class="normal">29</span>
 <span class="normal">30</span>
-<span class="normal">31</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.data_classes.cognito_user_pool_event</span> <span class="kn">import</span> <span class="n">DefineAuthChallengeTriggerEvent</span>
+<span class="normal">31</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.data_classes.cognito_user_pool_event</span><span class="w"> </span><span class="kn">import</span> <span class="n">DefineAuthChallengeTriggerEvent</span>
 
-<span class="k">def</span> <span class="nf">handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
     <span class="n">event</span><span class="p">:</span> <span class="n">DefineAuthChallengeTriggerEvent</span> <span class="o">=</span> <span class="n">DefineAuthChallengeTriggerEvent</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
     <span class="k">if</span> <span class="p">(</span>
         <span class="nb">len</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">session</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
@@ -4275,11 +4275,11 @@ can be imported from <code>aws_lambda_powertools.data_classes.cognito_user_pool_
 <span class="normal"> 7</span>
 <span class="normal"> 8</span>
 <span class="normal"> 9</span>
-<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.data_classes</span> <span class="kn">import</span> <span class="n">event_source</span>
-<span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.data_classes.cognito_user_pool_event</span> <span class="kn">import</span> <span class="n">CreateAuthChallengeTriggerEvent</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.data_classes</span><span class="w"> </span><span class="kn">import</span> <span class="n">event_source</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.data_classes.cognito_user_pool_event</span><span class="w"> </span><span class="kn">import</span> <span class="n">CreateAuthChallengeTriggerEvent</span>
 
 <span class="nd">@event_source</span><span class="p">(</span><span class="n">data_class</span><span class="o">=</span><span class="n">CreateAuthChallengeTriggerEvent</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">CreateAuthChallengeTriggerEvent</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">CreateAuthChallengeTriggerEvent</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
     <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">challenge_name</span> <span class="o">==</span> <span class="s2">&quot;CUSTOM_CHALLENGE&quot;</span><span class="p">:</span>
         <span class="n">event</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">public_challenge_parameters</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;captchaUrl&quot;</span><span class="p">:</span> <span class="s2">&quot;url/123.jpg&quot;</span><span class="p">}</span>
         <span class="n">event</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">private_challenge_parameters</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;answer&quot;</span><span class="p">:</span> <span class="s2">&quot;5&quot;</span><span class="p">}</span>
@@ -4302,11 +4302,11 @@ can be imported from <code>aws_lambda_powertools.data_classes.cognito_user_pool_
 <span class="normal">6</span>
 <span class="normal">7</span>
 <span class="normal">8</span>
-<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.data_classes</span> <span class="kn">import</span> <span class="n">event_source</span>
-<span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.data_classes.cognito_user_pool_event</span> <span class="kn">import</span> <span class="n">VerifyAuthChallengeResponseTriggerEvent</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.data_classes</span><span class="w"> </span><span class="kn">import</span> <span class="n">event_source</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.data_classes.cognito_user_pool_event</span><span class="w"> </span><span class="kn">import</span> <span class="n">VerifyAuthChallengeResponseTriggerEvent</span>
 
 <span class="nd">@event_source</span><span class="p">(</span><span class="n">data_class</span><span class="o">=</span><span class="n">VerifyAuthChallengeResponseTriggerEvent</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">VerifyAuthChallengeResponseTriggerEvent</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">VerifyAuthChallengeResponseTriggerEvent</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
     <span class="n">event</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">answer_correct</span> <span class="o">=</span> <span class="p">(</span>
         <span class="n">event</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">private_challenge_parameters</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;answer&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="n">event</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">challenge_answer</span>
     <span class="p">)</span>
@@ -4334,14 +4334,14 @@ can be imported from <code>aws_lambda_powertools.data_classes.cognito_user_pool_
 <span class="normal">10</span>
 <span class="normal">11</span>
 <span class="normal">12</span>
-<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.data_classes.connect_contact_flow_event</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.data_classes.connect_contact_flow_event</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">ConnectContactFlowChannel</span><span class="p">,</span>
     <span class="n">ConnectContactFlowEndpointType</span><span class="p">,</span>
     <span class="n">ConnectContactFlowEvent</span><span class="p">,</span>
     <span class="n">ConnectContactFlowInitiationMethod</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
     <span class="n">event</span><span class="p">:</span> <span class="n">ConnectContactFlowEvent</span> <span class="o">=</span> <span class="n">ConnectContactFlowEvent</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
     <span class="k">assert</span> <span class="n">event</span><span class="o">.</span><span class="n">contact_data</span><span class="o">.</span><span class="n">attributes</span> <span class="o">==</span> <span class="p">{</span><span class="s2">&quot;Language&quot;</span><span class="p">:</span> <span class="s2">&quot;en-US&quot;</span><span class="p">}</span>
     <span class="k">assert</span> <span class="n">event</span><span class="o">.</span><span class="n">contact_data</span><span class="o">.</span><span class="n">channel</span> <span class="o">==</span> <span class="n">ConnectContactFlowChannel</span><span class="o">.</span><span class="n">VOICE</span>
@@ -4370,12 +4370,12 @@ The class automatically deserializes DynamoDB types into their equivalent Python
 <span class="normal">10</span>
 <span class="normal">11</span>
 <span class="normal">12</span>
-<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.data_classes.dynamo_db_stream_event</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.data_classes.dynamo_db_stream_event</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">DynamoDBStreamEvent</span><span class="p">,</span>
     <span class="n">DynamoDBRecordEventName</span>
 <span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
     <span class="n">event</span><span class="p">:</span> <span class="n">DynamoDBStreamEvent</span> <span class="o">=</span> <span class="n">DynamoDBStreamEvent</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
 
     <span class="c1"># Multiple records can be delivered in a single event</span>
@@ -4395,12 +4395,12 @@ The class automatically deserializes DynamoDB types into their equivalent Python
 <span class="normal"> 7</span>
 <span class="normal"> 8</span>
 <span class="normal"> 9</span>
-<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.data_classes</span> <span class="kn">import</span> <span class="n">event_source</span><span class="p">,</span> <span class="n">DynamoDBStreamEvent</span>
-<span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.typing</span> <span class="kn">import</span> <span class="n">LambdaContext</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.data_classes</span><span class="w"> </span><span class="kn">import</span> <span class="n">event_source</span><span class="p">,</span> <span class="n">DynamoDBStreamEvent</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">LambdaContext</span>
 
 
 <span class="nd">@event_source</span><span class="p">(</span><span class="n">data_class</span><span class="o">=</span><span class="n">DynamoDBStreamEvent</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">DynamoDBStreamEvent</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">LambdaContext</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">DynamoDBStreamEvent</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">LambdaContext</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">record</span> <span class="ow">in</span> <span class="n">event</span><span class="o">.</span><span class="n">records</span><span class="p">:</span>
         <span class="c1"># {&quot;N&quot;: &quot;123.45&quot;} =&gt; Decimal(&quot;123.45&quot;)</span>
         <span class="n">key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">record</span><span class="o">.</span><span class="n">dynamodb</span><span class="o">.</span><span class="n">keys</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
@@ -4417,10 +4417,10 @@ The class automatically deserializes DynamoDB types into their equivalent Python
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
-<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.data_classes</span> <span class="kn">import</span> <span class="n">event_source</span><span class="p">,</span> <span class="n">EventBridgeEvent</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.data_classes</span><span class="w"> </span><span class="kn">import</span> <span class="n">event_source</span><span class="p">,</span> <span class="n">EventBridgeEvent</span>
 
 <span class="nd">@event_source</span><span class="p">(</span><span class="n">data_class</span><span class="o">=</span><span class="n">EventBridgeEvent</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">EventBridgeEvent</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">EventBridgeEvent</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
     <span class="n">do_something_with</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">detail</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -4436,10 +4436,10 @@ The class automatically deserializes DynamoDB types into their equivalent Python
 <span class="normal">3</span>
 <span class="normal">4</span>
 <span class="normal">5</span>
-<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.data_classes</span> <span class="kn">import</span> <span class="n">event_source</span><span class="p">,</span> <span class="n">KafkaEvent</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.data_classes</span><span class="w"> </span><span class="kn">import</span> <span class="n">event_source</span><span class="p">,</span> <span class="n">KafkaEvent</span>
 
 <span class="nd">@event_source</span><span class="p">(</span><span class="n">data_class</span><span class="o">=</span><span class="n">KafkaEvent</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">KafkaEvent</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">KafkaEvent</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">record</span> <span class="ow">in</span> <span class="n">event</span><span class="o">.</span><span class="n">records</span><span class="p">:</span>
         <span class="n">do_something_with</span><span class="p">(</span><span class="n">record</span><span class="o">.</span><span class="n">decoded_key</span><span class="p">,</span> <span class="n">record</span><span class="o">.</span><span class="n">json_value</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
@@ -4464,10 +4464,10 @@ or plain text, depending on the original payload.</p>
 <span class="normal">10</span>
 <span class="normal">11</span>
 <span class="normal">12</span>
-<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.data_classes</span> <span class="kn">import</span> <span class="n">event_source</span><span class="p">,</span> <span class="n">KinesisStreamEvent</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.data_classes</span><span class="w"> </span><span class="kn">import</span> <span class="n">event_source</span><span class="p">,</span> <span class="n">KinesisStreamEvent</span>
 
 <span class="nd">@event_source</span><span class="p">(</span><span class="n">data_class</span><span class="o">=</span><span class="n">KinesisStreamEvent</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">KinesisStreamEvent</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">KinesisStreamEvent</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
     <span class="n">kinesis_record</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">records</span><span class="p">)</span><span class="o">.</span><span class="n">kinesis</span>
 
     <span class="c1"># if data was delivered as text</span>
@@ -4519,17 +4519,17 @@ or plain text, depending on the original payload.</p>
 <span class="normal">25</span>
 <span class="normal">26</span>
 <span class="normal">27</span>
-<span class="normal">28</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.data_classes</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="normal">28</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.data_classes</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
 <span class="hll">    <span class="n">KinesisFirehoseDataTransformationResponse</span><span class="p">,</span>
 </span><span class="hll">    <span class="n">KinesisFirehoseEvent</span><span class="p">,</span>
 </span>    <span class="n">event_source</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.serialization</span> <span class="kn">import</span> <span class="n">base64_from_json</span>
-<span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.typing</span> <span class="kn">import</span> <span class="n">LambdaContext</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.serialization</span><span class="w"> </span><span class="kn">import</span> <span class="n">base64_from_json</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">LambdaContext</span>
 
 
 <span class="nd">@event_source</span><span class="p">(</span><span class="n">data_class</span><span class="o">=</span><span class="n">KinesisFirehoseEvent</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">KinesisFirehoseEvent</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">LambdaContext</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">KinesisFirehoseEvent</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">LambdaContext</span><span class="p">):</span>
 <span class="hll">    <span class="n">result</span> <span class="o">=</span> <span class="n">KinesisFirehoseDataTransformationResponse</span><span class="p">()</span>
 </span>
     <span class="k">for</span> <span class="n">record</span> <span class="ow">in</span> <span class="n">event</span><span class="o">.</span><span class="n">records</span><span class="p">:</span>
@@ -4593,21 +4593,21 @@ or plain text, depending on the original payload.</p>
 <span class="normal">37</span>
 <span class="normal">38</span>
 <span class="normal">39</span>
-<span class="normal">40</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">json</span> <span class="kn">import</span> <span class="n">JSONDecodeError</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span>
+<span class="normal">40</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">json</span><span class="w"> </span><span class="kn">import</span> <span class="n">JSONDecodeError</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span>
 
-<span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.data_classes</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.data_classes</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
 <span class="hll">    <span class="n">KinesisFirehoseDataTransformationRecord</span><span class="p">,</span>
 </span><span class="hll">    <span class="n">KinesisFirehoseDataTransformationResponse</span><span class="p">,</span>
 </span>    <span class="n">KinesisFirehoseEvent</span><span class="p">,</span>
     <span class="n">event_source</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.serialization</span> <span class="kn">import</span> <span class="n">base64_from_json</span>
-<span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.typing</span> <span class="kn">import</span> <span class="n">LambdaContext</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.serialization</span><span class="w"> </span><span class="kn">import</span> <span class="n">base64_from_json</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">LambdaContext</span>
 
 
 <span class="nd">@event_source</span><span class="p">(</span><span class="n">data_class</span><span class="o">=</span><span class="n">KinesisFirehoseEvent</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">KinesisFirehoseEvent</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">LambdaContext</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">KinesisFirehoseEvent</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">LambdaContext</span><span class="p">):</span>
 <span class="hll">    <span class="n">result</span> <span class="o">=</span> <span class="n">KinesisFirehoseDataTransformationResponse</span><span class="p">()</span>
 </span>
     <span class="k">for</span> <span class="n">record</span> <span class="ow">in</span> <span class="n">event</span><span class="o">.</span><span class="n">records</span><span class="p">:</span>
@@ -4677,18 +4677,18 @@ or plain text, depending on the original payload.</p>
 <span class="normal">36</span>
 <span class="normal">37</span>
 <span class="normal">38</span>
-<span class="normal">39</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.data_classes</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="normal">39</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.data_classes</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
 <span class="hll">    <span class="n">KinesisFirehoseDataTransformationRecord</span><span class="p">,</span>
 </span><span class="hll">    <span class="n">KinesisFirehoseDataTransformationResponse</span><span class="p">,</span>
 </span>    <span class="n">KinesisFirehoseEvent</span><span class="p">,</span>
     <span class="n">event_source</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.serialization</span> <span class="kn">import</span> <span class="n">base64_from_json</span>
-<span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.typing</span> <span class="kn">import</span> <span class="n">LambdaContext</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.serialization</span><span class="w"> </span><span class="kn">import</span> <span class="n">base64_from_json</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">LambdaContext</span>
 
 
 <span class="nd">@event_source</span><span class="p">(</span><span class="n">data_class</span><span class="o">=</span><span class="n">KinesisFirehoseEvent</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">LambdaContext</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">LambdaContext</span><span class="p">):</span>
     <span class="n">firehose_event</span> <span class="o">=</span> <span class="n">KinesisFirehoseEvent</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">KinesisFirehoseDataTransformationResponse</span><span class="p">()</span>
 
@@ -4731,10 +4731,10 @@ or plain text, depending on the original payload.</p>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
-<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.data_classes</span> <span class="kn">import</span> <span class="n">event_source</span><span class="p">,</span> <span class="n">LambdaFunctionUrlEvent</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.data_classes</span><span class="w"> </span><span class="kn">import</span> <span class="n">event_source</span><span class="p">,</span> <span class="n">LambdaFunctionUrlEvent</span>
 
 <span class="nd">@event_source</span><span class="p">(</span><span class="n">data_class</span><span class="o">=</span><span class="n">LambdaFunctionUrlEvent</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">LambdaFunctionUrlEvent</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">LambdaFunctionUrlEvent</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
     <span class="n">do_something_with</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">body</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -4762,16 +4762,16 @@ for more details.</p>
 <span class="normal">13</span>
 <span class="normal">14</span>
 <span class="normal">15</span>
-<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span>
 
-<span class="kn">from</span> <span class="nn">aws_lambda_powertools</span> <span class="kn">import</span> <span class="n">Logger</span>
-<span class="hll"><span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.data_classes</span> <span class="kn">import</span> <span class="n">event_source</span>
-</span><span class="hll"><span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.data_classes.rabbit_mq_event</span> <span class="kn">import</span> <span class="n">RabbitMQEvent</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">Logger</span>
+<span class="hll"><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.data_classes</span><span class="w"> </span><span class="kn">import</span> <span class="n">event_source</span>
+</span><span class="hll"><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.data_classes.rabbit_mq_event</span><span class="w"> </span><span class="kn">import</span> <span class="n">RabbitMQEvent</span>
 </span>
 <span class="n">logger</span> <span class="o">=</span> <span class="n">Logger</span><span class="p">()</span>
 
 <span class="hll"><span class="nd">@event_source</span><span class="p">(</span><span class="n">data_class</span><span class="o">=</span><span class="n">RabbitMQEvent</span><span class="p">)</span>
-</span><span class="hll"><span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">RabbitMQEvent</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+</span><span class="hll"><span class="k">def</span><span class="w"> </span><span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">RabbitMQEvent</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
 </span>    <span class="k">for</span> <span class="n">queue_name</span><span class="p">,</span> <span class="n">messages</span> <span class="ow">in</span> <span class="n">event</span><span class="o">.</span><span class="n">rmq_messages_by_queue</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Messages for queue: </span><span class="si">{</span><span class="n">queue_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">message</span> <span class="ow">in</span> <span class="n">messages</span><span class="p">:</span>
@@ -4797,11 +4797,11 @@ for more details.</p>
 <span class="normal"> 9</span>
 <span class="normal">10</span>
 <span class="normal">11</span>
-<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">urllib.parse</span> <span class="kn">import</span> <span class="n">unquote_plus</span>
-<span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.data_classes</span> <span class="kn">import</span> <span class="n">event_source</span><span class="p">,</span> <span class="n">S3Event</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">urllib.parse</span><span class="w"> </span><span class="kn">import</span> <span class="n">unquote_plus</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.data_classes</span><span class="w"> </span><span class="kn">import</span> <span class="n">event_source</span><span class="p">,</span> <span class="n">S3Event</span>
 
 <span class="nd">@event_source</span><span class="p">(</span><span class="n">data_class</span><span class="o">=</span><span class="n">S3Event</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">S3Event</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">S3Event</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
     <span class="n">bucket_name</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">bucket_name</span>
 
     <span class="c1"># Multiple records can be delivered in a single event</span>
@@ -4854,15 +4854,15 @@ for more details.</p>
 <span class="normal">34</span>
 <span class="normal">35</span>
 <span class="normal">36</span>
-<span class="normal">37</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">import</span> <span class="nn">boto3</span>
-<span class="kn">from</span> <span class="nn">botocore.exceptions</span> <span class="kn">import</span> <span class="n">ClientError</span>
+<span class="normal">37</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">boto3</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">botocore.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClientError</span>
 
-<span class="hll"><span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.data_classes</span> <span class="kn">import</span> <span class="n">S3BatchOperationEvent</span><span class="p">,</span> <span class="n">S3BatchOperationResponse</span><span class="p">,</span> <span class="n">event_source</span>
-</span><span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.typing</span> <span class="kn">import</span> <span class="n">LambdaContext</span>
+<span class="hll"><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.data_classes</span><span class="w"> </span><span class="kn">import</span> <span class="n">S3BatchOperationEvent</span><span class="p">,</span> <span class="n">S3BatchOperationResponse</span><span class="p">,</span> <span class="n">event_source</span>
+</span><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">LambdaContext</span>
 
 
 <span class="hll"><span class="nd">@event_source</span><span class="p">(</span><span class="n">data_class</span><span class="o">=</span><span class="n">S3BatchOperationEvent</span><span class="p">)</span>
-</span><span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">S3BatchOperationEvent</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">LambdaContext</span><span class="p">):</span>
+</span><span class="k">def</span><span class="w"> </span><span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">S3BatchOperationEvent</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">LambdaContext</span><span class="p">):</span>
 <span class="hll">    <span class="n">response</span> <span class="o">=</span> <span class="n">S3BatchOperationResponse</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">invocation_schema_version</span><span class="p">,</span> <span class="n">event</span><span class="o">.</span><span class="n">invocation_id</span><span class="p">,</span> <span class="s2">&quot;PermanentFailure&quot;</span><span class="p">)</span>
 </span>
     <span class="n">task</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">task</span>
@@ -4889,7 +4889,7 @@ for more details.</p>
 <span class="hll">    <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">asdict</span><span class="p">()</span>
 </span>
 
-<span class="k">def</span> <span class="nf">do_some_work</span><span class="p">(</span><span class="n">s3_client</span><span class="p">,</span> <span class="n">src_bucket</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">src_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">do_some_work</span><span class="p">(</span><span class="n">s3_client</span><span class="p">,</span> <span class="n">src_bucket</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">src_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="o">...</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -4927,19 +4927,19 @@ for more details.</p>
 <span class="normal">25</span>
 <span class="normal">26</span>
 <span class="normal">27</span>
-<span class="normal">28</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">import</span> <span class="nn">boto3</span>
-<span class="kn">import</span> <span class="nn">requests</span>
+<span class="normal">28</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">boto3</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
 
-<span class="kn">from</span> <span class="nn">aws_lambda_powertools</span> <span class="kn">import</span> <span class="n">Logger</span>
-<span class="hll"><span class="kn">from</span> <span class="nn">aws_lambda_powertools.logging.correlation_paths</span> <span class="kn">import</span> <span class="n">S3_OBJECT_LAMBDA</span>
-</span><span class="hll"><span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.data_classes.s3_object_event</span> <span class="kn">import</span> <span class="n">S3ObjectLambdaEvent</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">Logger</span>
+<span class="hll"><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.logging.correlation_paths</span><span class="w"> </span><span class="kn">import</span> <span class="n">S3_OBJECT_LAMBDA</span>
+</span><span class="hll"><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.data_classes.s3_object_event</span><span class="w"> </span><span class="kn">import</span> <span class="n">S3ObjectLambdaEvent</span>
 </span>
 <span class="n">logger</span> <span class="o">=</span> <span class="n">Logger</span><span class="p">()</span>
 <span class="n">session</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
 <span class="n">s3</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s2">&quot;s3&quot;</span><span class="p">)</span>
 
 <span class="hll"><span class="nd">@logger</span><span class="o">.</span><span class="n">inject_lambda_context</span><span class="p">(</span><span class="n">correlation_id_path</span><span class="o">=</span><span class="n">S3_OBJECT_LAMBDA</span><span class="p">,</span> <span class="n">log_event</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</span><span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+</span><span class="k">def</span><span class="w"> </span><span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
 <span class="hll">    <span class="n">event</span> <span class="o">=</span> <span class="n">S3ObjectLambdaEvent</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
 </span>
     <span class="c1"># Get object from S3</span>
@@ -4968,10 +4968,10 @@ for more details.</p>
 <span class="normal">3</span>
 <span class="normal">4</span>
 <span class="normal">5</span>
-<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.data_classes</span> <span class="kn">import</span> <span class="n">event_source</span><span class="p">,</span> <span class="n">S3EventBridgeNotificationEvent</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.data_classes</span><span class="w"> </span><span class="kn">import</span> <span class="n">event_source</span><span class="p">,</span> <span class="n">S3EventBridgeNotificationEvent</span>
 
 <span class="nd">@event_source</span><span class="p">(</span><span class="n">data_class</span><span class="o">=</span><span class="n">S3EventBridgeNotificationEvent</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">S3EventBridgeNotificationEvent</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">S3EventBridgeNotificationEvent</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
     <span class="n">bucket_name</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">detail</span><span class="o">.</span><span class="n">bucket</span><span class="o">.</span><span class="n">name</span>
     <span class="n">file_key</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">detail</span><span class="o">.</span><span class="n">object</span><span class="o">.</span><span class="n">key</span>
 </code></pre></div></td></tr></table></div>
@@ -4998,14 +4998,14 @@ for more details.</p>
 <span class="normal">13</span>
 <span class="normal">14</span>
 <span class="normal">15</span>
-<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities</span> <span class="kn">import</span> <span class="n">parameters</span>
-<span class="hll"><span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.data_classes</span> <span class="kn">import</span> <span class="n">SecretsManagerEvent</span><span class="p">,</span> <span class="n">event_source</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities</span><span class="w"> </span><span class="kn">import</span> <span class="n">parameters</span>
+<span class="hll"><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.data_classes</span><span class="w"> </span><span class="kn">import</span> <span class="n">SecretsManagerEvent</span><span class="p">,</span> <span class="n">event_source</span>
 </span>
 <span class="n">secrets_provider</span> <span class="o">=</span> <span class="n">parameters</span><span class="o">.</span><span class="n">SecretsProvider</span><span class="p">()</span>
 
 
 <span class="hll"><span class="nd">@event_source</span><span class="p">(</span><span class="n">data_class</span><span class="o">=</span><span class="n">SecretsManagerEvent</span><span class="p">)</span>
-</span><span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">SecretsManagerEvent</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+</span><span class="k">def</span><span class="w"> </span><span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">SecretsManagerEvent</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
     <span class="c1"># Getting secret value using Parameter utility</span>
     <span class="c1"># See https://docs.powertools.aws.dev/lambda/python/latest/utilities/parameters/</span>
 <span class="hll">    <span class="n">secret</span> <span class="o">=</span> <span class="n">secrets_provider</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">secret_id</span><span class="p">,</span> <span class="n">VersionId</span><span class="o">=</span><span class="n">event</span><span class="o">.</span><span class="n">version_id</span><span class="p">,</span> <span class="n">VersionStage</span><span class="o">=</span><span class="s2">&quot;AWSCURRENT&quot;</span><span class="p">)</span>
@@ -5043,10 +5043,10 @@ for more details.</p>
 <span class="normal"> 7</span>
 <span class="normal"> 8</span>
 <span class="normal"> 9</span>
-<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.data_classes</span> <span class="kn">import</span> <span class="n">event_source</span><span class="p">,</span> <span class="n">SESEvent</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.data_classes</span><span class="w"> </span><span class="kn">import</span> <span class="n">event_source</span><span class="p">,</span> <span class="n">SESEvent</span>
 
 <span class="nd">@event_source</span><span class="p">(</span><span class="n">data_class</span><span class="o">=</span><span class="n">SESEvent</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">SESEvent</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">SESEvent</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
     <span class="c1"># Multiple records can be delivered in a single event</span>
     <span class="k">for</span> <span class="n">record</span> <span class="ow">in</span> <span class="n">event</span><span class="o">.</span><span class="n">records</span><span class="p">:</span>
         <span class="n">mail</span> <span class="o">=</span> <span class="n">record</span><span class="o">.</span><span class="n">ses</span><span class="o">.</span><span class="n">mail</span>
@@ -5070,10 +5070,10 @@ for more details.</p>
 <span class="normal"> 7</span>
 <span class="normal"> 8</span>
 <span class="normal"> 9</span>
-<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.data_classes</span> <span class="kn">import</span> <span class="n">event_source</span><span class="p">,</span> <span class="n">SNSEvent</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.data_classes</span><span class="w"> </span><span class="kn">import</span> <span class="n">event_source</span><span class="p">,</span> <span class="n">SNSEvent</span>
 
 <span class="nd">@event_source</span><span class="p">(</span><span class="n">data_class</span><span class="o">=</span><span class="n">SNSEvent</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">SNSEvent</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">SNSEvent</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
     <span class="c1"># Multiple records can be delivered in a single event</span>
     <span class="k">for</span> <span class="n">record</span> <span class="ow">in</span> <span class="n">event</span><span class="o">.</span><span class="n">records</span><span class="p">:</span>
         <span class="n">message</span> <span class="o">=</span> <span class="n">record</span><span class="o">.</span><span class="n">sns</span><span class="o">.</span><span class="n">message</span>
@@ -5094,10 +5094,10 @@ for more details.</p>
 <span class="normal">4</span>
 <span class="normal">5</span>
 <span class="normal">6</span>
-<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.data_classes</span> <span class="kn">import</span> <span class="n">event_source</span><span class="p">,</span> <span class="n">SQSEvent</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.data_classes</span><span class="w"> </span><span class="kn">import</span> <span class="n">event_source</span><span class="p">,</span> <span class="n">SQSEvent</span>
 
 <span class="nd">@event_source</span><span class="p">(</span><span class="n">data_class</span><span class="o">=</span><span class="n">SQSEvent</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">SQSEvent</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">SQSEvent</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
     <span class="c1"># Multiple records can be delivered in a single event</span>
     <span class="k">for</span> <span class="n">record</span> <span class="ow">in</span> <span class="n">event</span><span class="o">.</span><span class="n">records</span><span class="p">:</span>
         <span class="n">do_something_with</span><span class="p">(</span><span class="n">record</span><span class="o">.</span><span class="n">body</span><span class="p">)</span>
@@ -5130,15 +5130,15 @@ for more details.</p>
 <span class="normal">17</span>
 <span class="normal">18</span>
 <span class="normal">19</span>
-<span class="normal">20</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">aws_lambda_powertools</span> <span class="kn">import</span> <span class="n">Logger</span>
-<span class="hll"><span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.data_classes</span> <span class="kn">import</span> <span class="n">VPCLatticeEventV2</span><span class="p">,</span> <span class="n">event_source</span>
-</span><span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.typing</span> <span class="kn">import</span> <span class="n">LambdaContext</span>
+<span class="normal">20</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">Logger</span>
+<span class="hll"><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.data_classes</span><span class="w"> </span><span class="kn">import</span> <span class="n">VPCLatticeEventV2</span><span class="p">,</span> <span class="n">event_source</span>
+</span><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">LambdaContext</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">Logger</span><span class="p">()</span>
 
 
 <span class="hll"><span class="nd">@event_source</span><span class="p">(</span><span class="n">data_class</span><span class="o">=</span><span class="n">VPCLatticeEventV2</span><span class="p">)</span>
-</span><span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">VPCLatticeEventV2</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">LambdaContext</span><span class="p">):</span>
+</span><span class="k">def</span><span class="w"> </span><span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">VPCLatticeEventV2</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">LambdaContext</span><span class="p">):</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">body</span><span class="p">)</span>
 
     <span class="n">response</span> <span class="o">=</span> <span class="p">{</span>
@@ -5238,15 +5238,15 @@ for more details.</p>
 <span class="normal">16</span>
 <span class="normal">17</span>
 <span class="normal">18</span>
-<span class="normal">19</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">aws_lambda_powertools</span> <span class="kn">import</span> <span class="n">Logger</span>
-<span class="hll"><span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.data_classes</span> <span class="kn">import</span> <span class="n">VPCLatticeEvent</span><span class="p">,</span> <span class="n">event_source</span>
-</span><span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.typing</span> <span class="kn">import</span> <span class="n">LambdaContext</span>
+<span class="normal">19</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">Logger</span>
+<span class="hll"><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.data_classes</span><span class="w"> </span><span class="kn">import</span> <span class="n">VPCLatticeEvent</span><span class="p">,</span> <span class="n">event_source</span>
+</span><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">LambdaContext</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">Logger</span><span class="p">()</span>
 
 
 <span class="hll"><span class="nd">@event_source</span><span class="p">(</span><span class="n">data_class</span><span class="o">=</span><span class="n">VPCLatticeEvent</span><span class="p">)</span>
-</span><span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">VPCLatticeEvent</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">LambdaContext</span><span class="p">):</span>
+</span><span class="k">def</span><span class="w"> </span><span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">VPCLatticeEvent</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">LambdaContext</span><span class="p">):</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">body</span><span class="p">)</span>
 
     <span class="n">response</span> <span class="o">=</span> <span class="p">{</span>
@@ -5311,14 +5311,14 @@ for more details.</p>
 <span class="normal">6</span>
 <span class="normal">7</span>
 <span class="normal">8</span>
-<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">aws_lambda_powertools.utilities.data_classes</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">aws_lambda_powertools.utilities.data_classes</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">CodePipelineJobEvent</span><span class="p">,</span>
     <span class="n">event_source</span><span class="p">,</span>
 <span class="p">)</span>
 
 
 <span class="nd">@event_source</span><span class="p">(</span><span class="n">data_class</span><span class="o">=</span><span class="n">CodePipelineJobEvent</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
 <span class="hll">    <span class="nb">print</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
