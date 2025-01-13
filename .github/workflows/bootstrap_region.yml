@@ -1,3 +1,5 @@
+name: Region Bootstrap
+
 # bootstraps new regions
 #
 # PURPOSE
@@ -27,7 +29,6 @@ on:
         required: true
         description: AWS region to bootstrap (i.e. eu-west-1)
 
-name: Region Bootstrap
 run-name: Region Bootstrap ${{ inputs.region }}
 
 permissions:
@@ -38,13 +39,13 @@ jobs:
     name: Install CDK
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: read
       id-token: write
     environment: layer-${{ inputs.environment }}
     steps:
       - id: credentials
         name: AWS Credentials
-        uses: aws-actions/configure-aws-credentials@e3dd6a429d7300a6a4c196c26e071d42e0343502
+        uses: aws-actions/configure-aws-credentials@e3dd6a429d7300a6a4c196c26e071d42e0343502 # v4.0.2
         with:
           aws-region: ${{ inputs.region }}
           role-to-assume: ${{ secrets.REGION_IAM_ROLE }}
@@ -69,7 +70,7 @@ jobs:
     name: Copy Layers
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: read
       id-token: write
     strategy:
       matrix:
@@ -90,7 +91,7 @@ jobs:
     steps:
       - id: credentials
         name: AWS Credentials
-        uses: aws-actions/configure-aws-credentials@e3dd6a429d7300a6a4c196c26e071d42e0343502
+        uses: aws-actions/configure-aws-credentials@e3dd6a429d7300a6a4c196c26e071d42e0343502 # v4.0.2
         with:
           aws-region: us-east-1
           role-to-assume: ${{ secrets.REGION_IAM_ROLE }}

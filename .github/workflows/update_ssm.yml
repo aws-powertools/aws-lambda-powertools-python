@@ -1,3 +1,6 @@
+name: SSM Parameters
+run-name: SSM Parameters - Python
+
 # SSM Parameters update
 #
 # PROCESS
@@ -38,9 +41,6 @@ on:
         type: string
         required: true
 
-name: SSM Parameters
-run-name: SSM Parameters - Python
-
 permissions:
   contents: read
 
@@ -59,14 +59,14 @@ jobs:
           ]
 
     permissions:
-      contents: write
+      contents: read
       id-token: write
     steps:
       - id: transform
         run: |
           echo 'CONVERTED_REGION=${{ matrix.region }}' | tr 'a-z\-' 'A-Z_' >> "$GITHUB_OUTPUT"
       - id: creds
-        uses: aws-actions/configure-aws-credentials@e3dd6a429d7300a6a4c196c26e071d42e0343502
+        uses: aws-actions/configure-aws-credentials@e3dd6a429d7300a6a4c196c26e071d42e0343502 # v4.0.2
         with:
           aws-region: ${{ matrix.region }}
           role-to-assume: ${{ secrets[format('{0}', steps.transform.outputs.CONVERTED_REGION)] }}
