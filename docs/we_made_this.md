@@ -134,7 +134,6 @@ Learn to implement data masking in AWS Lambda with Powertools, protecting sensit
 
 [Simplified Data Masking in AWS Lambda with Powertools](https://www.internetkatta.com/simplified-data-masking-in-aws-lambda-with-powertool){target="_blank" rel="nofollow"}
 
-
 ## Videos
 
 #### Building a resilient input handling with Parser

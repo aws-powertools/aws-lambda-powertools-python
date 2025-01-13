@@ -89,6 +89,8 @@ ijson = "^3.3.0"
 typed-ast = { version = "^1.5.5", python = "< 3.8" }
 hvac = "^2.3.0"
 aws-requests-auth = "^0.4.3"
+urllib3 = "<2"
+requests = ">=2.32.0"
 
 [tool.poetry.extras]
 parser = ["pydantic"]
