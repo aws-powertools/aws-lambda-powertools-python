@@ -40,7 +40,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: "Docs"
     permissions:
-      contents: read  # push to gh-pages
+      contents: write  # push to gh-pages
       id-token: write  # trade JWT token for AWS credentials in AWS Docs account
       pages: write     # uncomment if mike fails as we migrated to S3 hosting
     steps:

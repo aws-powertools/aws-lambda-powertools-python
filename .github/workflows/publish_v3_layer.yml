@@ -303,7 +303,7 @@ jobs:
     needs: [update_v3_layer_arn_docs, prepare_docs_alias]
     permissions:
       # lower privilege propagated from parent workflow (release.yml)
-      contents: read
+      contents: write
       pages: write
       pull-requests: none
       id-token: write
