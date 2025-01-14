@@ -304,7 +304,7 @@ jobs:
     permissions:
       # lower privilege propagated from parent workflow (release.yml)
       contents: read
-      #pages: write
+      pages: write
       pull-requests: none
       id-token: write
     secrets: inherit
