@@ -84,7 +84,7 @@ typing-extensions = "^4.12.2"
 mkdocs-material = "^9.5.49"
 filelock = "^3.16.0"
 dirhash = "^0.5.0"
-mypy-boto3-appconfigdata = "^1.35.93"
+mypy-boto3-appconfigdata = "^1.36.0"
 ijson = "^3.3.0"
 typed-ast = { version = "^1.5.5", python = "< 3.8" }
 hvac = "^2.3.0"
