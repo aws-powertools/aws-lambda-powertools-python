@@ -7,16 +7,8 @@ import os
 import random
 import sys
 import warnings
-from typing import (
-    IO,
-    TYPE_CHECKING,
-    Any,
-    Callable,
-    Iterable,
-    Mapping,
-    TypeVar,
-    overload,
-)
+from contextlib import contextmanager
+from typing import IO, TYPE_CHECKING, Any, Callable, Generator, Iterable, Mapping, TypeVar, overload
 
 from aws_lambda_powertools.logging.constants import (
     LOGGER_ATTRIBUTE_PRECONFIGURED,
@@ -337,6 +329,31 @@ class Logger:
                     "Please review POWERTOOLS_LOGGER_SAMPLE_RATE environment variable."
                 ),
             )
+
+    @contextmanager
+    def append_context_keys(self, **keys: Any) -> Generator[Any, Any, Any]:
+        """
+        Context manager to temporarily add logging keys.
+
+        Parameters:
+        -----------
+        **keys: Any
+            Key-value pairs to include in the log context during the lifespan of the context manager.
+
+        Example:
+        --------
+        >>> logger = Logger(service="example_service")
+        >>> with logger.append_context_keys(user_id="123", operation="process"):
+        >>>     logger.info("Log with context")
+        >>> logger.info("Log without context")
+        """
+        # Add keys to the context
+        self.append_keys(**keys)
+        try:
+            yield
+        finally:
+            # Remove the keys after exiting the context
+            self.remove_keys(keys.keys())
 
     @overload
     def inject_lambda_context(
