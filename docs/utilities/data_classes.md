@@ -679,7 +679,13 @@ Data classes and utility functions to help create continuous delivery pipelines 
             else:
                 template = event.get_artifact(artifact_name, template_file)
                 # Kick off a stack update or create
-                start_update_or_create(job_id, stack, template)
+                result = start_update_or_create(job_id, stack, template)
+                artifact: io.BytesIO = zip_data(result)
+                event.put_artifact(
+                    artifact_name=event.data.output_artifacts[0].name,
+                    body=artifact,
+                    content_type="application/zip"
+                )
         except Exception as e:
             # If any other exceptions which we didn't expect are raised
             # then fail the job and log the exception message.

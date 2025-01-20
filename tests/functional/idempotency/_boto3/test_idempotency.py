@@ -1,7 +1,7 @@
 import copy
 import datetime
 import warnings
-from typing import Any
+from typing import Any, Optional
 from unittest.mock import MagicMock, Mock
 
 import jmespath
@@ -2014,3 +2014,50 @@ def test_idempotent_lambda_already_completed_response_hook_is_called_with_none(
 
     stubber.assert_no_pending_responses()
     stubber.deactivate()
+
+
+@pytest.mark.parametrize("output_serializer_type", ["explicit", "deduced"])
+def test_idempotent_function_serialization_dataclass_with_optional_return(output_serializer_type: str):
+    # GIVEN
+    dataclasses = get_dataclasses_lib()
+    config = IdempotencyConfig(use_local_cache=True)
+    mock_event = {"customer_id": "fake", "transaction_id": "fake-id"}
+    idempotency_key = f"{TESTS_MODULE_PREFIX}.test_idempotent_function_serialization_dataclass_with_optional_return.<locals>.collect_payment#{hash_idempotency_key(mock_event)}"  # noqa E501
+    persistence_layer = MockPersistenceLayer(expected_idempotency_key=idempotency_key)
+
+    @dataclasses.dataclass
+    class PaymentInput:
+        customer_id: str
+        transaction_id: str
+
+    @dataclasses.dataclass
+    class PaymentOutput:
+        customer_id: str
+        transaction_id: str
+
+    if output_serializer_type == "explicit":
+        output_serializer = DataclassSerializer(
+            model=PaymentOutput,
+        )
+    else:
+        output_serializer = DataclassSerializer
+
+    @idempotent_function(
+        data_keyword_argument="payment",
+        persistence_store=persistence_layer,
+        config=config,
+        output_serializer=output_serializer,
+    )
+    def collect_payment(payment: PaymentInput) -> Optional[PaymentOutput]:
+        return PaymentOutput(**dataclasses.asdict(payment))
+
+    # WHEN
+    payment = PaymentInput(**mock_event)
+    first_call: PaymentOutput = collect_payment(payment=payment)
+    assert first_call.customer_id == payment.customer_id
+    assert first_call.transaction_id == payment.transaction_id
+    assert isinstance(first_call, PaymentOutput)
+    second_call: PaymentOutput = collect_payment(payment=payment)
+    assert isinstance(second_call, PaymentOutput)
+    assert second_call.customer_id == payment.customer_id
+    assert second_call.transaction_id == payment.transaction_id
